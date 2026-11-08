@@ -27,6 +27,7 @@ def main():
     parser.add_argument("--source-dir", type=str, required=True, help="Path to bitacora source repository")
     parser.add_argument("--data-dir", type=str, required=True, help="Path to web public/data directory")
     parser.add_argument("--mode", type=str, choices=["local", "github"], default="github", help="Execution mode")
+    parser.add_argument("--manifest-url", type=str, default="https://sonda0.github.io/data/manifest.json", help="URL to live published manifest.json")
     parser.add_argument("--commit-sha", type=str, default=None, help="Source git commit SHA")
     parser.add_argument("--force", action="store_true", help="Force sync even if fingerprint matches")
     args = parser.parse_args()
@@ -53,6 +54,7 @@ def main():
         sys.executable, str(detect_py),
         "--source-dir", str(source_dir),
         "--manifest-path", str(manifest_path),
+        "--manifest-url", str(args.manifest_url),
         "--output-json"
     ]
     ret, out, err = run_cmd(cmd_detect)

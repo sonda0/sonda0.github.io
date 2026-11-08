@@ -42,6 +42,7 @@ def main():
     parser = argparse.ArgumentParser(description="MISSION-DATA SYNC // Change Detector")
     parser.add_argument("--source-dir", type=str, required=True, help="Path to bitacora source repository")
     parser.add_argument("--manifest-path", type=str, default=None, help="Path to existing manifest.json")
+    parser.add_argument("--manifest-url", type=str, default=None, help="URL to live published manifest.json")
     parser.add_argument("--output-json", action="store_true", help="Print output as JSON")
     args = parser.parse_args()
 
@@ -52,9 +53,19 @@ def main():
 
     fingerprint, count = compute_source_fingerprint(source_dir)
 
-    # Read existing manifest
+    # Read existing manifest from URL if provided, else fallback to path
     manifest_fingerprint = None
-    if args.manifest_path:
+    if args.manifest_url:
+        try:
+            import urllib.request
+            req = urllib.request.Request(args.manifest_url, headers={"User-Agent": "Sonda0-Sync"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                mdata = json.load(resp)
+                manifest_fingerprint = mdata.get("sync", {}).get("content_fingerprint")
+        except Exception as e:
+            print(f"[WARN] Error fetching manifest URL: {e}", file=sys.stderr)
+
+    if not manifest_fingerprint and args.manifest_path:
         mpath = Path(args.manifest_path).resolve()
         if mpath.exists():
             try:
