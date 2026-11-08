@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sonda0.online/sitemap.xml
