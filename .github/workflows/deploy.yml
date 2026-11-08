@@ -34,28 +34,18 @@ jobs:
           version: 9
 
       - name: Set up Node.js 22
-        uses: actions/setup-node@v3
-        with:
-          node-version: 22
           cache: 'pnpm'
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
       - name: Validate public mission data
         run: python tools/validate_public_data.py
-
       - name: Run automated test suite
         run: pnpm test
-
       - name: Build static web application
         run: pnpm build
-
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
-        with:
           path: ./dist
-
   deploy:
     environment:
       name: github-pages
