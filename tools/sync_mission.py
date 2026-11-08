@@ -93,7 +93,7 @@ def main():
 
     # 3. Validate public datasets
     validate_py = script_dir / "validate_public_data.py"
-    cmd_validate = [sys.executable, str(validate_py)]
+    cmd_validate = [sys.executable, str(validate_py), "--data-dir", str(data_dir)]
     print("[SYNC] Invoking validate_public_data...")
     ret, out, err = run_cmd(cmd_validate)
     print(out)

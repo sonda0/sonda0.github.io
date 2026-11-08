@@ -9,7 +9,9 @@ import {
   getTransmissions,
   getAnomalies,
   getSystems,
-  getTimeline
+  getTimeline,
+  checkForUpdates,
+  refreshAllData
 } from './services/missionData';
 
 import { MissionHeader } from './components/MissionHeader';
@@ -100,6 +102,37 @@ export const App: React.FC = () => {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  // Periodic manifest check and in-memory background update without full page reload
+  useEffect(() => {
+    const POLL_INTERVAL_MS = 60000;
+    let isMounted = true;
+
+    const intervalId = setInterval(async () => {
+      try {
+        const updateInfo = await checkForUpdates();
+        if (updateInfo.hasUpdates && isMounted) {
+          console.log('[MISSION-CONTROL] Detected updated manifest. Refreshing data in-memory without reload...');
+          const refreshed = await refreshAllData();
+          if (isMounted) {
+            setMission(refreshed.mission);
+            setManifest(refreshed.manifest);
+            setTransmissions(refreshed.transmissions);
+            setAnomalies(refreshed.anomalies);
+            setSystems(refreshed.systems);
+            setTimeline(refreshed.timeline);
+          }
+        }
+      } catch (err) {
+        console.warn('[MISSION-CONTROL] Background check error:', err);
+      }
+    }, POLL_INTERVAL_MS);
+
+    return () => {
+      isMounted = false;
+      clearInterval(intervalId);
+    };
+  }, []);
 
   // Route matching helper
   const renderCurrentView = () => {

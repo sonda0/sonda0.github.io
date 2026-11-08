@@ -4,6 +4,7 @@ import sys
 import shutil
 import tempfile
 import json
+import subprocess
 from pathlib import Path
 
 # Add mission_control/tools to path
@@ -75,12 +76,10 @@ class TestSyncMission(unittest.TestCase):
 
     def test_duplicate_records_rejected(self):
         """Simulate duplicate transmission ID in source."""
-        # Create second file with LOG-0001 ID
         (self.trans_dir / "LOG-0001-copy.md").write_text(
             (self.trans_dir / "LOG-0001.md").read_text(encoding="utf-8"),
             encoding="utf-8"
         )
-        # build_transmissions should not duplicate or should ignore
         txs = build_mission_data.build_transmissions(self.source_dir)
         ids = [t["id"] for t in txs]
         self.assertEqual(ids.count("LOG-0001"), 1)
@@ -89,7 +88,6 @@ class TestSyncMission(unittest.TestCase):
         """Two change detector runs without modifications must report NO_CHANGES."""
         fp1, count1 = detect_changes.compute_source_fingerprint(self.source_dir)
 
-        # Write manifest with fp1
         manifest = {
             "sync": {
                 "content_fingerprint": fp1
@@ -106,7 +104,6 @@ class TestSyncMission(unittest.TestCase):
         """Modifying or adding a transmission must change the fingerprint."""
         fp1, _ = detect_changes.compute_source_fingerprint(self.source_dir)
 
-        # Add new transmission
         (self.trans_dir / "LOG-0002.md").write_text(
             "---\ntitle: 'LOG-0002'\ndate: '2026-11-07T04:00:00Z'\n---\n### Test\n\nPárrafo.\n\n[FIN DE ARCHIVO]\n",
             encoding="utf-8"
@@ -116,7 +113,6 @@ class TestSyncMission(unittest.TestCase):
 
     def test_missing_local_anomaly_catalog_preserves_public_catalog(self):
         """Running in standalone mode without private anomaly catalog must preserve public catalog."""
-        # Put an existing public anomalies.json in output_dir
         existing = [{"id": "ANOM-HEX-04", "title": "Preserved Anomaly", "state": "AWAITING_DATA"}]
         (self.output_dir / "anomalies.json").write_text(json.dumps(existing), encoding="utf-8")
 
@@ -135,6 +131,127 @@ class TestSyncMission(unittest.TestCase):
 
         for pat in forbidden:
             self.assertNotIn(pat, manifest_str)
+
+    # --- NUEVAS PRUEBAS: AUDIT-REMEDIATION 001 (Ámbito B) ---
+
+    def test_sync_no_op_when_source_unchanged(self):
+        """No-op deployment: when source fingerprint matches manifest, sync terminates cleanly with NO_CHANGES."""
+        sync_script = TOOLS_DIR / "sync_mission.py"
+        fp, _ = detect_changes.compute_source_fingerprint(self.source_dir)
+
+        manifest = {"sync": {"content_fingerprint": fp}}
+        (self.output_dir / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+
+        # Run sync_mission.py with matching fingerprint and no --force
+        cmd = [
+            sys.executable, str(sync_script),
+            "--source-dir", str(self.source_dir),
+            "--data-dir", str(self.output_dir),
+            "--mode", "github",
+            "--manifest-url", "http://127.0.0.1:9999/nonexistent.json"  # should fallback to local manifest
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0)
+        self.assertIn("SYNC_RESULT=NO_CHANGES", res.stdout)
+
+    def test_change_detection_public_manifest_unavailable_fallback(self):
+        """When public manifest URL is unreachable (offline/404), detector falls back to local manifest cleanly."""
+        fp, count = detect_changes.compute_source_fingerprint(self.source_dir)
+        manifest = {"sync": {"content_fingerprint": fp}}
+        manifest_path = self.output_dir / "manifest.json"
+        manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+        detect_script = TOOLS_DIR / "detect_changes.py"
+        cmd = [
+            sys.executable, str(detect_script),
+            "--source-dir", str(self.source_dir),
+            "--manifest-path", str(manifest_path),
+            "--manifest-url", "https://invalid-nonexistent-domain-404.io/manifest.json",
+            "--output-json"
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0)
+        out = json.loads(res.stdout)
+        self.assertEqual(out["status"], "NO_CHANGES")
+        self.assertEqual(out["manifest_source"], "local_manifest")
+        self.assertIsNotNone(out["public_url_error"])
+
+    def test_preservation_of_last_valid_dataset_on_build_error(self):
+        """When build or validation fails, previous valid public datasets remain completely intact and uncorrupted."""
+        # 1. Populate output_dir with a valid dataset
+        valid_transmissions = [{"id": "LOG-0001", "title": "Valid Log", "date": "2026-11-07T03:00:00Z"}]
+        valid_mission = {"mission_id": "SONDA-0", "status": "NOMINAL"}
+        (self.output_dir / "transmissions.json").write_text(json.dumps(valid_transmissions), encoding="utf-8")
+        (self.output_dir / "mission.json").write_text(json.dumps(valid_mission), encoding="utf-8")
+
+        # 2. Corrupt source directory by making it unreadable or empty invalid markdown
+        (self.trans_dir / "LOG-0099.md").write_text("", encoding="utf-8") # Empty file raises ValueError
+
+        # 3. Attempt to run build_mission_data
+        build_script = TOOLS_DIR / "build_mission_data.py"
+        cmd = [
+            sys.executable, str(build_script),
+            "--source-dir", str(self.source_dir),
+            "--output-dir", str(self.output_dir),
+            "--mode", "github",
+            "--fingerprint", "dummy_fingerprint"
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertNotEqual(res.returncode, 0)
+
+        # 4. Verify that previous valid files were NOT overwritten or deleted
+        tx_after = json.loads((self.output_dir / "transmissions.json").read_text(encoding="utf-8"))
+        mission_after = json.loads((self.output_dir / "mission.json").read_text(encoding="utf-8"))
+        self.assertEqual(tx_after, valid_transmissions)
+        self.assertEqual(mission_after, valid_mission)
+
+    def test_protocol_version_no_unsupported_v31_default(self):
+        """Transmissions >= 22 without explicit V3.1 evidence must NOT default to V3.1."""
+        # Case A: No V3.1 marker in content or frontmatter -> V3.0
+        v_case_a = build_mission_data.determine_protocol_version(
+            log_num=25,
+            frontmatter={"title": "LOG-0025: Test"},
+            content="### Test\n\nPárrafo estándar sin mención de versión."
+        )
+        self.assertEqual(v_case_a, "V3.0")
+
+        # Case B: Explicit V3.1 in content -> V3.1
+        v_case_b = build_mission_data.determine_protocol_version(
+            log_num=25,
+            frontmatter={"title": "LOG-0025: Test"},
+            content="### Test\n\nOperando bajo EXODATA V3.1 con rigor epistemológico."
+        )
+        self.assertEqual(v_case_b, "V3.1")
+
+    def test_anomaly_catalog_stale_status_in_all_modes(self):
+        """Anomaly catalog status must remain STALE in both local and github modes until validated export."""
+        # Even with local catalog existing in source
+        local_cat_path = self.source_dir / "scripts" / "anomaly_catalog.json"
+        local_cat_path.parent.mkdir(parents=True, exist_ok=True)
+        local_cat_path.write_text(json.dumps({"anomalies": [{"id": "ANOM-HEX-04", "title": "Test"}]}), encoding="utf-8")
+
+        _, status_local = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="local")
+        self.assertEqual(status_local, "STALE")
+
+        _, status_github = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="github")
+        self.assertEqual(status_github, "STALE")
+
+    def test_timeline_evt016_accurate_and_no_rom_corruption(self):
+        """EVT-016 must reflect LOG-0016 accurately without claiming confirmed ROM corruption."""
+        events = build_mission_data.build_dynamic_timeline([], self.output_dir)
+        evt16 = next((e for e in events if e["id"] == "EVT-016"), None)
+        self.assertIsNotNone(evt16)
+        # Must not claim confirmed ROM corruption
+        self.assertNotIn("discrepancia en bloques de memoria ROM", evt16["summary"].lower())
+        self.assertIn("almacenamiento reescribible", evt16["summary"].lower())
+        self.assertIn("sin alteración de rom", evt16["summary"].lower())
+
+    def test_timeline_evt017_correct_date(self):
+        """EVT-017 must reflect the actual V3.1 patch date (2026-11-08T01:15:00Z), not 2026-11-07."""
+        events = build_mission_data.build_dynamic_timeline([], self.output_dir)
+        evt17 = next((e for e in events if e["id"] == "EVT-017"), None)
+        self.assertIsNotNone(evt17)
+        self.assertEqual(evt17["date"], "2026-11-08T01:15:00Z")
 
 if __name__ == "__main__":
     unittest.main()

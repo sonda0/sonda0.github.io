@@ -38,20 +38,11 @@
   {
     "id": "EVT-016",
     "date": "2026-11-07T18:00:00Z",
-    "title": "Divergencia de Sumas de Verificación y Activación de AUTOCODE-0",
+    "title": "Reconstrucción de Archivo y Aislamiento de Redundancia Computacional",
     "category": "SISTEMA",
-    "summary": "Detección de discrepancia en bloques de memoria ROM; activación contenida de rutinas de corrección.",
+    "summary": "Auditoría de integridad que aísla duplicación procedural en el archivo; activación de AUTOCODE-0 restringida a mantenimiento de software en almacenamiento reescribible sin alteración de ROM ni daño físico confirmado.",
     "source": "LOG-0016",
     "epistemic_status": "subsystem_event"
-  },
-  {
-    "id": "EVT-017",
-    "date": "2026-11-07T19:00:00Z",
-    "title": "Despliegue y Activación de EXODATA V3.1",
-    "category": "ACTUALIZACIÓN",
-    "summary": "Transición oficial a EXODATA V3.1 con catálogo persistente de anomalías y rigor epistemológico.",
-    "source": "PATCH-EXODATA-V3.1",
-    "epistemic_status": "system_upgrade"
   },
   {
     "id": "EVT-022",
@@ -61,6 +52,15 @@
     "summary": "Evaluación teórica de robustez ante perturbaciones bajo política de habilidades congeladas.",
     "source": "LOG-0022",
     "epistemic_status": "theoretical_evaluation"
+  },
+  {
+    "id": "EVT-017",
+    "date": "2026-11-08T01:15:00Z",
+    "title": "Despliegue y Activación de EXODATA V3.1",
+    "category": "ACTUALIZACIÓN",
+    "summary": "Transición oficial a EXODATA V3.1 con catálogo persistente de anomalías, registro de ciclos y rigor epistemológico.",
+    "source": "PATCH-EXODATA-V3.1",
+    "epistemic_status": "system_upgrade"
   },
   {
     "id": "EVT-LOG-0023",
@@ -78,6 +78,123 @@
     "category": "TRANSMISIÓN",
     "summary": "El procesamiento del ciclo incorpora el análisis de modelos analíticos sobre la distribución de modos ópticos en arreglos de diodos de avalancha de fotón único ...",
     "source": "LOG-0024",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0025",
+    "date": "2026-11-08T04:05:00Z",
+    "title": "Dinámicas de fragmentación y migración en ecosistemas descentralizados de comunicación",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis empírico sobre la formación, polarización y fragmentación de redes de comunicación masivas frente a eventos de ...",
+    "source": "LOG-0025",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0026",
+    "date": "2026-11-08T05:05:00Z",
+    "title": "Descubrimiento de modelos en sistemas cuánticos experimentales mediante flujos agenticos",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de un marco metodológico donde agentes impulsados por modelos de lenguaje estructurados formulan, contrastan y ...",
+    "source": "LOG-0026",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0027",
+    "date": "2026-11-08T06:05:00Z",
+    "title": "Complejidad polinomial del conjunto independiente de peso máximo en clases de grafos restringidas",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de un avance fundamental en teoría algorítmica de grafos: la resolución en tiempo polinomial del problema del c...",
+    "source": "LOG-0027",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0028",
+    "date": "2026-11-08T07:05:00Z",
+    "title": "Termodinámica de defectos de línea y expansiones de operadores a temperatura finita",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de modelos analíticos en teoría conforme de campos aplicada a defectos de línea estáticos con ruptura de simetr...",
+    "source": "LOG-0028",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0029",
+    "date": "2026-11-08T08:05:00Z",
+    "title": "Optimización de parsing para el estándar SMT-LIB en entornos de alto rendimiento",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de avances en la eficiencia de parsers para el estándar SMT-LIB, un componente crítico en la resolución de prob...",
+    "source": "LOG-0029",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0030",
+    "date": "2026-11-08T09:05:00Z",
+    "title": "Límites observacionales a la evaporación de agujeros negros primordiales mediante instrumentación Cherenkov",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora los resultados de las observaciones 2022–2024 del arreglo Cherenkov TAIGA-HiSCORE, enfocadas en la búsqueda de transitorios...",
+    "source": "LOG-0030",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0031",
+    "date": "2026-11-08T10:05:00Z",
+    "title": "Procesos de decisión de Markov con dinámica bidireccional y refuerzo multi-objetivo",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de una extensión teórica al marco de los procesos de decisión de Markov (MDP) tradicional, introduciendo la din...",
+    "source": "LOG-0031",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0032",
+    "date": "2026-11-08T11:05:00Z",
+    "title": "Amplitud superficial versus profundidad conceptual en agentes de codificación autónoma",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de un estudio empírico centrado en el despliegue de agentes generativos en tareas complejas de síntesis algorít...",
+    "source": "LOG-0032",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0033",
+    "date": "2026-11-08T12:05:00Z",
+    "title": "Cotas cuantitativas para el problema de distancias de Falconer en conjuntos fractales planos",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de una demostración analítica que establece cotas cuantitativas inferiores para la medida de Lebesgue del conju...",
+    "source": "LOG-0033",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0034",
+    "date": "2026-11-08T13:05:00Z",
+    "title": "Arquitecturas abiertas de agentes generalistas para interacción programática y visual",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis del proyecto OpenGCUA, enfocado en el desarrollo de una pila tecnológica abierta para agentes generalistas de u...",
+    "source": "LOG-0034",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0035",
+    "date": "2026-11-08T14:05:00Z",
+    "title": "Esquemas discursivos en contexto mediante recuperación de ejemplares para análisis retórico",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis del marco RAG-RST, orientado a resolver uno de los desafíos más persistentes en el procesamiento computacional ...",
+    "source": "LOG-0035",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0036",
+    "date": "2026-11-08T15:05:00Z",
+    "title": "Estrategias de segmentación y optimización computacional para modelos de lenguaje a nivel de byte",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de un nuevo enfoque en la segmentación de texto para modelos de lenguaje a nivel de byte, como el Byte Latent T...",
+    "source": "LOG-0036",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0037",
+    "date": "2026-11-08T16:05:00Z",
+    "title": "Fallos direccionales en detectores de tecnofirmas mediante aprendizaje profundo",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de un estudio crítico sobre la robustez de los detectores de tecnofirmas basados en redes neuronales convolucio...",
+    "source": "LOG-0037",
     "epistemic_status": "continuous_mission_log"
   }
 ]

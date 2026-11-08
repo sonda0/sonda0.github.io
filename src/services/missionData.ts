@@ -100,20 +100,66 @@ export function clearDataCache(): void {
   cachedTimeline = null;
 }
 
-export async function checkForUpdates(): Promise<boolean> {
-  const currentManifest = await getManifest();
-  
-  // Clear cache to force re-fetch
-  clearDataCache();
-  
-  const newManifest = await getManifest();
-  
-  const hasUpdates = currentManifest.sync?.content_fingerprint !== newManifest.sync?.content_fingerprint;
-  
-  if (!hasUpdates) {
-    // Restore cache if no updates found to avoid unnecessary work
-    cachedManifest = newManifest;
+export interface UpdateCheckResult {
+  hasUpdates: boolean;
+  currentFingerprint?: string | null;
+  newFingerprint?: string | null;
+}
+
+/**
+ * Checks for manifest changes in the background without clearing the active data cache.
+ */
+export async function checkForUpdates(): Promise<UpdateCheckResult> {
+  try {
+    const currentFingerprint = cachedManifest?.sync?.content_fingerprint;
+    const raw = await fetchJson<unknown>('manifest.json');
+    const freshManifest = validateManifest(raw);
+    const newFingerprint = freshManifest.sync?.content_fingerprint;
+
+    const hasUpdates = Boolean(
+      currentFingerprint &&
+      newFingerprint &&
+      currentFingerprint !== newFingerprint
+    );
+
+    return {
+      hasUpdates,
+      currentFingerprint,
+      newFingerprint
+    };
+  } catch (err) {
+    console.warn('[MISSION-DATA] Background update check failed:', err);
+    return { hasUpdates: false };
   }
-  
-  return hasUpdates;
+}
+
+/**
+ * Flushes cache and reloads all datasets in-memory for seamless live UI update.
+ */
+export async function refreshAllData(): Promise<{
+  mission: MissionState;
+  manifest: ManifestData;
+  transmissions: Transmission[];
+  anomalies: Anomaly[];
+  systems: SystemsData;
+  timeline: TimelineEvent[];
+}> {
+  clearDataCache();
+  const [mission, manifest, transmissions, anomalies, systems, timeline] = await Promise.all([
+    getMission(),
+    getManifest(),
+    getTransmissions(),
+    getAnomalies(),
+    getSystems(),
+    getTimeline()
+  ]);
+
+  return {
+    mission,
+    manifest,
+    transmissions,
+    anomalies,
+    systems,
+    timeline
+  };
 }

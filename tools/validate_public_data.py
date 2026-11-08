@@ -189,7 +189,13 @@ def validate_timeline(data: list) -> list:
     return errors
 
 def main():
-    print("[VALIDATE] Auditing public datasets in public/data/...")
+    import argparse
+    parser = argparse.ArgumentParser(description="Public Data Validator")
+    parser.add_argument("--data-dir", type=str, default=str(DATA_DIR), help="Path to data directory")
+    args = parser.parse_args()
+
+    target_dir = Path(args.data_dir).resolve()
+    print(f"[VALIDATE] Auditing public datasets in {target_dir}...")
     all_errors = []
 
     required_files = [
@@ -202,7 +208,7 @@ def main():
     ]
 
     for fname in required_files:
-        fpath = DATA_DIR / fname
+        fpath = target_dir / fname
         if not fpath.exists():
             all_errors.append(f"Missing required data file: {fname}")
             continue

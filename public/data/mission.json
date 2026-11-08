@@ -6,13 +6,13 @@
   "carrier_label": "CONTROL DE MISIÓN: SIN PORTADORA",
   "earth_link_state": "LOSS_OF_SIGNAL",
   "earth_link_description": "Pérdida de portadora artificial detectada hace > 4,200 ciclos. Sin acuse de recibo de la Red de Espacio Profundo.",
-  "last_transmission_id": "LOG-0024",
-  "last_transmission_date": "2026-11-08T03:05:00Z",
-  "last_data_update": "2026-11-08T03:10:07Z",
+  "last_transmission_id": "LOG-0037",
+  "last_transmission_date": "2026-11-08T16:05:00Z",
+  "last_data_update": "2026-11-08T16:06:36Z",
   "source_commit": null,
   "known_anomalies_count": 6,
   "active_anomalies_count": 5,
-  "total_transmissions_count": 25,
+  "total_transmissions_count": 38,
   "subsystem_summary": "Arquitectura V3.1 autónoma; sin enlace de subida",
   "telemetry": {
     "distance": {

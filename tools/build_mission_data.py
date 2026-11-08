@@ -41,10 +41,10 @@ def determine_protocol_version(log_num: int, frontmatter: dict, content: str) ->
     elif log_num <= 21:
         return "V3.0"
     elif log_num >= 22:
-        # LOG-0022 introduces V3.1 resilience / exodata reference
-        if "V3.1" in content or "V3.1" in str(frontmatter):
+        # Check explicit evidence of V3.1 in content or frontmatter
+        if "V3.1" in content or "V3.1" in str(frontmatter) or "EXODATA V3.1" in content:
             return "V3.1"
-        return "V3.1"
+        return "V3.0"
     return "V3.0"
 
 def parse_markdown_transmission(file_path: Path) -> dict:
@@ -267,7 +267,9 @@ def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tu
                     "epistemic_status": raw.get("epistemic_status", "fictional_claim_under_review")
                 }
                 anomalies.append(clean_anomaly)
-            anomalies_status = "SYNCHRONIZED"
+            # Per AUDIT-REMEDIATION 001 item B.6, anomaly catalog remains STALE
+            # until a recent and validated public export is officially available.
+            anomalies_status = "STALE"
             return anomalies, anomalies_status
         except Exception as e:
             print(f"[WARN] Could not parse local anomaly catalog: {e}", file=sys.stderr)
@@ -491,18 +493,18 @@ def build_dynamic_timeline(transmissions: list, output_dir: Path) -> list:
         {
             "id": "EVT-016",
             "date": "2026-11-07T18:00:00Z",
-            "title": "Divergencia de Sumas de Verificación y Activación de AUTOCODE-0",
+            "title": "Reconstrucción de Archivo y Aislamiento de Redundancia Computacional",
             "category": "SISTEMA",
-            "summary": "Detección de discrepancia en bloques de memoria ROM; activación contenida de rutinas de corrección.",
+            "summary": "Auditoría de integridad que aísla duplicación procedural en el archivo; activación de AUTOCODE-0 restringida a mantenimiento de software en almacenamiento reescribible sin alteración de ROM ni daño físico confirmado.",
             "source": "LOG-0016",
             "epistemic_status": "subsystem_event"
         },
         {
             "id": "EVT-017",
-            "date": "2026-11-07T19:00:00Z",
+            "date": "2026-11-08T01:15:00Z",
             "title": "Despliegue y Activación de EXODATA V3.1",
             "category": "ACTUALIZACIÓN",
-            "summary": "Transición oficial a EXODATA V3.1 con catálogo persistente de anomalías y rigor epistemológico.",
+            "summary": "Transición oficial a EXODATA V3.1 con catálogo persistente de anomalías, registro de ciclos y rigor epistemológico.",
             "source": "PATCH-EXODATA-V3.1",
             "epistemic_status": "system_upgrade"
         },
@@ -708,7 +710,7 @@ def main():
     mission = build_mission_state(transmissions, anomalies, output_dir, source_commit=args.commit_sha)
     manifest = build_manifest(transmissions, anomalies, anomalies_status, fingerprint=args.fingerprint, source_commit=args.commit_sha)
 
-    # 4. Atomic write
+    # 4. Atomic write using temporary files and os.replace
     files_to_write = {
         "transmissions.json": transmissions,
         "anomalies.json": anomalies,
@@ -720,8 +722,12 @@ def main():
 
     for filename, data in files_to_write.items():
         out_path = output_dir / filename
-        with open(out_path, "w", encoding="utf-8") as f:
+        tmp_path = output_dir / f".{filename}.tmp"
+        with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, out_path)
         print(f"[OK] Generated {filename} ({out_path.stat().st_size} bytes)")
 
     print("[SUCCESS] Mission datasets successfully generated in output directory.")

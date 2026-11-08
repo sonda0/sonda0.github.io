@@ -6,6 +6,7 @@ Computes a deterministic SHA-256 fingerprint from the canonical bitacora source 
 - transmisiones/LOG-*.md (sorted by name)
 
 Compares against the fingerprint stored in manifest.json.
+Gracefully handles unavailable public manifests with robust local fallback.
 Exits 0 and outputs SYNC_STATUS=CHANGES_DETECTED or SYNC_STATUS=NO_CHANGES.
 """
 
@@ -53,8 +54,11 @@ def main():
 
     fingerprint, count = compute_source_fingerprint(source_dir)
 
-    # Read existing manifest from URL if provided, else fallback to path
     manifest_fingerprint = None
+    manifest_source = "none"
+    public_url_error = None
+
+    # 1. Attempt reading from public URL if provided
     if args.manifest_url:
         try:
             import urllib.request
@@ -62,9 +66,13 @@ def main():
             with urllib.request.urlopen(req, timeout=10) as resp:
                 mdata = json.load(resp)
                 manifest_fingerprint = mdata.get("sync", {}).get("content_fingerprint")
+                if manifest_fingerprint:
+                    manifest_source = "public_url"
         except Exception as e:
-            print(f"[WARN] Error fetching manifest URL: {e}", file=sys.stderr)
+            public_url_error = str(e)
+            print(f"[WARN] Public manifest URL unreachable ({e}); falling back to local manifest.", file=sys.stderr)
 
+    # 2. Robust fallback to local manifest_path
     if not manifest_fingerprint and args.manifest_path:
         mpath = Path(args.manifest_path).resolve()
         if mpath.exists():
@@ -72,8 +80,10 @@ def main():
                 with open(mpath, "r", encoding="utf-8") as f:
                     mdata = json.load(f)
                     manifest_fingerprint = mdata.get("sync", {}).get("content_fingerprint")
+                    if manifest_fingerprint:
+                        manifest_source = "local_manifest"
             except Exception as e:
-                print(f"[WARN] Error reading manifest: {e}", file=sys.stderr)
+                print(f"[WARN] Error reading local manifest at {mpath}: {e}", file=sys.stderr)
 
     changes_detected = (manifest_fingerprint != fingerprint)
     status_str = "CHANGES_DETECTED" if changes_detected else "NO_CHANGES"
@@ -83,15 +93,17 @@ def main():
             "status": status_str,
             "fingerprint": fingerprint,
             "previous_fingerprint": manifest_fingerprint,
+            "manifest_source": manifest_source,
+            "public_url_error": public_url_error,
             "files_counted": count
         }
         print(json.dumps(result, indent=2))
     else:
         print(f"[DETECT] Computed source fingerprint: {fingerprint} ({count} files)")
+        print(f"[DETECT] Manifest source: {manifest_source}")
         print(f"SYNC_STATUS={status_str}")
         print(f"CONTENT_FINGERPRINT={fingerprint}")
 
-    # Exit code: 0 always, output indicates status
     sys.exit(0)
 
 if __name__ == "__main__":
