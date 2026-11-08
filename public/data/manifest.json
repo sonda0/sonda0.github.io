@@ -3,11 +3,11 @@
   "project": "SONDA 0",
   "site": "MISSION-CONTROL",
   "domain": "sonda0.online",
-  "generated_at": "2026-11-08T16:06:36Z",
-  "last_valid_transmission": "LOG-0037",
+  "generated_at": "2026-11-08T18:57:04Z",
+  "last_valid_transmission": "LOG-0039",
   "data_status": "SYNCHRONIZED",
   "stats": {
-    "transmissions_count": 38,
+    "transmissions_count": 40,
     "anomalies_count": 6
   },
   "sync": {
@@ -15,16 +15,25 @@
     "source_repository": "sonda0/bitacora",
     "source_branch": "main",
     "source_commit": null,
-    "content_fingerprint": "f81aaef25c161689a20843a9ec9efb94a60b41a123c1b3e7a93f35a7edaeea3f",
-    "last_successful_sync": "2026-11-08T16:06:36Z",
+    "content_fingerprint": "044334ae4e2c7a525da8e8aa0eae3fbf574ea42b5f2a23d45432bec4461c06a1",
+    "last_successful_sync": "2026-11-08T18:57:04Z",
     "status": "SYNCHRONIZED",
-    "transmissions_count": 38,
-    "anomalies_status": "STALE"
+    "transmissions_count": 40,
+    "anomalies_status": "SYNCHRONIZED"
   },
   "sources": {
     "repository": "https://github.com/sonda0/bitacora",
     "official_domain": "https://sonda0.online",
     "youtube": "https://www.youtube.com/@sonda0.Operator",
     "reddit": "https://www.reddit.com/r/Sonda0/"
+  },
+  "anomaly_export": {
+    "source": "EXODATA-V3.1",
+    "exporter_version": "1.0",
+    "content_fingerprint": "fef1d1b426d1dfa6752a6c148cd72a48d166ea575f2392b2e866a2cb6a7d511d",
+    "exported_at": "2026-11-08T18:46:23Z",
+    "last_validated_at": "2026-11-08T18:57:04Z",
+    "status": "SYNCHRONIZED",
+    "count": 6
   }
 }

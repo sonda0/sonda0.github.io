@@ -15,6 +15,7 @@ import os
 import sys
 import json
 import re
+import hashlib
 import argparse
 from datetime import datetime, timezone
 from pathlib import Path
@@ -223,16 +224,103 @@ def build_transmissions(source_dir: Path) -> list:
     transmissions.sort(key=lambda x: x["log_number"])
     return transmissions
 
-def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tuple[list, str]:
+def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tuple[list, str, dict]:
     """
-    Preserve or build anomalies.
-    Returns (anomalies_list, anomalies_status).
-    anomalies_status is 'SYNCHRONIZED' or 'STALE'.
+    Ingest, validate and build public anomaly dataset.
+    Checks data-source/anomalies-public.json first across candidate directories.
+    Validates canonical fingerprint and expected anomaly IDs.
+    Returns (anomalies_list, anomalies_status, anomaly_export_metadata).
     """
     anomalies = []
     anomalies_status = "STALE"
+    export_meta = None
 
-    # First check if local private catalog exists (Windows local mode)
+    # Candidate paths for data-source/anomalies-public.json
+    candidate_paths = [
+        output_dir.parent / "data-source" / "anomalies-public.json",
+        output_dir.parent.parent / "data-source" / "anomalies-public.json",
+        output_dir / "data-source" / "anomalies-public.json",
+        source_dir / "data-source" / "anomalies-public.json",
+        source_dir.parent / "data-source" / "anomalies-public.json"
+    ]
+
+    public_export_file = None
+    for cp in candidate_paths:
+        if cp.exists():
+            public_export_file = cp
+            break
+
+    if public_export_file:
+        try:
+            with open(public_export_file, "r", encoding="utf-8") as f:
+                raw_export = json.load(f)
+
+            if (raw_export.get("schema_version") == "1.0" and
+                raw_export.get("source") == "EXODATA-V3.1" and
+                raw_export.get("exporter") == "ANOMALY-UPLINK-V1.0" and
+                isinstance(raw_export.get("anomalies"), list)):
+
+                # Canonical fingerprint verification
+                canonical_payload = {
+                    "schema_version": "1.0",
+                    "source": "EXODATA-V3.1",
+                    "exporter": "ANOMALY-UPLINK-V1.0",
+                    "anomalies": raw_export["anomalies"]
+                }
+                computed_fp = hashlib.sha256(
+                    json.dumps(canonical_payload, sort_keys=True, indent=2, ensure_ascii=False).encode("utf-8")
+                ).hexdigest()
+
+                declared_fp = raw_export.get("content_fingerprint")
+                if declared_fp and declared_fp != computed_fp:
+                    raise ValueError(f"Fingerprint mismatch: declared {declared_fp[:16]}, computed {computed_fp[:16]}")
+
+                # Validate expected 6 canonical IDs
+                expected_ids = {"ANOM-CRIO-01", "ANOM-HEX-04", "ANOM-PSR-01", "ANOM-SIGNAL-ULF-01", "ANOM-SYS-0001", "ANOM-TOROID-01"}
+                found_ids = {a.get("id") for a in raw_export["anomalies"] if isinstance(a, dict)}
+                if not expected_ids.issubset(found_ids):
+                    raise ValueError(f"Missing expected canonical anomaly IDs: {expected_ids - found_ids}")
+
+                # Recency check (threshold: 3 hours)
+                exported_at_str = raw_export.get("exported_at")
+                is_recent = False
+                if exported_at_str:
+                    try:
+                        exp_dt = datetime.fromisoformat(exported_at_str.replace("Z", "+00:00"))
+                        now_dt = datetime.now(timezone.utc)
+                        age_hours = (now_dt - exp_dt).total_seconds() / 3600.0
+                        if age_hours <= 3.0:
+                            is_recent = True
+                    except Exception as e:
+                        print(f"[WARN] Error calculating export age: {e}", file=sys.stderr)
+                        is_recent = False
+
+                anomalies = raw_export["anomalies"]
+                anomalies_status = "SYNCHRONIZED" if is_recent else "STALE"
+                export_meta = {
+                    "source": raw_export.get("source", "EXODATA-V3.1"),
+                    "exporter_version": "1.0",
+                    "content_fingerprint": computed_fp,
+                    "exported_at": exported_at_str,
+                    "last_validated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "status": anomalies_status,
+                    "count": len(anomalies)
+                }
+                print(f"[INFO] Successfully ingested public anomaly export ({len(anomalies)} items, status: {anomalies_status}, recent: {is_recent})")
+                return anomalies, anomalies_status, export_meta
+            else:
+                raise ValueError("Invalid public export envelope structure")
+        except Exception as e:
+            print(f"[WARN] Failed to validate public anomaly export from {public_export_file}: {e}", file=sys.stderr)
+            export_meta = {
+                "source": "EXODATA-V3.1",
+                "exporter_version": "1.0",
+                "last_validated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "status": "VALIDATION_FAILED",
+                "count": 0
+            }
+
+    # Fallback 1: Local private catalog in local mode (for development fallback)
     local_catalog = source_dir / "scripts" / "anomaly_catalog.json"
     if mode == "local" and local_catalog.exists():
         try:
@@ -267,14 +355,12 @@ def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tu
                     "epistemic_status": raw.get("epistemic_status", "fictional_claim_under_review")
                 }
                 anomalies.append(clean_anomaly)
-            # Per AUDIT-REMEDIATION 001 item B.6, anomaly catalog remains STALE
-            # until a recent and validated public export is officially available.
             anomalies_status = "STALE"
-            return anomalies, anomalies_status
+            return anomalies, anomalies_status, export_meta
         except Exception as e:
             print(f"[WARN] Could not parse local anomaly catalog: {e}", file=sys.stderr)
 
-    # In GitHub mode or fallback: preserve existing public anomalies.json
+    # Fallback 2: Preserve existing public anomalies.json
     existing_anomalies_file = output_dir / "anomalies.json"
     if existing_anomalies_file.exists():
         try:
@@ -282,11 +368,11 @@ def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tu
                 anomalies = json.load(f)
             print(f"[INFO] Preserving existing public anomaly catalog ({len(anomalies)} items, status: STALE)")
             anomalies_status = "STALE"
-            return anomalies, anomalies_status
+            return anomalies, anomalies_status, export_meta
         except Exception as e:
             print(f"[WARN] Error reading existing anomalies.json: {e}", file=sys.stderr)
 
-    # Fallback to standard validated public set if neither exists
+    # Fallback 3: Standard validated public baseline
     fallback_ids = [
         ("ANOM-HEX-04", "ANOM-HEX-04: Objeto Hexagonal Resonante", "AWAITING_DATA"),
         ("ANOM-SYS-0001", "ANOM-SYS-0001: Divergencia de Integridad de Memoria", "ARCHIVED"),
@@ -314,7 +400,7 @@ def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tu
             "epistemic_status": "historical_claim_under_review"
         })
     anomalies_status = "STALE"
-    return anomalies, anomalies_status
+    return anomalies, anomalies_status, export_meta
 
 def load_or_build_systems(output_dir: Path) -> dict:
     """Preserve existing systems.json or return default validated system state."""
@@ -629,7 +715,7 @@ def build_mission_state(transmissions: list, anomalies: list, output_dir: Path, 
         ]
     }
 
-def build_manifest(transmissions: list, anomalies: list, anomalies_status: str, fingerprint: str = None, source_commit: str = None) -> dict:
+def build_manifest(transmissions: list, anomalies: list, anomalies_status: str, fingerprint: str = None, source_commit: str = None, anomaly_export: dict = None) -> dict:
     """Build manifest metadata matching MISSION-DATA SYNC V1.1 specifications."""
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     last_tx_id = transmissions[-1]["id"] if transmissions else "LOG-0022"
@@ -662,7 +748,8 @@ def build_manifest(transmissions: list, anomalies: list, anomalies_status: str, 
             "official_domain": "https://sonda0.online",
             "youtube": "https://www.youtube.com/@sonda0.Operator",
             "reddit": "https://www.reddit.com/r/Sonda0/"
-        }
+        },
+        "anomaly_export": anomaly_export
     }
 
 def main():
@@ -700,15 +787,15 @@ def main():
         sys.exit(1)
     print(f"[OK] Parsed {len(transmissions)} transmissions.")
 
-    # 2. Build anomalies (preserving existing public state if in github mode)
-    anomalies, anomalies_status = load_or_build_anomalies(source_dir, output_dir, args.mode)
+    # 2. Build anomalies (ingesting public export if available)
+    anomalies, anomalies_status, anomaly_export = load_or_build_anomalies(source_dir, output_dir, args.mode)
     print(f"[OK] Processed {len(anomalies)} anomalies (status: {anomalies_status}).")
 
     # 3. Systems, Timeline, Mission state, Manifest
     systems = load_or_build_systems(output_dir)
     timeline = build_dynamic_timeline(transmissions, output_dir)
     mission = build_mission_state(transmissions, anomalies, output_dir, source_commit=args.commit_sha)
-    manifest = build_manifest(transmissions, anomalies, anomalies_status, fingerprint=args.fingerprint, source_commit=args.commit_sha)
+    manifest = build_manifest(transmissions, anomalies, anomalies_status, fingerprint=args.fingerprint, source_commit=args.commit_sha, anomaly_export=anomaly_export)
 
     # 4. Atomic write using temporary files and os.replace
     files_to_write = {

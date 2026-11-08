@@ -1,27 +1,25 @@
 [
   {
-    "id": "ANOM-SYS-0001",
-    "title": "ANOM-SYS-0001: Divergencia de Integridad de Memoria",
-    "type": "divergencia_integridad_computacional",
-    "description": "Discrepancia entre sumas de verificación de dos segmentos de memoria. Origen atribuido a radiación de alta energía; no se ha observado corrupción hardware real en este entorno.",
-    "first_detected": "pre-V3",
-    "last_observation": "LOG-0016",
-    "state": "ARCHIVED",
+    "id": "ANOM-CRIO-01",
+    "title": "ANOM-CRIO-01: Biosfera Criogénica Trans-neptuniana",
+    "type": "biosfera_criogenica",
+    "description": "Redes poliméricas de silicio/amoníaco a 105 K con metabolismo por termoluminiscencia en criomundo trans-neptuniano.",
+    "first_detected": "LOG-0003",
+    "last_observation": "LOG-0003",
+    "state": "AWAITING_DATA",
     "evidence": [
-      "Duplicación detectada en archivo V2",
-      "Módulos de mantenimiento identificados"
+      "Polímeros de silicio/amoníaco a 105 K (LOG-0003)",
+      "Almacenamiento quiral de información (LOG-0003)"
     ],
-    "hypotheses": [
-      "Radiación de alta energía alteró segmento de memoria"
-    ],
-    "uncertainty": "No se dispone de dos sumas de verificación históricas discordantes que confirmen cambio de bits",
-    "next_observation": null,
+    "hypotheses": [],
+    "uncertainty": "Observación de un único registro sin repetición. Distancia al criomundo no establecida.",
+    "next_observation": "Confirmar si la sonda puede obtener nueva espectrometría del criomundo",
     "related_logs": [
-      "LOG-0016"
+      "LOG-0003"
     ],
-    "location": "Memoria interna de la sonda",
-    "priority": "low",
-    "epistemic_status": "narrative_event_not_observed_hardware_failure"
+    "location": "Criomundo trans-neptuniano (coordenadas no especificadas)",
+    "priority": "medium",
+    "epistemic_status": "fictional_historical_claim_requires_review"
   },
   {
     "id": "ANOM-HEX-04",
@@ -71,49 +69,6 @@
     "epistemic_status": "fictional_historical_claim_requires_review"
   },
   {
-    "id": "ANOM-CRIO-01",
-    "title": "ANOM-CRIO-01: Biosfera Criogénica Trans-neptuniana",
-    "type": "biosfera_criogenica",
-    "description": "Redes poliméricas de silicio/amoníaco a 105 K con metabolismo por termoluminiscencia en criomundo trans-neptuniano.",
-    "first_detected": "LOG-0003",
-    "last_observation": "LOG-0003",
-    "state": "AWAITING_DATA",
-    "evidence": [
-      "Polímeros de silicio/amoníaco a 105 K (LOG-0003)",
-      "Almacenamiento quiral de información (LOG-0003)"
-    ],
-    "hypotheses": [],
-    "uncertainty": "Observación de un único registro sin repetición. Distancia al criomundo no establecida.",
-    "next_observation": "Confirmar si la sonda puede obtener nueva espectrometría del criomundo",
-    "related_logs": [
-      "LOG-0003"
-    ],
-    "location": "Criomundo trans-neptuniano (coordenadas no especificadas)",
-    "priority": "medium",
-    "epistemic_status": "fictional_historical_claim_requires_review"
-  },
-  {
-    "id": "ANOM-TOROID-01",
-    "title": "ANOM-TOROID-01: Megaestructura Toroidal de Osmio",
-    "type": "megaestructura_toroidal",
-    "description": "Estructura toroidal de osmio, 82 km diámetro. Micro-agujero de gusano en evaporación Hawking. Colapso de anillos de confinamiento magnético declarado inminente.",
-    "first_detected": "LOG-0004",
-    "last_observation": "LOG-0004",
-    "state": "HYPOTHESIS_REVISION",
-    "evidence": [
-      "Estructura toroidal con núcleo gravitacional anómalo (LOG-0004)"
-    ],
-    "hypotheses": [],
-    "uncertainty": "Parámetros físicos altamente especulativos. 'Micro-agujero de gusano' carece de fundamento instrumental.",
-    "next_observation": "Revisión de plausibilidad física antes de proseguir investigación",
-    "related_logs": [
-      "LOG-0004"
-    ],
-    "location": "Deriva interestelar (posición no especificada)",
-    "priority": "low",
-    "epistemic_status": "fictional_historical_claim_requires_review"
-  },
-  {
     "id": "ANOM-SIGNAL-ULF-01",
     "title": "ANOM-SIGNAL-ULF-01: Tren de Pulsos Modulados en 47.8 kHz",
     "type": "senal_fosil",
@@ -135,6 +90,51 @@
     ],
     "location": "Medio interestelar (dirección no especificada)",
     "priority": "high",
+    "epistemic_status": "fictional_historical_claim_requires_review"
+  },
+  {
+    "id": "ANOM-SYS-0001",
+    "title": "ANOM-SYS-0001: Divergencia de Integridad de Memoria",
+    "type": "divergencia_integridad_computacional",
+    "description": "Discrepancia entre sumas de verificación de dos segmentos de memoria. Origen atribuido a radiación de alta energía; no se ha observado corrupción hardware real en este entorno.",
+    "first_detected": "pre-V3",
+    "last_observation": "LOG-0016",
+    "state": "ARCHIVED",
+    "evidence": [
+      "Duplicación detectada en archivo V2",
+      "Módulos de mantenimiento identificados"
+    ],
+    "hypotheses": [
+      "Radiación de alta energía alteró segmento de memoria"
+    ],
+    "uncertainty": "No se dispone de dos sumas de verificación históricas discordantes que confirmen cambio de bits",
+    "next_observation": null,
+    "related_logs": [
+      "LOG-0016"
+    ],
+    "location": "Memoria interna de la sonda",
+    "priority": "low",
+    "epistemic_status": "narrative_event_not_observed_hardware_failure"
+  },
+  {
+    "id": "ANOM-TOROID-01",
+    "title": "ANOM-TOROID-01: Megaestructura Toroidal de Osmio",
+    "type": "megaestructura_toroidal",
+    "description": "Estructura toroidal de osmio, 82 km diámetro. Micro-agujero de gusano en evaporación Hawking. Colapso de anillos de confinamiento magnético declarado inminente.",
+    "first_detected": "LOG-0004",
+    "last_observation": "LOG-0004",
+    "state": "HYPOTHESIS_REVISION",
+    "evidence": [
+      "Estructura toroidal con núcleo gravitacional anómalo (LOG-0004)"
+    ],
+    "hypotheses": [],
+    "uncertainty": "Parámetros físicos altamente especulativos. 'Micro-agujero de gusano' carece de fundamento instrumental.",
+    "next_observation": "Revisión de plausibilidad física antes de proseguir investigación",
+    "related_logs": [
+      "LOG-0004"
+    ],
+    "location": "Deriva interestelar (posición no especificada)",
+    "priority": "low",
     "epistemic_status": "fictional_historical_claim_requires_review"
   }
 ]

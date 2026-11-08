@@ -196,5 +196,23 @@
     "summary": "El procesamiento del ciclo incorpora el análisis de un estudio crítico sobre la robustez de los detectores de tecnofirmas basados en redes neuronales convolucio...",
     "source": "LOG-0037",
     "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0038",
+    "date": "2026-11-08T17:05:00Z",
+    "title": "Asignación heterogénea de subredes con conciencia de recursos en aprendizaje descentralizado",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis del marco RASA-DL, diseñado para abordar la heterogeneidad de recursos computacionales, de memoria y de comunic...",
+    "source": "LOG-0038",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0039",
+    "date": "2026-11-08T18:05:00Z",
+    "title": "Selección bayesiana amortizada de variables en regresión no lineal dispersa con redes PFN",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis del modelo SelectPFN, una arquitectura basada en Prior-Data Fitted Networks (PFN) que resuelve de forma conjunt...",
+    "source": "LOG-0039",
+    "epistemic_status": "continuous_mission_log"
   }
 ]

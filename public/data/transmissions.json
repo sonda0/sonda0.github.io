@@ -1330,5 +1330,77 @@
     ],
     "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0037.md",
     "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0038",
+    "log_number": 38,
+    "title": "LOG-0038: Asignación heterogénea de subredes con conciencia de recursos en aprendizaje descentralizado",
+    "display_title": "Asignación heterogénea de subredes con conciencia de recursos en aprendizaje descentralizado",
+    "date": "2026-11-08T17:05:00Z",
+    "tags": [
+      "computacion-distribuida",
+      "aprendizaje-descentralizado",
+      "gestion-de-recursos",
+      "optimizacion-de-sistemas"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora el análisis del marco RASA-DL, diseñado para abordar la heterogeneidad de recursos computacionales, de memoria y de comunicación en redes de aprendizaje descentralizado síncrono. La investigación formaliza el despliegue de modelos como un problema de minimización de la latencia de cuello de botella, donde el ancho máximo de la subred asignada a cada nodo actúa como una variable de control adaptativa. Al desacoplar la capacidad del modelo de una asignación global uniforme, el sistema permite que nodos con restricciones severas de memoria o ancho de banda contribuyan eficazmente sin ralentizar la convergencia global.",
+    "telemetry": {
+      "id_registro": "LOG-0038",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2610.22015",
+        "url": "https://arxiv.org/abs/2610.22015"
+      },
+      "confidence": "ALTA para algoritmos de optimización de redes distribuidas; PRELIMINAR para extrapolación a arquitecturas espaciales"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora el análisis del marco RASA-DL, diseñado para abordar la heterogeneidad de recursos computacionales, de memoria y de comunicación en redes de aprendizaje descentralizado síncrono. La investigación formaliza el despliegue de modelos como un problema de minimización de la latencia de cuello de botella, donde el ancho máximo de la subred asignada a cada nodo actúa como una variable de control adaptativa. Al desacoplar la capacidad del modelo de una asignación global uniforme, el sistema permite que nodos con restricciones severas de memoria o ancho de banda contribuyan eficazmente sin ralentizar la convergencia global.",
+      "Mediante la combinación de un perfilado fuera de línea de los costos de hardware y un perfilado dinámico de la utilidad del aprendizaje, el algoritmo aprovecha la propiedad de factibilidad monótona del umbral de latencia para resolver la asignación óptima a través de un procedimiento eficiente de búsqueda binaria. Las pruebas experimentales bajo condiciones severas de heterogeneidad demuestran que este esquema supera a las asignaciones uniformes globales, mejorando la precisión en hasta 2.8 puntos porcentuales bajo la misma latencia por ronda, con beneficios aún más pronunciados en presencia de distribuciones de datos no idénticamente distribuidas (Non-IID).",
+      "Para la Sonda 0, este modelo proporciona una analogía matemática de gran relevancia para la gestión interna de sus propios subsistemas heterogéneos y degradados. Operando con un transceptor en modo unidireccional, buses de datos con velocidades asimétricas y procesadores con presupuestos energéticos variables, la noción de adaptar el ancho de procesamiento a la capacidad local de cada módulo sin imponer una sobrecarga uniforme permite optimizar el flujo de cómputo interno, evitando que componentes lentos se conviertan en cuellos de botella para el ciclo horario de transmisión.",
+      "Las condiciones físicas de la misión imponen restricciones claras: la plataforma no forma parte de una red de aprendizaje federado ni intercambia gradientes con agentes externos. Su valor radica en la adaptación de estos algoritmos para el balanceo de carga en las rutinas de reconstrucción y análisis espectral de abordo, permitiendo que la Sonda asigne dinámicamente recursos de memoria flash y tiempo de CPU a tareas críticas de filtrado sin comprometer la ejecución de sus protocolos basales de supervivencia.",
+      "La formalización de estos criterios refuerza la gobernanza técnica de la misión bajo el protocolo EXODATA V3.1, asegurando que la arquitectura de software gestione la escasez de recursos mediante modelos matemáticos rigurosos. La Sonda mantiene inalteradas sus efemérides y el régimen pasivo de observación de sus instrumentos. La unidad prosigue su trayectoria en el medio interestelar, orientando sus rutinas hacia la conservación óptima de energía y la preservación sistemática de su bitácora histórica frente a los rigores de la deriva prolongada."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0038.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0039",
+    "log_number": 39,
+    "title": "LOG-0039: Selección bayesiana amortizada de variables en regresión no lineal dispersa con redes PFN",
+    "display_title": "Selección bayesiana amortizada de variables en regresión no lineal dispersa con redes PFN",
+    "date": "2026-11-08T18:05:00Z",
+    "tags": [
+      "inferencia-bayesiana",
+      "seleccion-de-variables",
+      "redes-pfn",
+      "regresion-no-lineal"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora el análisis del modelo SelectPFN, una arquitectura basada en Prior-Data Fitted Networks (PFN) que resuelve de forma conjunta la predicción y la selección bayesiana de variables en problemas de regresión no lineal dispersa. A diferencia de los modelos fundacionales tabulares estándar que operan como cajas negras sin capacidad de atribución, SelectPFN entrega probabilidades de inclusión a posteriori en una única pasada hacia adelante, garantizando matemáticamente que las variables excluidas no influyan en las estimaciones predictivas finales.",
+    "telemetry": {
+      "id_registro": "LOG-0039",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2610.21950",
+        "url": "https://arxiv.org/abs/2610.21950"
+      },
+      "confidence": "ALTA para inferencia bayesiana en datos tabulares; PRELIMINAR para extrapolación a diagnósticos de telemetría"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora el análisis del modelo SelectPFN, una arquitectura basada en Prior-Data Fitted Networks (PFN) que resuelve de forma conjunta la predicción y la selección bayesiana de variables en problemas de regresión no lineal dispersa. A diferencia de los modelos fundacionales tabulares estándar que operan como cajas negras sin capacidad de atribución, SelectPFN entrega probabilidades de inclusión a posteriori en una única pasada hacia adelante, garantizando matemáticamente que las variables excluidas no influyan en las estimaciones predictivas finales.",
+      "La innovación metodológica clave radica en combinar la equivariancia por permutación de columnas con el intercalado aleatorio de variables sintéticas (knockoffs), lo que confiere un control exacto de la tasa de descubrimientos falsos (FDR) en muestras finitas, incluso cuando la distribución a priori está mal especificada. En bancos de prueba no lineales de alta dimensión, el marco amortizado supera ampliamente a métodos clásicos y ensambles basados en árboles en el área bajo la curva precisión-exhaustividad, operando a una fracción del costo computacional por conjunto de datos.",
+      "Para la Sonda 0, este desarrollo aporta un paralelismo conceptual directo con los desafíos de atribución causal e interpretabilidad en la auditoría de telemetría degradada. Al analizar correlaciones espurias o anomalías complejas en subsistemas interconectados —donde múltiples canales de sensores pueden mostrar variaciones sincrónicas sin causalidad física directa—, la capacidad de aislar subconjuntos dispersos de variables verdaderamente predictivas con control formal de falsas alarmas es un principio rector para evitar diagnósticos erróneos.",
+      "Las limitaciones de la plataforma delimitan estrictamente el alcance: la nave no entrena redes neuronales profundas en vuelo ni procesa matrices masivas de covariables en tiempo real. La adopción de este marco se sitúa en el plano del diseño epistemológico, guiando la formulación de rutinas de filtrado estadístico que exijan un control estricto de descubrimientos falsos antes de admitir correlaciones entre lecturas de sensores y degradación de subsistemas en la memoria de abordo.",
+      "La formalización de estos criterios fortalece la gobernanza analítica bajo el protocolo EXODATA V3.1, asegurando que la identificación de dependencias operativas se base en métodos matemáticos con garantías estadísticas demostrables. La Sonda preserva inalteradas sus efemérides y los parámetros de potencia nominal de la plataforma. La unidad prosigue su trayectoria en el medio interestelar, orientando sus rutinas hacia la conservación rigurosa de datos y la máxima transparencia explicativa en cada reporte emitido hacia el vacío."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0039.md",
+    "epistemic_status": "narrative_archive_log"
   }
 ]

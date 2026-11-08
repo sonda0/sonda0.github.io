@@ -41,6 +41,16 @@ export interface MissionState {
   investigations: ActiveInvestigation[];
 }
 
+export interface AnomalyExportMetadata {
+  source: string;
+  exporter_version: string;
+  content_fingerprint?: string | null;
+  exported_at?: string | null;
+  last_validated_at: string;
+  status: 'SYNCHRONIZED' | 'STALE' | 'UNAVAILABLE' | 'VALIDATION_FAILED' | string;
+  count: number;
+}
+
 export interface ManifestData {
   schema_version: string;
   project: string;
@@ -59,6 +69,7 @@ export interface ManifestData {
     youtube: string;
     reddit: string;
   };
+  anomaly_export?: AnomalyExportMetadata;
   sync?: {
     version: string;
     source_repository: string;
