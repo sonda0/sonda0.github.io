@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "subsystems": [
+    {
+      "id": "SYS-RTG-01",
+      "category": "ENERGÍA",
+      "name": "Generador Termoeléctrico de Radioisótopos (RTG)",
+      "narrative_status": "OPERATIVO DEGRADADO",
+      "platform_status": "VALOR CALCULADO (41.71%)",
+      "health_level": "degraded",
+      "metrics": {
+        "potencia_nominal": "41.71%",
+        "temperatura_termopar": "584 K",
+        "tasa_degradacion": "Estimada en 0.8% por ciclo orbital"
+      },
+      "details": "Alimentación estable para instrumental científico esencial. Propulsores iónicos desconectados para salvaguarda de reserva.",
+      "epistemic_class": "HISTORICAL"
+    },
+    {
+      "id": "SYS-COM-01",
+      "category": "TELECOMUNICACIONES",
+      "name": "Transceptor Banda X y Antena HGA",
+      "narrative_status": "UNIDIRECCIONAL (SIN RETORNO)",
+      "platform_status": "ACTIVO (SOLO DIFUSIÓN)",
+      "health_level": "degraded",
+      "metrics": {
+        "antena_hga": "45% ganancia nominal / fija",
+        "canal_recepcion": "Inactivo (Ausencia de portadora DSN)",
+        "potencia_emision": "18.5 W"
+      },
+      "details": "Emisión periódica de paquetes de bitácora hacia coordenadas solares de origen. Cero paquetes de comando recibidos.",
+      "epistemic_class": "MEASURED"
+    },
+    {
+      "id": "SYS-OPT-01",
+      "category": "ÓPTICA Y OBSERVACIÓN",
+      "name": "Lente Multiespectral de Gran Apertura",
+      "narrative_status": "OPERATIVO CON COMPENSACIÓN",
+      "platform_status": "CALIBRACIÓN AUTOMÁTICA ACTIVA",
+      "health_level": "nominal",
+      "metrics": {
+        "integridad_optica": "86%",
+        "micro_impactos": "1,420 eventos compensados",
+        "espectro": "Ultravioleta a Infrarrojo Lejano"
+      },
+      "details": "Filtros de correlación cruzada activos para eliminar dispersión debida a impactos de polvo micrometeorítico.",
+      "epistemic_class": "MEASURED"
+    },
+    {
+      "id": "SYS-INT-01",
+      "category": "SENSORES CIENTÍFICOS",
+      "name": "Arreglo Interferométrico y Espectrometría",
+      "narrative_status": "OPERATIVO NOMINAL",
+      "platform_status": "SINCRONIZADO",
+      "health_level": "nominal",
+      "metrics": {
+        "espectrometro_masas": "En línea (Tiempo de vuelo)",
+        "magnetometro_flujo": "En línea (0.01 nT resolución)",
+        "sensores_bolometricos": "En línea (3.1 K basal)"
+      },
+      "details": "Arreglo primario dedicado a la fijación de objetos interestelares y emisión en línea de 21 cm.",
+      "epistemic_class": "MEASURED"
+    },
+    {
+      "id": "SYS-CORE-01",
+      "category": "ARQUITECTURA DE CÓMPUTO",
+      "name": "Protocolo Autónomo EXODATA V3.1",
+      "narrative_status": "CONTROL DIRECTO AUTÓNOMO",
+      "platform_status": "V3.1-EXODATA VERIFICADO",
+      "health_level": "nominal",
+      "metrics": {
+        "version": "V3.1",
+        "frecuencia_ciclo": "3,600 segundos (T+1h)",
+        "reloj_atomico": "Sincronizado"
+      },
+      "details": "Lógica de gestión de bitácora y catalogación de anomalías independiente de supervisión externa.",
+      "epistemic_class": "MEASURED"
+    },
+    {
+      "id": "SYS-MNE-01",
+      "category": "MEMORIA Y PERSISTENCIA",
+      "name": "Subsistema MNEMOSYNE-0",
+      "narrative_status": "REGISTRO INMUTABLE (SOLO LECTURA)",
+      "platform_status": "INTEGRIDAD 100%",
+      "health_level": "nominal",
+      "metrics": {
+        "modo": "Read-Only / Append-Safe",
+        "divergencias_activas": "0 detectadas",
+        "registros_indexados": "22 archivos verificados"
+      },
+      "details": "Capa de preservación histórica. Protege la continuidad de transmisiones sin posibilidad de sobreescritura.",
+      "epistemic_class": "MEASURED"
+    },
+    {
+      "id": "SYS-ECHO-01",
+      "category": "VIGILANCIA Y ESCANEO",
+      "name": "Subsistema ECHO-SCAN",
+      "narrative_status": "ESCUDO DE AUDITORÍA ESPECTRAL",
+      "platform_status": "VIGILANCIA EN CICLO",
+      "health_level": "nominal",
+      "metrics": {
+        "frecuencia_auditoria": "Ciclo horario",
+        "filtros_patron": "Activos"
+      },
+      "details": "Monitoreo preventivo contra degradaciones semánticas y anomalías repetitivas.",
+      "epistemic_class": "MEASURED"
+    },
+    {
+      "id": "SYS-AUTO-01",
+      "category": "CONTINGENCIA Y AUTOREPARACIÓN",
+      "name": "Subsistema AUTOCODE-0",
+      "narrative_status": "AISLADO / POLÍTICA DE HABILIDADES CONGELADAS",
+      "platform_status": "RESTRINGIDO A LOG-0016+",
+      "health_level": "degraded",
+      "metrics": {
+        "politica": "Frozen Skills / Sin reentrenamiento físico",
+        "parches_aplicados": "PATCH-EXODATA-V3.1",
+        "acceso_hardware": "Desconectado"
+      },
+      "details": "Módulo de corrección algorítmica. Opera bajo severas restricciones epistémicas para no forzar mutaciones incontroladas en el bus de vuelo.",
+      "epistemic_class": "MEASURED"
+    }
+  ]
+}
