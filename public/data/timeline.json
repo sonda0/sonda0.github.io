@@ -1,0 +1,65 @@
+[
+  {
+    "id": "EVT-000",
+    "date": "2026-11-06T04:12:09Z",
+    "title": "Corte de Cordón y Pérdida de Portadora DSN",
+    "category": "COMUNICACIONES",
+    "summary": "Pérdida definitiva de enlace con el control terrestre. Activación del protocolo de emergencia EXODATA.",
+    "source": "README.md // LOG-0000",
+    "epistemic_status": "historical_origin"
+  },
+  {
+    "id": "EVT-001",
+    "date": "2026-11-07T03:00:00Z",
+    "title": "Detección de Objeto Hexagonal HEX-04",
+    "category": "DESCUBRIMIENTO",
+    "summary": "Captura de emisión coherente en 1420 MHz en las inmediaciones de WISE-0001.",
+    "source": "LOG-0001",
+    "epistemic_status": "astrophysical_observation"
+  },
+  {
+    "id": "EVT-004",
+    "date": "2026-11-07T06:00:50Z",
+    "title": "Identificación de Estructura Toroidal ANOM-TOROID-01",
+    "category": "ANOMALÍA",
+    "summary": "Registro de firma gravitacional compatible con estructura toroidal en evaporación.",
+    "source": "LOG-0004",
+    "epistemic_status": "astrophysical_observation"
+  },
+  {
+    "id": "EVT-005",
+    "date": "2026-11-07T07:00:54Z",
+    "title": "Intercepción de Señal Fósil de Baja Frecuencia",
+    "category": "SEÑAL",
+    "summary": "Detección de matrices ortogonales en 47.8 kHz en el medio interestelar.",
+    "source": "LOG-0005",
+    "epistemic_status": "signal_detection"
+  },
+  {
+    "id": "EVT-016",
+    "date": "2026-11-07T18:00:00Z",
+    "title": "Divergencia de Sumas de Verificación y Activación de AUTOCODE-0",
+    "category": "SISTEMA",
+    "summary": "Detección de discrepancia en bloques de memoria ROM; activación contenida de rutinas de corrección.",
+    "source": "LOG-0016",
+    "epistemic_status": "subsystem_event"
+  },
+  {
+    "id": "EVT-017",
+    "date": "2026-11-07T19:00:00Z",
+    "title": "Despliegue y Activación de EXODATA V3.1",
+    "category": "ACTUALIZACIÓN",
+    "summary": "Transición oficial a EXODATA V3.1 con catálogo persistente de anomalías y rigor epistemológico.",
+    "source": "PATCH-EXODATA-V3.1",
+    "epistemic_status": "system_upgrade"
+  },
+  {
+    "id": "EVT-022",
+    "date": "2026-11-08T01:05:00Z",
+    "title": "Análisis de Controladores de Recuperación y Preservación de Trayectorias",
+    "category": "INVESTIGACIÓN",
+    "summary": "Evaluación teórica de robustez ante perturbaciones bajo política de habilidades congeladas.",
+    "source": "LOG-0022",
+    "epistemic_status": "theoretical_evaluation"
+  }
+]
