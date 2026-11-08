@@ -51,7 +51,6 @@ def main():
         sys.exit(1)
 
     fingerprint, count = compute_source_fingerprint(source_dir)
-    print(f"[DETECT] Computed source fingerprint: {fingerprint} ({count} files)")
 
     # Read existing manifest
     manifest_fingerprint = None
@@ -77,6 +76,7 @@ def main():
         }
         print(json.dumps(result, indent=2))
     else:
+        print(f"[DETECT] Computed source fingerprint: {fingerprint} ({count} files)")
         print(f"SYNC_STATUS={status_str}")
         print(f"CONTENT_FINGERPRINT={fingerprint}")
 
