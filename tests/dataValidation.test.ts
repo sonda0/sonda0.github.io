@@ -6,10 +6,9 @@ import {
   validateManifest,
   validateTransmissionsList,
   validateAnomaliesList,
-  validateSystemsData,
   DataValidationError
 } from '../src/services/dataValidation';
-import { renderMarkdownParagraph, escapeHtml } from '../src/services/transmissionParser';
+import { renderMarkdownParagraph } from '../src/services/transmissionParser';
 
 describe('Data Validation & Epistemic Integrity Tests', () => {
   it('validates ISO 8601 dates correctly', () => {
