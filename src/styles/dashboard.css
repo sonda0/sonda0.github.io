@@ -1,0 +1,152 @@
+/* Dashboard Layout & Console Terminal Effects */
+.mission-app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+/* Carrier Banner */
+.carrier-banner {
+  background: rgba(220, 100, 113, 0.08);
+  border-bottom: 1px solid rgba(220, 100, 113, 0.3);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+.carrier-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carrier-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--red-critical);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.col-12 { grid-column: span 12; }
+.col-8 { grid-column: span 8; }
+.col-7 { grid-column: span 7; }
+.col-6 { grid-column: span 6; }
+.col-5 { grid-column: span 5; }
+.col-4 { grid-column: span 4; }
+.col-3 { grid-column: span 3; }
+
+@media (max-width: 1024px) {
+  .col-8, .col-7, .col-5, .col-4 {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 16px 12px 32px;
+  }
+  .col-6, .col-3 {
+    grid-column: span 12;
+  }
+}
+
+/* Telemetry Grid */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.telemetry-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-panel);
+  border-radius: 4px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.telemetry-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.telemetry-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.telemetry-value {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 6px 0;
+  word-break: break-word;
+}
+
+.telemetry-notes {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 4px;
+  border-top: 1px dashed rgba(36, 59, 80, 0.6);
+  padding-top: 6px;
+}
+
+/* CRT Scanline and Reticle styling */
+.reticle-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: var(--cyan-instrument);
+}
+
+.reticle-tl { top: 2px; left: 2px; border-top: 1px solid; border-left: 1px solid; }
+.reticle-tr { top: 2px; right: 2px; border-top: 1px solid; border-right: 1px solid; }
+.reticle-bl { bottom: 2px; left: 2px; border-bottom: 1px solid; border-left: 1px solid; }
+.reticle-br { bottom: 2px; right: 2px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Subtle radar sweep */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-sweep-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(69, 201, 216, 0.6));
+  transform-origin: 0% 0%;
+  animation: radar-sweep 12s linear infinite;
+  pointer-events: none;
+}
