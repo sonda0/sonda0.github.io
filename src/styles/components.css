@@ -1,0 +1,227 @@
+/* Component Base Cards & Panels */
+.panel-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-card:hover {
+  border-color: var(--border-highlight);
+}
+
+.panel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(69, 201, 216, 0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.panel-card:hover::before {
+  opacity: 1;
+}
+
+.panel-header {
+  padding: 12px 16px;
+  background: rgba(13, 23, 36, 0.6);
+  border-bottom: 1px solid var(--border-panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cyan-instrument);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.panel-body {
+  padding: 16px;
+}
+
+/* Epistemic Badges */
+.badge-epistemic {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-measured {
+  background: rgba(66, 200, 162, 0.12);
+  color: var(--green-operational);
+  border: 1px solid rgba(66, 200, 162, 0.35);
+}
+
+.badge-estimated {
+  background: rgba(69, 201, 216, 0.12);
+  color: var(--cyan-instrument);
+  border: 1px solid rgba(69, 201, 216, 0.35);
+}
+
+.badge-historical {
+  background: rgba(232, 170, 83, 0.12);
+  color: var(--amber-warning);
+  border: 1px solid rgba(232, 170, 83, 0.35);
+}
+
+.badge-unknown {
+  background: rgba(130, 151, 169, 0.12);
+  color: var(--text-muted);
+  border: 1px solid rgba(130, 151, 169, 0.35);
+}
+
+.badge-critical {
+  background: rgba(220, 100, 113, 0.12);
+  color: var(--red-critical);
+  border: 1px solid rgba(220, 100, 113, 0.35);
+}
+
+/* Anomaly Status Badges */
+.anomaly-state-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.state-detected {
+  background: rgba(220, 100, 113, 0.15);
+  color: var(--red-critical);
+  border: 1px solid rgba(220, 100, 113, 0.4);
+}
+
+.state-under-analysis {
+  background: rgba(69, 201, 216, 0.15);
+  color: var(--cyan-instrument);
+  border: 1px solid rgba(69, 201, 216, 0.4);
+}
+
+.state-awaiting-data {
+  background: rgba(232, 170, 83, 0.15);
+  color: var(--amber-warning);
+  border: 1px solid rgba(232, 170, 83, 0.4);
+}
+
+.state-hypothesis-revision {
+  background: rgba(175, 140, 240, 0.15);
+  color: #c4a1ff;
+  border: 1px solid rgba(175, 140, 240, 0.4);
+}
+
+.state-resolved {
+  background: rgba(66, 200, 162, 0.15);
+  color: var(--green-operational);
+  border: 1px solid rgba(66, 200, 162, 0.4);
+}
+
+.state-archived {
+  background: rgba(130, 151, 169, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(130, 151, 169, 0.4);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-panel);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--bg-panel-elevated);
+  border-color: var(--cyan-instrument);
+  color: var(--cyan-instrument);
+}
+
+.btn-active {
+  background: rgba(69, 201, 216, 0.15);
+  border-color: var(--cyan-instrument);
+  color: var(--cyan-instrument);
+}
+
+/* Form Controls */
+.input-filter {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-panel);
+  color: var(--text-main);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input-filter:focus {
+  border-color: var(--cyan-instrument);
+}
+
+/* Tags */
+.tag-chip {
+  background: rgba(36, 59, 80, 0.4);
+  border: 1px solid var(--border-panel);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+}
+
+.tag-chip:hover, .tag-chip.active {
+  border-color: var(--cyan-instrument);
+  color: var(--cyan-instrument);
+  background: rgba(69, 201, 216, 0.1);
+}
+
+/* Pulse Animation for Signal / Loss */
+@keyframes signal-pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(220, 100, 113, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(220, 100, 113, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 100, 113, 0); }
+}
+
+@keyframes signal-pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(66, 200, 162, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(66, 200, 162, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(66, 200, 162, 0); }
+}
+
+.pulse-red {
+  animation: signal-pulse-red 2.5s infinite;
+}
+
+.pulse-green {
+  animation: signal-pulse-green 2.5s infinite;
+}
