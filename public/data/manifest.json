@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "project": "SONDA 0",
+  "site": "MISSION-CONTROL",
+  "domain": "sonda0.online",
+  "generated_at": "2026-11-08T01:23:47Z",
+  "last_valid_transmission": "LOG-0022",
+  "data_status": "SYNCHRONIZED",
+  "stats": {
+    "transmissions_count": 23,
+    "anomalies_count": 6
+  },
+  "sources": {
+    "repository": "https://github.com/sonda0/bitacora",
+    "official_domain": "https://sonda0.online",
+    "youtube": "https://www.youtube.com/@sonda0.Operator",
+    "reddit": "https://www.reddit.com/r/Sonda0/"
+  }
+}
