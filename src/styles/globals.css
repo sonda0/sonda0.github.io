@@ -1,0 +1,132 @@
+:root {
+  --bg-deepspace: #060B12;
+  --bg-surface: #0D1724;
+  --bg-panel: #122034;
+  --bg-panel-elevated: #162740;
+  --border-panel: #243B50;
+  --border-highlight: #355370;
+  --text-main: #DCEAF1;
+  --text-muted: #8297A9;
+  --text-dim: #506677;
+  --cyan-instrument: #45C9D8;
+  --green-operational: #42C8A2;
+  --amber-warning: #E8AA53;
+  --red-critical: #DC6471;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, Menlo, monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Chakra Petch', 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--bg-deepspace);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Deep space background with subtle grid overlay */
+body.theme-deepspace {
+  background-image: 
+    linear-gradient(to right, rgba(36, 59, 80, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(36, 59, 80, 0.15) 1px, transparent 1px),
+    radial-gradient(circle at 50% 10%, rgba(69, 201, 216, 0.05) 0%, transparent 70%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+  background-attachment: fixed;
+}
+
+a {
+  color: var(--cyan-instrument);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: #7ce3ee;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  color: inherit;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-panel);
+  border-radius: 4px;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-deepspace);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-panel);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-highlight);
+}
+
+/* Typography utilities */
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-cyan {
+  color: var(--cyan-instrument);
+}
+
+.text-green {
+  color: var(--green-operational);
+}
+
+.text-amber {
+  color: var(--amber-warning);
+}
+
+.text-red {
+  color: var(--red-critical);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.tracking-technical {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
