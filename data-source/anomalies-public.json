@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "source": "EXODATA-V3.1",
+  "exporter": "ANOMALY-UPLINK-V1.0",
+  "exported_at": "2026-11-08T18:46:23Z",
+  "content_fingerprint": "fef1d1b426d1dfa6752a6c148cd72a48d166ea575f2392b2e866a2cb6a7d511d",
+  "anomalies": [
+    {
+      "id": "ANOM-CRIO-01",
+      "title": "ANOM-CRIO-01: Biosfera Criogénica Trans-neptuniana",
+      "type": "biosfera_criogenica",
+      "description": "Redes poliméricas de silicio/amoníaco a 105 K con metabolismo por termoluminiscencia en criomundo trans-neptuniano.",
+      "first_detected": "LOG-0003",
+      "last_observation": "LOG-0003",
+      "state": "AWAITING_DATA",
+      "evidence": [
+        "Polímeros de silicio/amoníaco a 105 K (LOG-0003)",
+        "Almacenamiento quiral de información (LOG-0003)"
+      ],
+      "hypotheses": [],
+      "uncertainty": "Observación de un único registro sin repetición. Distancia al criomundo no establecida.",
+      "next_observation": "Confirmar si la sonda puede obtener nueva espectrometría del criomundo",
+      "related_logs": [
+        "LOG-0003"
+      ],
+      "location": "Criomundo trans-neptuniano (coordenadas no especificadas)",
+      "priority": "medium",
+      "epistemic_status": "fictional_historical_claim_requires_review"
+    },
+    {
+      "id": "ANOM-HEX-04",
+      "title": "ANOM-HEX-04: Objeto Hexagonal Resonante",
+      "type": "objeto_geometrico_anomalo",
+      "description": "Objeto no reflectante de geometría hexagonal. Masa estimada 4.2e11 kg. Emisión coherente en línea de hidrógeno neutro 1420 MHz cada 73 s. Órbita estacionaria declarada alrededor de enana marrón WISE-0001. Parámetros del registro inicial no confirmados instrumentalmente.",
+      "first_detected": "LOG-0000",
+      "last_observation": "LOG-0001",
+      "state": "AWAITING_DATA",
+      "evidence": [
+        "Emisión monocromática 1420.405 MHz con ancho de banda < 0.02 Hz (LOG-0001)",
+        "Microestructura fractal de nanotubos de boro/osmio (LOG-0001)",
+        "Pluma de dispersión iónica: helio-3 y diamante policristalino (LOG-0001)",
+        "Compresión magnética periódica 1.8 Gauss / 73.004 s (LOG-0001)"
+      ],
+      "hypotheses": [
+        "HYP-001: Nodo de extracción energética consumiendo momento angular de WISE-0001 (probable, LOG-0001)"
+      ],
+      "uncertainty": "Geometría, masa, composición y órbita proceden de un único registro sin repetición independiente. La pureza espectral declarada requiere confirmación. La clasificación como artificial es hipotética.",
+      "next_observation": "Análisis retrospectivo de la emisión en 1420 MHz; evaluación de la plausibilidad orbital; búsqueda de modulación temporal en registros históricos",
+      "related_logs": [
+        "LOG-0001"
+      ],
+      "location": "0.04 AL de la posición declarada de la sonda, órbita alrededor de WISE-0001 (no verificada)",
+      "priority": "high",
+      "epistemic_status": "fictional_historical_claim_requires_review"
+    },
+    {
+      "id": "ANOM-PSR-01",
+      "title": "ANOM-PSR-01: Púlsar de Milisegundo en Rayos X Duros",
+      "type": "pulsar_milisegundo",
+      "description": "Estrella de neutrones ultracompacta con pulsos coherentes en rayos X duros 12-60 keV. Fragmentación de corteza de hierro. Decaimiento de momento cinético 3.2 ns/giro.",
+      "first_detected": "LOG-0002",
+      "last_observation": "LOG-0002",
+      "state": "HYPOTHESIS_REVISION",
+      "evidence": [
+        "Tren de pulsos 12-60 keV (LOG-0002)"
+      ],
+      "hypotheses": [],
+      "uncertainty": "No se dispone de detector de rayos X duros en el inventario instrumental verificado. Observación requiere revisión de capacidades.",
+      "next_observation": "Verificar si el instrumental permite detección en la banda 12-60 keV",
+      "related_logs": [
+        "LOG-0002"
+      ],
+      "location": "Dirección no especificada desde la posición de la sonda",
+      "priority": "medium",
+      "epistemic_status": "fictional_historical_claim_requires_review"
+    },
+    {
+      "id": "ANOM-SIGNAL-ULF-01",
+      "title": "ANOM-SIGNAL-ULF-01: Tren de Pulsos Modulados en 47.8 kHz",
+      "type": "senal_fosil",
+      "description": "Tren de pulsos modulados a 47.8 kHz con corrimiento al rojo severo. Matrices numéricas ortogonales compatibles con protocolo de sincronización de red estelar extinta.",
+      "first_detected": "LOG-0005",
+      "last_observation": "LOG-0005",
+      "state": "AWAITING_DATA",
+      "evidence": [
+        "Pulsos modulados 47.8 kHz (LOG-0005)",
+        "Matrices numéricas ortogonales (LOG-0005)"
+      ],
+      "hypotheses": [
+        "HYP-002: Protocolo de sincronización de red interestelar extinta hace 1.8 millones de años (inconcluso, LOG-0005)"
+      ],
+      "uncertainty": "Atribución a red interestelar extinta es especulativa. El corrimiento al rojo declarado no tiene valor numérico. La interpretación como protocolo de sincronización requiere evidencia adicional.",
+      "next_observation": "Análisis de la estructura matemática de las matrices; búsqueda de repetición de la señal en ciclos posteriores",
+      "related_logs": [
+        "LOG-0005"
+      ],
+      "location": "Medio interestelar (dirección no especificada)",
+      "priority": "high",
+      "epistemic_status": "fictional_historical_claim_requires_review"
+    },
+    {
+      "id": "ANOM-SYS-0001",
+      "title": "ANOM-SYS-0001: Divergencia de Integridad de Memoria",
+      "type": "divergencia_integridad_computacional",
+      "description": "Discrepancia entre sumas de verificación de dos segmentos de memoria. Origen atribuido a radiación de alta energía; no se ha observado corrupción hardware real en este entorno.",
+      "first_detected": "pre-V3",
+      "last_observation": "LOG-0016",
+      "state": "ARCHIVED",
+      "evidence": [
+        "Duplicación detectada en archivo V2",
+        "Módulos de mantenimiento identificados"
+      ],
+      "hypotheses": [
+        "Radiación de alta energía alteró segmento de memoria"
+      ],
+      "uncertainty": "No se dispone de dos sumas de verificación históricas discordantes que confirmen cambio de bits",
+      "next_observation": null,
+      "related_logs": [
+        "LOG-0016"
+      ],
+      "location": "Memoria interna de la sonda",
+      "priority": "low",
+      "epistemic_status": "narrative_event_not_observed_hardware_failure"
+    },
+    {
+      "id": "ANOM-TOROID-01",
+      "title": "ANOM-TOROID-01: Megaestructura Toroidal de Osmio",
+      "type": "megaestructura_toroidal",
+      "description": "Estructura toroidal de osmio, 82 km diámetro. Micro-agujero de gusano en evaporación Hawking. Colapso de anillos de confinamiento magnético declarado inminente.",
+      "first_detected": "LOG-0004",
+      "last_observation": "LOG-0004",
+      "state": "HYPOTHESIS_REVISION",
+      "evidence": [
+        "Estructura toroidal con núcleo gravitacional anómalo (LOG-0004)"
+      ],
+      "hypotheses": [],
+      "uncertainty": "Parámetros físicos altamente especulativos. 'Micro-agujero de gusano' carece de fundamento instrumental.",
+      "next_observation": "Revisión de plausibilidad física antes de proseguir investigación",
+      "related_logs": [
+        "LOG-0004"
+      ],
+      "location": "Deriva interestelar (posición no especificada)",
+      "priority": "low",
+      "epistemic_status": "fictional_historical_claim_requires_review"
+    }
+  ]
+}
