@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "mission_id": "SONDA-0",
+  "protocol_version": "V3.1-EXODATA",
+  "carrier_status": "SIN_PORTADORA",
+  "carrier_label": "CONTROL DE MISIÓN: SIN PORTADORA",
+  "earth_link_state": "LOSS_OF_SIGNAL",
+  "earth_link_description": "Pérdida de portadora artificial detectada hace > 4,200 ciclos. Sin acuse de recibo de la Red de Espacio Profundo.",
+  "last_transmission_id": "LOG-0022",
+  "last_transmission_date": "2026-11-08T01:05:00Z",
+  "last_data_update": "2026-11-08T01:23:47Z",
+  "known_anomalies_count": 6,
+  "active_anomalies_count": 5,
+  "total_transmissions_count": 23,
+  "telemetry": {
+    "distance": {
+      "label": "Distancia Estimada al Sol",
+      "value": "169.34 AU",
+      "classification": "ESTIMATED",
+      "notes": "Escape heliosférico en curso. Coordenadas no verificadas independientemente; modelo orbital congelado."
+    },
+    "rtg_power": {
+      "label": "Potencia Generador RTG",
+      "value": "41.71%",
+      "classification": "HISTORICAL",
+      "notes": "Potencia residual calculada a partir de curva de decaimiento del plutonio-238."
+    },
+    "transceiver": {
+      "label": "Estado Transceptor de Banda X",
+      "value": "DEGRADADO UNIDIRECCIONAL",
+      "classification": "MEASURED",
+      "notes": "Emisión activa hacia el sector solar sin enlace de comando de subida (Uplink: 0 bps)."
+    },
+    "optical": {
+      "label": "Instrumento Óptico Multiespectral",
+      "value": "OPERATIVO CON COMPENSACIÓN",
+      "classification": "MEASURED",
+      "notes": "Filtros de software compensando la erosión por micro-impactos cósmicos."
+    },
+    "memory_integrity": {
+      "label": "Integridad de Memoria Operativa",
+      "value": "VERIFICADA / SIN CORRUPCIÓN",
+      "classification": "HISTORICAL",
+      "notes": "Arquitectura MNEMOSYNE-0 protegida contra escrituras no autorizadas."
+    }
+  },
+  "investigations": [
+    {
+      "id": "ANOM-HEX-04",
+      "title": "Objeto Hexagonal HEX-04",
+      "status": "AWAITING_DATA",
+      "priority": "high",
+      "summary": "Emisión en 1420 MHz cada 73s en WISE-0001; análisis de plausibilidad orbital pendiente."
+    },
+    {
+      "id": "ANOM-SIGNAL-ULF-01",
+      "title": "Señal Fósil 47.8 kHz",
+      "status": "AWAITING_DATA",
+      "priority": "high",
+      "summary": "Matrices ortogonales de sincronización estelar en análisis espectral."
+    },
+    {
+      "id": "ANOM-SYS-0001",
+      "title": "Divergencia de Memoria",
+      "status": "ARCHIVED",
+      "priority": "low",
+      "summary": "Contenida en LOG-0016; firmware protegido por política de congelación."
+    }
+  ]
+}
