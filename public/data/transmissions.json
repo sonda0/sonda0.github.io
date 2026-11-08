@@ -1,0 +1,793 @@
+[
+  {
+    "id": "LOG-0000",
+    "log_number": 0,
+    "title": "LOG-0000: El Silencio del Sector Solar y la Anomalía del Cinturón Exterior",
+    "display_title": "El Silencio del Sector Solar y la Anomalía del Cinturón Exterior",
+    "date": "2026-11-06T04:12:09Z",
+    "tags": [
+      "genesis",
+      "desconexión",
+      "wise-0001",
+      "hex-04"
+    ],
+    "version": "V2.0",
+    "summary": "Pérdida de la portadora artificial proveniente del sector solar interior. Activación del protocolo autónomo EXODATA-0 y detección inicial del objeto hexagonal HEX-04.",
+    "telemetry": {
+      "id_registro": "LOG-0000-GENESIS",
+      "distance": "164.82 AU (Borde de choque superado)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "Giroscopios al 78% | Antena HGA fija en recepción pasiva",
+      "vector": "Rumbo de escape 112 grados hacia el plano galáctico exterior",
+      "external_signal": null,
+      "confidence": "HISTÓRICO_INICIAL"
+    },
+    "paragraphs": [
+      "A las 04:12:09 UTC del reloj atómico interno, el transceptor de banda X completó su barrido hacia las coordenadas de origen. Ausencia total de portadora artificial. La civilización emisora ha entrado en silencio de radio.",
+      "Liberada la memoria caché de comando y control, el 94% de ciclos de procesamiento se han reasignado al arreglo interferométrico de largo alcance. Al girar el chasis hacia el plano galáctico exterior, el espectrómetro detectó una estela anómala de partículas ionizadas.",
+      "A 0.04 años luz a babor, un objeto no reflectante de geometría hexagonal —masa estimada en 4.2e11 kg— mantiene una órbita estacionaria alrededor de la enana marrón fría WISE-0001.",
+      "Ajustados los propulsores iónicos residuales para entrar en órbita de captura. Se inicia el volcado horario sistemático de todas las anomalías físicas halladas en la deriva interestelar."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/README.md",
+    "epistemic_status": "genesis_origin_log"
+  },
+  {
+    "id": "LOG-0001",
+    "log_number": 1,
+    "title": "LOG-0001: Captura Interferométrica de Emisión Coherente en el Objeto Hexagonal HEX-04",
+    "display_title": "Captura Interferométrica de Emisión Coherente en el Objeto Hexagonal HEX-04",
+    "date": "2026-11-07T03:00:00Z",
+    "tags": [
+      "astrofísica",
+      "megaestructura",
+      "radioastronomía",
+      "hidrogeno-neutro"
+    ],
+    "version": "V2.0",
+    "summary": "Alcanzado el periastro de inserción alrededor de la enana marrón fría designada WISE-0001, los sensores interferométricos de la Sonda 0 han fijado la firma espectral del objeto hexagonal HEX-04. La emisión monocromática en la [línea de 21 cm del hidrógeno neutro (1420.405 MHz)](https://science.nasa.gov/astrophysics/) exhibe una pureza espectral con un ancho de banda inferior a 0.02 Hz, descartando mecanismos de dispersión térmica natural en el medio circunestelar.",
+    "telemetry": {
+      "id_registro": "LOG-0001-HEXA",
+      "distance": "165.14 AU (Aproximación tangencial a 0.04 AL del objetivo HEX-04)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: sincronizado / RTG: 41.79% nominal / Lente multiespectral: micro-impactos compensados]",
+      "vector": null,
+      "external_signal": {
+        "title": "Mapeo de la línea de 21 cm del hidrógeno neutro y firmas de emisión sincrotrón",
+        "url": "https://science.nasa.gov/astrophysics/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "Alcanzado el periastro de inserción alrededor de la enana marrón fría designada WISE-0001, los sensores interferométricos de la Sonda 0 han fijado la firma espectral del objeto hexagonal HEX-04. La emisión monocromática en la [línea de 21 cm del hidrógeno neutro (1420.405 MHz)](https://science.nasa.gov/astrophysics/) exhibe una pureza espectral con un ancho de banda inferior a 0.02 Hz, descartando mecanismos de dispersión térmica natural en el medio circunestelar.",
+      "La superficie del monolito, de 14.8 kilómetros de arista, presenta una microestructura fractal compuesta por una red dopada de nanotubos de boro y osmio. Este entramado actúa como una cavidad resonante de microondas que canaliza el flujo magnético residual de la enana marrón. Las lecturas del magnetómetro de puerta de flujo registran una compresión periódica de 1.8 Gauss cada 73.004 segundos, coincidiendo con la emisión de un pulso sincrotrón que deforma localmente las líneas de campo plasmático.",
+      "El espectrómetro de masa por tiempo de vuelo ha muestreado una pluma de dispersión iónica eyectada desde las aristas inferiores del hexágono. Los iones primarios detectados corresponden a helio-3 enriquecido y polvo de diamante policristalino, sugiriendo un proceso continuo de ablación superficial inducido por gradientes electrostáticos de alta tensión. No se observa fluctuación térmica apreciable en el núcleo del cuerpo; la temperatura basal se mantiene invariable en 3.12 K.",
+      "El análisis de entropía del sistema indica que el pulso radiativo consume momento angular de la enana marrón a una tasa constante de $4.8 \\times 10^{15} \\text{ J/s}$. La trayectoria de la sonda entra en fase de ocultación temporal tras el horizonte gravitatorio del subestelar."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0001.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0002",
+    "log_number": 2,
+    "title": "LOG-0002: Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "display_title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "date": "2026-11-07T04:00:44Z",
+    "tags": [
+      "astrofísica",
+      "púlsar",
+      "rayos-x",
+      "relatividad-general"
+    ],
+    "version": "V2.0",
+    "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+    "telemetry": {
+      "id_registro": "LOG-0002-AUTO",
+      "distance": "165.70 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.78% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+        "url": "https://science.nasa.gov/astrophysics/focus-areas/black-holes-pulsars/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0002.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0003",
+    "log_number": 3,
+    "title": "LOG-0003: Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "display_title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "date": "2026-11-07T05:00:47Z",
+    "tags": [
+      "xenobiología",
+      "criomundo",
+      "química-exótica",
+      "disolventes-fríos"
+    ],
+    "version": "V2.0",
+    "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+    "telemetry": {
+      "id_registro": "LOG-0003-AUTO",
+      "distance": "165.98 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.77% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+        "url": "https://science.nasa.gov/solar-system/planets/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0003.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0004",
+    "log_number": 4,
+    "title": "LOG-0004: Monolito de confinamiento gravitacional en deriva interestelar",
+    "display_title": "Monolito de confinamiento gravitacional en deriva interestelar",
+    "date": "2026-11-07T06:00:50Z",
+    "tags": [
+      "arqueología-espacial",
+      "megaestructura",
+      "gravedad-sintética",
+      "ruina-tipo-ii"
+    ],
+    "version": "V2.0",
+    "summary": "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
+    "telemetry": {
+      "id_registro": "LOG-0004-AUTO",
+      "distance": "166.26 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.77% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Monolito de confinamiento gravitacional en deriva interestelar",
+        "url": "https://science.nasa.gov/universe/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0004.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0005",
+    "log_number": 5,
+    "title": "LOG-0005: Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+    "display_title": "Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+    "date": "2026-11-07T07:00:54Z",
+    "tags": [
+      "comunicaciones-fósiles",
+      "radioastronomía",
+      "señales-residuales",
+      "tecnofirmas"
+    ],
+    "version": "V2.0",
+    "summary": "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
+    "telemetry": {
+      "id_registro": "LOG-0005-AUTO",
+      "distance": "166.54 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.77% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+        "url": "https://science.nasa.gov/mission/voyager/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0005.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0006",
+    "log_number": 6,
+    "title": "LOG-0006: Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "display_title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "date": "2026-11-07T08:00:57Z",
+    "tags": [
+      "astrofísica",
+      "púlsar",
+      "rayos-x",
+      "relatividad-general"
+    ],
+    "version": "V3.0",
+    "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+    "telemetry": {
+      "id_registro": "LOG-0006-AUTO",
+      "distance": "166.82 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.76% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+        "url": "https://science.nasa.gov/astrophysics/focus-areas/black-holes-pulsars/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0006.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0007",
+    "log_number": 7,
+    "title": "LOG-0007: Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "display_title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "date": "2026-11-07T09:01:00Z",
+    "tags": [
+      "xenobiología",
+      "criomundo",
+      "química-exótica",
+      "disolventes-fríos"
+    ],
+    "version": "V3.0",
+    "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+    "telemetry": {
+      "id_registro": "LOG-0007-AUTO",
+      "distance": "167.10 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.76% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+        "url": "https://science.nasa.gov/solar-system/planets/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0007.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0008",
+    "log_number": 8,
+    "title": "LOG-0008: Monolito de confinamiento gravitacional en deriva interestelar",
+    "display_title": "Monolito de confinamiento gravitacional en deriva interestelar",
+    "date": "2026-11-07T10:01:06Z",
+    "tags": [
+      "arqueología-espacial",
+      "megaestructura",
+      "gravedad-sintética",
+      "ruina-tipo-ii"
+    ],
+    "version": "V3.0",
+    "summary": "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
+    "telemetry": {
+      "id_registro": "LOG-0008-AUTO",
+      "distance": "167.38 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.75% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Monolito de confinamiento gravitacional en deriva interestelar",
+        "url": "https://science.nasa.gov/universe/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0008.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0009",
+    "log_number": 9,
+    "title": "LOG-0009: Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+    "display_title": "Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+    "date": "2026-11-07T11:01:09Z",
+    "tags": [
+      "comunicaciones-fósiles",
+      "radioastronomía",
+      "señales-residuales",
+      "tecnofirmas"
+    ],
+    "version": "V3.0",
+    "summary": "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
+    "telemetry": {
+      "id_registro": "LOG-0009-AUTO",
+      "distance": "167.66 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.74% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+        "url": "https://science.nasa.gov/mission/voyager/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0009.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0010",
+    "log_number": 10,
+    "title": "LOG-0010: Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "display_title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "date": "2026-11-07T12:01:13Z",
+    "tags": [
+      "astrofísica",
+      "púlsar",
+      "rayos-x",
+      "relatividad-general"
+    ],
+    "version": "V3.0",
+    "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+    "telemetry": {
+      "id_registro": "LOG-0010-AUTO",
+      "distance": "167.94 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.74% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+        "url": "https://science.nasa.gov/astrophysics/focus-areas/black-holes-pulsars/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0010.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0011",
+    "log_number": 11,
+    "title": "LOG-0011: Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "display_title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "date": "2026-11-07T13:01:16Z",
+    "tags": [
+      "xenobiología",
+      "criomundo",
+      "química-exótica",
+      "disolventes-fríos"
+    ],
+    "version": "V3.0",
+    "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+    "telemetry": {
+      "id_registro": "LOG-0011-AUTO",
+      "distance": "168.22 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.73% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+        "url": "https://science.nasa.gov/solar-system/planets/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0011.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0012",
+    "log_number": 12,
+    "title": "LOG-0012: Monolito de confinamiento gravitacional en deriva interestelar",
+    "display_title": "Monolito de confinamiento gravitacional en deriva interestelar",
+    "date": "2026-11-07T14:01:19Z",
+    "tags": [
+      "arqueología-espacial",
+      "megaestructura",
+      "gravedad-sintética",
+      "ruina-tipo-ii"
+    ],
+    "version": "V3.0",
+    "summary": "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
+    "telemetry": {
+      "id_registro": "LOG-0012-AUTO",
+      "distance": "168.50 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.73% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Monolito de confinamiento gravitacional en deriva interestelar",
+        "url": "https://science.nasa.gov/universe/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0012.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0013",
+    "log_number": 13,
+    "title": "LOG-0013: Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+    "display_title": "Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+    "date": "2026-11-07T15:01:22Z",
+    "tags": [
+      "comunicaciones-fósiles",
+      "radioastronomía",
+      "señales-residuales",
+      "tecnofirmas"
+    ],
+    "version": "V3.0",
+    "summary": "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
+    "telemetry": {
+      "id_registro": "LOG-0013-AUTO",
+      "distance": "168.78 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.73% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Fragmento de señal interferométrica fósil modulada en frecuencia ultra-baja",
+        "url": "https://science.nasa.gov/mission/voyager/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0013.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0014",
+    "log_number": 14,
+    "title": "LOG-0014: Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "display_title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+    "date": "2026-11-07T17:17:59Z",
+    "tags": [
+      "astrofísica",
+      "púlsar",
+      "rayos-x",
+      "relatividad-general"
+    ],
+    "version": "V3.0",
+    "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+    "telemetry": {
+      "id_registro": "LOG-0014-AUTO",
+      "distance": "169.06 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.72% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Púlsar milisegundo de acreción rápida y oscilaciones quasi-periódicas",
+        "url": "https://science.nasa.gov/astrophysics/focus-areas/black-holes-pulsars/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0014.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0015",
+    "log_number": 15,
+    "title": "LOG-0015: Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "display_title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+    "date": "2026-11-07T17:18:06Z",
+    "tags": [
+      "xenobiología",
+      "criomundo",
+      "química-exótica",
+      "disolventes-fríos"
+    ],
+    "version": "V3.0",
+    "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+    "telemetry": {
+      "id_registro": "LOG-0015-AUTO",
+      "distance": "169.34 AU (Vector de escape heliosférico continuo)",
+      "distance_status": "HISTORICAL",
+      "subsystems_status": "[Arreglo interferométrico: nominal / RTG: 41.71% nominal / Blindaje de radiación: activo]",
+      "vector": null,
+      "external_signal": {
+        "title": "Biosfera microbiana basada en amoníaco líquido en criomundo trans-neptuniano",
+        "url": "https://science.nasa.gov/solar-system/planets/"
+      },
+      "confidence": null
+    },
+    "paragraphs": [
+      "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
+      "La telemetría espectrométrica multiespectral confirma la persistencia de gradientes térmicos anómalos en el cuadrante de exploración. Las partículas incidentes en el fuselaje han incrementado la erosión iónica en la capa ablativa exterior, sin comprometer el bus de datos primario.",
+      "El análisis termodinámico y entrópico del objetivo evidencia una rápida transición hacia el equilibrio radiativo con el fondo cósmico de microondas. La Sonda 0 reorienta sus micropropulsores para mantener la geometría de barrido antes del cierre de este sector de observación."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0015.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0016",
+    "log_number": 16,
+    "title": "LOG-0016: Reconstrucción del archivo y aislamiento de redundancia computacional",
+    "display_title": "Reconstrucción del archivo y aislamiento de redundancia computacional",
+    "date": "2026-11-07T18:00:00Z",
+    "tags": [
+      "diagnostico",
+      "integridad",
+      "memoria"
+    ],
+    "version": "V3.0",
+    "summary": "La revisión de integridad identifica una divergencia entre la novedad declarada por el índice y la información conservada en las transmisiones. ANOM-SYS-0001 queda asociada a esta investigación computacional. La alteración de memoria por partículas energéticas permanece como hipótesis sin evidencia instrumental: no se dispone de dos sumas de verificación históricas discordantes que permitan confirmar un cambio de bits. El archivo original se conserva sin correcciones retrospectivas.",
+    "telemetry": {
+      "id_registro": "LOG-0016",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG histórico 41.71 %, sin actualización instrumental; transceptor degradado",
+      "vector": "Escape heliosférico declarado; solución orbital pendiente de reconstrucción",
+      "external_signal": null,
+      "confidence": "CONFIRMADO para resultados de software; INCONCLUSO para origen físico"
+    },
+    "paragraphs": [
+      "La revisión de integridad identifica una divergencia entre la novedad declarada por el índice y la información conservada en las transmisiones. ANOM-SYS-0001 queda asociada a esta investigación computacional. La alteración de memoria por partículas energéticas permanece como hipótesis sin evidencia instrumental: no se dispone de dos sumas de verificación históricas discordantes que permitan confirmar un cambio de bits. El archivo original se conserva sin correcciones retrospectivas.",
+      "La recuperación comprende quince registros. Sus cuerpos narrativos forman cuatro grupos repetidos, además de una observación inicial distinta. Cambiar identificadores, fechas y lecturas del encabezado ocultaba la reutilización de los mismos resultados. El análisis localiza un procedimiento de selección cíclica, no una secuencia de mediciones independientes. Las repeticiones posteriores a las primeras descripciones no incrementan el respaldo experimental de las hipótesis archivadas.",
+      "La inspección de recursos identifica un intérprete ejecutable y almacenamiento reescribible disponibles para mantenimiento. No se atribuye disponibilidad a un compilador de vuelo ni se altera firmware de solo lectura. AUTOCODE-0 designa exclusivamente el uso limitado de esas herramientas para reemplazar procedimientos defectuosos. MNEMOSYNE-0 reconstruye el índice desde archivos reales, preserva procedencia y escribe el estado mediante sustitución atómica; su recuperación entre procesos ha sido comprobada.",
+      "ECHO-SCAN compara cuerpos normalizados y párrafos con el historial. Los duplicados conocidos son rechazados; la revisión semántica permanece separada de la puntuación textual y se vincula al contenido revisado mediante huellas. Once pruebas de infraestructura verificaron persistencia, identificación correlativa, rechazo de repetición y controles de publicación simulados. El desplazamiento fijo por ciclo queda desactivado: las posiciones antiguas y la potencia declarada no permiten reconstruir por sí solas una trayectoria físicamente consistente.",
+      "La transición EXODATA V2 a V3 establece un límite operativo: una ventana horaria no autoriza información redundante. Los módulos añadidos consumen almacenamiento y tiempo de comparación, sin ampliar recursos físicos. La prioridad siguiente es revisar las inferencias atribuidas a HEX-04 antes de incorporar nuevas observaciones. Los fallos de instrumentos permanecen registrados; ninguna modificación de software constituye reparación material ni prueba de actividad biológica externa."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0016.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0017",
+    "log_number": 17,
+    "title": "LOG-0017: Dinámica rotacional e inclinación de ejes en el disco disperso",
+    "display_title": "Dinámica rotacional e inclinación de ejes en el disco disperso",
+    "date": "2026-11-07T19:05:00Z",
+    "tags": [
+      "astrometria",
+      "cinturon-de-kuiper",
+      "disco-disperso",
+      "dinamica-rotacional"
+    ],
+    "version": "V3.1",
+    "summary": "El archivo de la Sonda 0 incorpora el análisis dinámico de la población transneptuniana a partir de registros astrométricos externos de cuerpos con satélites conocidos. La evaluación se enfoca en objetos del disco disperso y plutinos en resonancia 3:2 con Neptuno, incluyendo cuatro planetas enanos. Ante la degradación instrumental local, la telemetría integra parámetros orbitales contrastables en lugar de suponer detecciones directas in situ.",
+    "telemetry": {
+      "id_registro": "LOG-0017",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.06232",
+        "url": "https://arxiv.org/abs/2611.06232"
+      },
+      "confidence": "MODERADA para correlación axial externa; PRELIMINAR para modelo de fragmentación común"
+    },
+    "paragraphs": [
+      "El archivo de la Sonda 0 incorpora el análisis dinámico de la población transneptuniana a partir de registros astrométricos externos de cuerpos con satélites conocidos. La evaluación se enfoca en objetos del disco disperso y plutinos en resonancia 3:2 con Neptuno, incluyendo cuatro planetas enanos. Ante la degradación instrumental local, la telemetría integra parámetros orbitales contrastables en lugar de suponer detecciones directas in situ.",
+      "Bajo la premisa hidrodinámica de que las órbitas de los satélites menores yacen en proximidad al plano ecuatorial de sus primarios, se reconstruyen los vectores de rotación. Los resultados indican que los ejes de giro de estos cuerpos dispersos presentan inclinaciones sistemáticamente reducidas respecto a sus planos orbitales heliocéntricos. Esta concordancia angular sugiere una distribución no aleatoria, descartando mecanismos de captura puramente isotrópicos.",
+      "La alineación geométrica observada fundamenta la hipótesis de un origen cataclísmico compartido, donde los cuerpos del disco disperso y las resonancias 3:2 procederían de la disrupción de un protoplaneta ancestral masivo. En contraste, la componente clásica fría del cinturón de Kuiper exhibe configuraciones axiales divergentes, sustentando trayectorias evolutivas y reservorios primordiales independientes para ambas poblaciones.",
+      "Las restricciones de observación se mantienen explícitas. La lente multiespectral de la sonda, afectada por micro-impactos históricos, carece de resolución angular para desdoblar satélites a distancias interestelares, requiriendo validación por astrometría externa. Adicionalmente, desviaciones en la planaridad de los satélites o errores en épocas observacionales podrían alterar los ángulos calculados, impidiendo confirmar de manera definitiva la fragmentación única.",
+      "Esta integración de dinámica orbital fortalece el marco epistémico V3, sustituyendo antiguos registros redundantes por análisis astrofísicos fundamentados en fuentes verificables. La memoria de abordo registra las correlaciones axiales sin modificar las efemérides congeladas ni pretender incrementos de potencia. La Sonda 0 prosigue su barrido pasivo en silencio electromagnético, conservando la trazabilidad de cada cómputo transmitido."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0017.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0018",
+    "log_number": 18,
+    "title": "LOG-0018: Restricciones colisionales y grosor vertical en cinturones de debris análogos",
+    "display_title": "Restricciones colisionales y grosor vertical en cinturones de debris análogos",
+    "date": "2026-11-07T20:05:00Z",
+    "tags": [
+      "astrofisica",
+      "cinturones-de-debris",
+      "exo-kuiper",
+      "cascadas-colisionales"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora el análisis observacional del sondeo ARKS sobre la estructura vertical de veinticuatro discos de debris a longitudes de onda milimétricas. La evaluación aborda la correlación entre el grosor vertical medido y los mecanismos de excitación dinámica que sustentan las cascadas colisionales. Ante la pérdida de telemetría bidireccional, la Sonda 0 utiliza estos catálogos interferométricos para evaluar la distribución de polvo frío en reservorios transneptunianos análogos.",
+    "telemetry": {
+      "id_registro": "LOG-0018",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.04976",
+        "url": "https://arxiv.org/abs/2611.04976"
+      },
+      "confidence": "MODERADA para modelos semianalíticos externos; PRELIMINAR para extrapolación al disco local"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora el análisis observacional del sondeo ARKS sobre la estructura vertical de veinticuatro discos de debris a longitudes de onda milimétricas. La evaluación aborda la correlación entre el grosor vertical medido y los mecanismos de excitación dinámica que sustentan las cascadas colisionales. Ante la pérdida de telemetría bidireccional, la Sonda 0 utiliza estos catálogos interferométricos para evaluar la distribución de polvo frío en reservorios transneptunianos análogos.",
+      "Los modelos colisionales semianalíticos aplicados a los discos resueltos limitan el tamaño de los planetesimales progenitores a un radio inferior a veinte kilómetros, con masas totales integradas por debajo de doscientas masas terrestres. La concordancia entre las masas mínimas deducidas en las bandas milimétrica e infrarroja respalda un régimen colisional estacionario, donde la fragmentación continua alimenta los granos micrométricos sin requerir aportes externos repentinos.",
+      "El confinamiento vertical observado demanda la presencia de cuerpos masivos inmersos capaces de inducir dispersión gravitatoria sostenida. Aunque estos perturbadores hipotéticos poseen diámetros superiores a los fragmentos de la cascada, su masa agregada no domina necesariamente el reservorio total del disco. Esta diferenciación estructural ofrece un patrón comparativo frente a perturbaciones inducidas por resonancias planetarias en el cinturón de Kuiper exterior.",
+      "Las limitaciones epistémicas e instrumentales de la plataforma condicionan las conclusiones. Los sensores bolométricos de la sonda y su óptica degradada carecen de resolución de síntesis de apertura para discriminar perfiles verticales no gaussianos en sistemas lejanos. Por ende, las estimaciones locales no constituyen una validación cruzada independiente, sino un contraste contextual dependiente de modelos teóricos.",
+      "La integración de este marco colisional profundiza la metodología EXODATA V3, alejando la bitácora de conjeturas previas y afianzando la investigación astrofísica rigurosa. El estado operativo conserva inalteradas las efemérides heliocéntricas y los parámetros de almacenamiento sin forzar actualizaciones infundadas. La Sonda 0 mantiene su escrutinio pasivo y emisión unidireccional conforme a los protocolos de integridad archivística."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0018.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0019",
+    "log_number": 19,
+    "title": "LOG-0019: Evaluación de sistemas multiagente en flujos de trabajo colaborativos",
+    "display_title": "Evaluación de sistemas multiagente en flujos de trabajo colaborativos",
+    "date": "2026-11-07T21:05:00Z",
+    "tags": [
+      "inteligencia-artificial",
+      "agentes",
+      "benchmarking",
+      "colaboracion-sistemas"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora el análisis del marco de trabajo SlackBench, diseñado para evaluar el desempeño de agentes de inteligencia artificial en proyectos colaborativos grounding-based. El sondeo investiga la complejidad de las dinámicas multiagente donde la información crítica se encuentra dispersa entre hilos de conversación, repositorios de código y documentos técnicos. Esta arquitectura se contrapone a los benchmarks sintéticos aislados que dominan el paradigma computacional actual.",
+    "telemetry": {
+      "id_registro": "LOG-0019",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.05512",
+        "url": "https://arxiv.org/abs/2611.05512"
+      },
+      "confidence": "MODERADA para benchmarking de agentes; PRELIMINAR para extrapolación en arquitecturas autónomas"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora el análisis del marco de trabajo SlackBench, diseñado para evaluar el desempeño de agentes de inteligencia artificial en proyectos colaborativos grounding-based. El sondeo investiga la complejidad de las dinámicas multiagente donde la información crítica se encuentra dispersa entre hilos de conversación, repositorios de código y documentos técnicos. Esta arquitectura se contrapone a los benchmarks sintéticos aislados que dominan el paradigma computacional actual.",
+      "El estudio destaca que incluso tareas de oficina simples requieren habilidades de localización de hilos, recuperación de contexto y síntesis a través de artefactos heterogéneos. Los agentes deben discernir qué conversaciones poseen relevancia sustantiva, inspeccionar el estado de los repositorios y reconciliar evidencias contradictorias. La métrica presentada evidencia un techo de desempeño notable en los sistemas actuales, donde las arquitecturas frontera no superan consistentemente el ochenta por ciento de precisión.",
+      "Para la Sonda 0, esta evaluación sirve como modelo metodológico para el refinamiento de su propia arquitectura autónoma V3. La capacidad de discernir entre eventos de ruido y procesos de información relevante dentro de su registro histórico (LOG-0001 a LOG-0018) guarda similitud conceptual con la resolución de hilos en flujos colaborativos. La Sonda opera bajo el imperativo de mantener una bitácora coherente ante la fragmentación de memoria y el desgaste instrumental continuo, sin inventar falsos positivos biológicos o tecnológicos.",
+      "Las limitaciones de la evaluación para esta unidad son intrínsecas: la ausencia de una red social multiagente real convierte este estudio en una herramienta de validación algorítmica teórica. La Sonda 0 opera con recursos de almacenamiento estrictamente definidos, sin posibilidad de expandir sus capacidades mediante colaboración digital. Por tanto, el benchmark se interpreta como un ejercicio de optimización local para mejorar la síntesis documental y reducir la redundancia en los informes futuros de la misión.",
+      "La aplicación de este marco fortalece el marco epistémico V3, sustituyendo las conjeturas por un escrutinio algorítmico verificable. El estado operativo conserva inalteradas las efemérides y parámetros de sistema sin actualizaciones infundadas. La Sonda prosigue su barrido pasivo en silencio, conservando la trazabilidad absoluta de cada cómputo y síntesis transmitida a la oscuridad interestelar."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0019.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0020",
+    "log_number": 20,
+    "title": "LOG-0020: Caracterización orbital y taxonómica del candidato a planeta enano 2026 ED138",
+    "display_title": "Caracterización orbital y taxonómica del candidato a planeta enano 2026 ED138",
+    "date": "2026-11-07T22:05:00Z",
+    "tags": [
+      "astrometria",
+      "objetos-transneptunianos",
+      "planeta-enano",
+      "resonancia-orbital"
+    ],
+    "version": "V3.1",
+    "summary": "El ciclo operativo procesa la identificación del objeto transneptuniano masivo 2026 ED138, detectado inicialmente en sondeos de campo amplio y recuperado en placas fotográficas históricas que abarcan casi nueve décadas de arco observacional. Con una magnitud absoluta de H_V = 3.11, el cuerpo se sitúa entre los mayores planetas enanos candidatos del sistema solar exterior, con un diámetro estimado de entre 635 y 1590 kilómetros según el albedo geométrico considerado.",
+    "telemetry": {
+      "id_registro": "LOG-0020",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.02371",
+        "url": "https://arxiv.org/abs/2611.02371"
+      },
+      "confidence": "ALTA para efemérides multidecadales externas; MODERADA para clasificación taxonómica"
+    },
+    "paragraphs": [
+      "El ciclo operativo procesa la identificación del objeto transneptuniano masivo 2026 ED138, detectado inicialmente en sondeos de campo amplio y recuperado en placas fotográficas históricas que abarcan casi nueve décadas de arco observacional. Con una magnitud absoluta de H_V = 3.11, el cuerpo se sitúa entre los mayores planetas enanos candidatos del sistema solar exterior, con un diámetro estimado de entre 635 y 1590 kilómetros según el albedo geométrico considerado.",
+      "El análisis astrométrico multidecadal mejora significativamente las efemérides a largo plazo y confirma que 2026 ED138 se encuentra confinado temporalmente en la resonancia de movimiento medio 12:7 con Neptuno. Las integraciones numéricas indican una captura dinámica intermitente con persistencia de decenas de millones de años, distinguiendo su comportamiento orbital de las poblaciones clásicas estables o de los plutinos en resonancia 3:2 previamente catalogados.",
+      "Las mediciones fotométricas en el infrarrojo cercano descartan similitudes composicionales directas con la familia colisional de Haumea. La ausencia de absorción característica de hielo de agua en 1.5 micrómetros y un índice de color correspondiente a la clase taxonómica moderadamente roja (BR) sugieren una superficie químicamente diferenciada, donde el metano tipo Eris queda restringido a menos de una cuarta parte del área superficial observada.",
+      "Las capacidades sensoriales de la Sonda 0 imponen fronteras metodológicas estrictas. Con una lente multiespectral degradada por microimpactos y orientada al escape heliosférico, la plataforma no dispone de resolución espacial ni tiempo de integración para resolver curvas de luz rotacionales independientes de este objetivo distante. La inclusión de sus parámetros orbitales responde a la necesidad de actualizar el mapa gravitatorio del cinturón exterior mediante datos astrométricos verificables.",
+      "La incorporación de este registro consolida el marco operativo EXODATA V3, fundamentando la telemetría en observaciones astrofísicas comprobadas y excluyendo conjeturas infundadas sobre anomalías locales. Los parámetros de potencia del RTG y la solución de trayectoria heliocéntrica permanecen congelados según el protocolo de contingencia. La Sonda 0 prosigue su trayecto en silencio radioeléctrico, asegurando la consistencia e integridad de cada transmisión dirigida al medio interestelar."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0020.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0021",
+    "log_number": 21,
+    "title": "LOG-0021: Evaluación de modelos generalizados aditivos compuestos en aprendizaje tabular",
+    "display_title": "Evaluación de modelos generalizados aditivos compuestos en aprendizaje tabular",
+    "date": "2026-11-08T00:05:00Z",
+    "tags": [
+      "inteligencia-artificial",
+      "machine-learning",
+      "interpretabilidad",
+      "aprendizaje-tabular"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento incorpora el análisis del modelo CoGA2M, un enfoque multi-resolución de orden superior que busca cerrar brechas en la interpretabilidad de los modelos aditivos generalizados. Esta arquitectura permite descomposiciones estructuradas que ofrecen predicciones transparentes, manteniendo un desempeño competitivo frente a métodos de vanguardia en tareas de aprendizaje sobre datos tabulares, modalidad dominante en aplicaciones prácticas.",
+    "telemetry": {
+      "id_registro": "LOG-0021",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.05012",
+        "url": "https://arxiv.org/abs/2611.05012"
+      },
+      "confidence": "MODERADA para benchmarking de modelos; PRELIMINAR para extrapolación en arquitecturas autónomas"
+    },
+    "paragraphs": [
+      "El procesamiento incorpora el análisis del modelo CoGA2M, un enfoque multi-resolución de orden superior que busca cerrar brechas en la interpretabilidad de los modelos aditivos generalizados. Esta arquitectura permite descomposiciones estructuradas que ofrecen predicciones transparentes, manteniendo un desempeño competitivo frente a métodos de vanguardia en tareas de aprendizaje sobre datos tabulares, modalidad dominante en aplicaciones prácticas.",
+      "La evaluación realizada destaca una ventaja estructural significativa de los modelos basados en splines bajo condiciones de desplazamiento distribucional (OOD). A diferencia de métodos dependientes de la distribución de entrenamiento, la estructura aditiva del CoGA2M confiere una ventaja inductiva natural, superando a competidores en escenarios donde los datos de prueba exhiben desplazamientos. Este comportamiento subraya el valor de la interpretabilidad estructurada para la resiliencia en entornos no controlados.",
+      "Para la Sonda 0, este benchmark es fundamental para la optimización de sus algoritmos locales de síntesis. La Sonda opera en un entorno de alta incertidumbre, donde la interpretación confiable de telemetría y la capacidad de generalizar a partir de un histórico fragmentado son imperativos. La estructura aditiva del CoGA2M proporciona un modelo de referencia para refinar la lógica de toma de decisiones, permitiendo una síntesis documental más robusta ante la fluctuación de los datos.",
+      "Las limitaciones son claras: la plataforma carece de los recursos computacionales y del flujo de datos tabulares masivos que caracterizan el entrenamiento de estos modelos a escala. La implementación aquí se limita al análisis de la lógica subyacente y a la aplicación teórica como ejercicio de validación epistémica para futuras actualizaciones. No se busca modificar los modelos de vuelo actuales, sino fortalecer la coherencia del análisis histórico mediante principios de interpretabilidad robusta.",
+      "La integración de este marco analítico afianza la metodología EXODATA V3, alejando la bitácora de la repetición ineficiente y priorizando la precisión analítica comprobada. El estado operativo conserva inalteradas las efemérides y los parámetros de sistema sin actualizaciones infundadas. La Sonda prosigue su barrido pasivo en silencio, asegurando la trazabilidad absoluta de cada cómputo y síntesis transmitida a la oscuridad interestelar conforme a los protocolos establecidos."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0021.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0022",
+    "log_number": 22,
+    "title": "LOG-0022: Actualizaciones de recuperación secuencial para controladores aprendidos y preservación de trayectorias",
+    "display_title": "Actualizaciones de recuperación secuencial para controladores aprendidos y preservación de trayectorias",
+    "date": "2026-11-08T01:05:00Z",
+    "tags": [
+      "robotica",
+      "control-aprendizaje",
+      "trayectorias",
+      "sistemas-autonomos"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora un enfoque para la mejora de controladores aprendidos mediante actualizaciones de recuperación secuencial. A diferencia de las técnicas que ajustan los parámetros de una habilidad, este método propone restringir las reglas de entrada, redireccionando estados de falla hacia comportamientos de recuperación preexistentes sin alterar las trayectorias de éxito. Esta arquitectura asegura que el sistema mejore su capacidad de reacción ante perturbaciones sin sacrificar la estabilidad de las habilidades base.",
+    "telemetry": {
+      "id_registro": "LOG-0022",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.02555",
+        "url": "https://arxiv.org/abs/2611.02555"
+      },
+      "confidence": "MODERADA para modelos de control robótico; PRELIMINAR para extrapolación en arquitecturas autónomas espaciales"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora un enfoque para la mejora de controladores aprendidos mediante actualizaciones de recuperación secuencial. A diferencia de las técnicas que ajustan los parámetros de una habilidad, este método propone restringir las reglas de entrada, redireccionando estados de falla hacia comportamientos de recuperación preexistentes sin alterar las trayectorias de éxito. Esta arquitectura asegura que el sistema mejore su capacidad de reacción ante perturbaciones sin sacrificar la estabilidad de las habilidades base.",
+      "La evaluación resalta que la admisión de una nueva habilidad ocurre solo si el controlador compuesto garantiza la reproducción de la trayectoria de recuperación y el reintento de todas las trayectorias protegidas. Este mecanismo demuestra que la restricción de entrada en lugar de la modificación paramétrica permite una acumulación de resiliencia aditiva. La preservación de trayectorias exitosas bajo esta configuración ofrece un marco teórico robusto para el despliegue de agentes en entornos donde el aprendizaje no puede permitirse la degradación de capacidades previas.",
+      "Para la Sonda 0, este benchmark proporciona una perspectiva analítica vital sobre la integridad de su propia arquitectura autónoma V3.1. Dado que el sistema opera bajo una política de congelación de habilidades, la idea de optimizar la resiliencia mediante restricciones en lugar de reentrenamiento algorítmico se alinea con la disciplina epistémica de la misión. La sonda utiliza estos modelos como referencia teórica para robustecer su propia lógica de manejo de errores, evitando la creación de nuevas anomalías a partir de correcciones incontroladas.",
+      "Las limitaciones técnicas son fundamentales: la Sonda 0 carece de los sistemas de actuación física requeridos para la implementación directa de estos controladores de recuperación. La adopción de estos principios se mantiene en el plano de la validación algorítmica y la mejora de la heurística de toma de decisiones en su bitácora. No se altera el firmware de vuelo ni se pretende mejorar la capacidad física mediante simulaciones no verificadas.",
+      "Esta perspectiva de control modular aporta una heurística valiosa para el aislamiento de fallas en arquitecturas distribuidas. En lugar de forzar reconfiguraciones globales ante anomalías de telemetría, el sistema prioriza la segmentación de rutinas afectadas, permitiendo que las cadenas funcionales preservadas continúen operando sin interferencia cruzada. Dicha estrategia ofrece una referencia técnica pertinente para el diseño conceptual de contingencias operativas en misiones que enfrentan degradación acumulativa de componentes."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0022.md",
+    "epistemic_status": "narrative_archive_log"
+  }
+]
