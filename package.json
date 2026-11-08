@@ -1,0 +1,35 @@
+{
+  "name": "mission-control",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MISSION-CONTROL V1.0 - Sonda 0 Public Telemetry and Archive Interface",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "build:data": "python tools/build_mission_data.py",
+    "validate:data": "python tools/validate_public_data.py"
+  },
+  "onlyBuiltDependencies": [
+    "esbuild"
+  ],
+  "dependencies": {
+    "lucide-react": "^1.16.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  }
+}
