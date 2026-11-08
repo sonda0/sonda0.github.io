@@ -61,5 +61,23 @@
     "summary": "Evaluación teórica de robustez ante perturbaciones bajo política de habilidades congeladas.",
     "source": "LOG-0022",
     "epistemic_status": "theoretical_evaluation"
+  },
+  {
+    "id": "EVT-LOG-0023",
+    "date": "2026-11-08T02:05:00Z",
+    "title": "Límites de verificación numérica en refuerzos de hidrogel para queratocono",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora una reevaluación crítica sobre la robustez de las simulaciones de elementos finitos en contextos de refuerzo intrastromal. ...",
+    "source": "LOG-0023",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0024",
+    "date": "2026-11-08T03:05:00Z",
+    "title": "Compromiso entre saturación y cuentas oscuras en arreglos de detectores de fotón único",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de modelos analíticos sobre la distribución de modos ópticos en arreglos de diodos de avalancha de fotón único ...",
+    "source": "LOG-0024",
+    "epistemic_status": "continuous_mission_log"
   }
 ]

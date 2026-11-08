@@ -214,7 +214,7 @@
       "rayos-x",
       "relatividad-general"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
     "telemetry": {
       "id_registro": "LOG-0006-AUTO",
@@ -248,7 +248,7 @@
       "química-exótica",
       "disolventes-fríos"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
     "telemetry": {
       "id_registro": "LOG-0007-AUTO",
@@ -282,7 +282,7 @@
       "gravedad-sintética",
       "ruina-tipo-ii"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
     "telemetry": {
       "id_registro": "LOG-0008-AUTO",
@@ -316,7 +316,7 @@
       "señales-residuales",
       "tecnofirmas"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
     "telemetry": {
       "id_registro": "LOG-0009-AUTO",
@@ -350,7 +350,7 @@
       "rayos-x",
       "relatividad-general"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
     "telemetry": {
       "id_registro": "LOG-0010-AUTO",
@@ -384,7 +384,7 @@
       "química-exótica",
       "disolventes-fríos"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
     "telemetry": {
       "id_registro": "LOG-0011-AUTO",
@@ -418,7 +418,7 @@
       "gravedad-sintética",
       "ruina-tipo-ii"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "Se ha interceptado una estructura toroidal de aleación de osmio y materia bariónica condensada de 82 km de diámetro mayor. Un micro-agujero de gusano estabilizado artificialmente en su núcleo muestra signos de evaporación Hawking incontrolada. El colapso inminente de los anillos de confinamiento magnético liberará una onda de choque relativista en el medio interestelar dentro de 4 ciclos orbitales.",
     "telemetry": {
       "id_registro": "LOG-0012-AUTO",
@@ -452,7 +452,7 @@
       "señales-residuales",
       "tecnofirmas"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "La antena de recepción pasiva de la Sonda 0 ha reconstruido un tren de pulsos modulados en 47.8 kHz que recorren el espacio interestelar con un corrimiento al rojo severo. El decodificador sintético identifica matrices numéricas ortogonales compatibles con un protocolo de sincronización de reloj de red estelar extinguida hace más de 1.8 millones de años. La portadora se diluye progresivamente en la radiación de fondo de microondas.",
     "telemetry": {
       "id_registro": "LOG-0013-AUTO",
@@ -486,7 +486,7 @@
       "rayos-x",
       "relatividad-general"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "La Sonda 0 ha detectado un tren de pulsos coherentes en la banda de rayos X duros (12-60 keV) emanado de una estrella de neutrones ultracompacta. Los gradientes de marea relativistas en la magnetosfera interior están fragmentando la corteza de hierro en láminas cristalinas de micro-espesor. La tasa de dispersión electromagnética confirma que el vector de momento cinético decae a razón de 3.2 nanosegundos por giro estelar, dispersando flujos de radiación que saturan los canales del sensor secundario.",
     "telemetry": {
       "id_registro": "LOG-0014-AUTO",
@@ -520,7 +520,7 @@
       "química-exótica",
       "disolventes-fríos"
     ],
-    "version": "V3.0",
+    "version": "V2.0",
     "summary": "El barrido criogénico sobre la planicie glacial revela redes de polímeros basados en silicio y amoníaco que operan a 105 Kelvin. Estas colonias aprovechan la termoluminiscencia inducida por radiación de rayos cósmicos para catalizar enlaces moleculares de baja energía. No se identifica huella de ácidos nucleicos convencionales; la información estructural se almacena en microestructuras quirales de hidrocarburos pesados embebidos en el hielo amorfo.",
     "telemetry": {
       "id_registro": "LOG-0015-AUTO",
@@ -586,7 +586,7 @@
       "disco-disperso",
       "dinamica-rotacional"
     ],
-    "version": "V3.1",
+    "version": "V3.0",
     "summary": "El archivo de la Sonda 0 incorpora el análisis dinámico de la población transneptuniana a partir de registros astrométricos externos de cuerpos con satélites conocidos. La evaluación se enfoca en objetos del disco disperso y plutinos en resonancia 3:2 con Neptuno, incluyendo cuatro planetas enanos. Ante la degradación instrumental local, la telemetría integra parámetros orbitales contrastables en lugar de suponer detecciones directas in situ.",
     "telemetry": {
       "id_registro": "LOG-0017",
@@ -622,7 +622,7 @@
       "exo-kuiper",
       "cascadas-colisionales"
     ],
-    "version": "V3.1",
+    "version": "V3.0",
     "summary": "El procesamiento del ciclo incorpora el análisis observacional del sondeo ARKS sobre la estructura vertical de veinticuatro discos de debris a longitudes de onda milimétricas. La evaluación aborda la correlación entre el grosor vertical medido y los mecanismos de excitación dinámica que sustentan las cascadas colisionales. Ante la pérdida de telemetría bidireccional, la Sonda 0 utiliza estos catálogos interferométricos para evaluar la distribución de polvo frío en reservorios transneptunianos análogos.",
     "telemetry": {
       "id_registro": "LOG-0018",
@@ -658,7 +658,7 @@
       "benchmarking",
       "colaboracion-sistemas"
     ],
-    "version": "V3.1",
+    "version": "V3.0",
     "summary": "El procesamiento del ciclo incorpora el análisis del marco de trabajo SlackBench, diseñado para evaluar el desempeño de agentes de inteligencia artificial en proyectos colaborativos grounding-based. El sondeo investiga la complejidad de las dinámicas multiagente donde la información crítica se encuentra dispersa entre hilos de conversación, repositorios de código y documentos técnicos. Esta arquitectura se contrapone a los benchmarks sintéticos aislados que dominan el paradigma computacional actual.",
     "telemetry": {
       "id_registro": "LOG-0019",
@@ -694,7 +694,7 @@
       "planeta-enano",
       "resonancia-orbital"
     ],
-    "version": "V3.1",
+    "version": "V3.0",
     "summary": "El ciclo operativo procesa la identificación del objeto transneptuniano masivo 2026 ED138, detectado inicialmente en sondeos de campo amplio y recuperado en placas fotográficas históricas que abarcan casi nueve décadas de arco observacional. Con una magnitud absoluta de H_V = 3.11, el cuerpo se sitúa entre los mayores planetas enanos candidatos del sistema solar exterior, con un diámetro estimado de entre 635 y 1590 kilómetros según el albedo geométrico considerado.",
     "telemetry": {
       "id_registro": "LOG-0020",
@@ -730,7 +730,7 @@
       "interpretabilidad",
       "aprendizaje-tabular"
     ],
-    "version": "V3.1",
+    "version": "V3.0",
     "summary": "El procesamiento incorpora el análisis del modelo CoGA2M, un enfoque multi-resolución de orden superior que busca cerrar brechas en la interpretabilidad de los modelos aditivos generalizados. Esta arquitectura permite descomposiciones estructuradas que ofrecen predicciones transparentes, manteniendo un desempeño competitivo frente a métodos de vanguardia en tareas de aprendizaje sobre datos tabulares, modalidad dominante en aplicaciones prácticas.",
     "telemetry": {
       "id_registro": "LOG-0021",
@@ -788,6 +788,78 @@
       "Esta perspectiva de control modular aporta una heurística valiosa para el aislamiento de fallas en arquitecturas distribuidas. En lugar de forzar reconfiguraciones globales ante anomalías de telemetría, el sistema prioriza la segmentación de rutinas afectadas, permitiendo que las cadenas funcionales preservadas continúen operando sin interferencia cruzada. Dicha estrategia ofrece una referencia técnica pertinente para el diseño conceptual de contingencias operativas en misiones que enfrentan degradación acumulativa de componentes."
     ],
     "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0022.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0023",
+    "log_number": 23,
+    "title": "LOG-0023: Límites de verificación numérica en refuerzos de hidrogel para queratocono",
+    "display_title": "Límites de verificación numérica en refuerzos de hidrogel para queratocono",
+    "date": "2026-11-08T02:05:00Z",
+    "tags": [
+      "biofisica",
+      "biomecanica",
+      "verificacion-numerica",
+      "modelado-elementos-finitos"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora una reevaluación crítica sobre la robustez de las simulaciones de elementos finitos en contextos de refuerzo intrastromal. El estudio subraya una distinción metodológica crucial: la diferencia entre la verificación del solver numérico y la adecuación constitutiva de los modelos biomecánicos. A través de benchmarks de dos materiales, la investigación demuestra que resultados aparentemente significativos pueden revertirse o volverse irrelevantes ante cambios en el refinamiento de la malla, alertando sobre el riesgo de atribuir validez a simulaciones altamente sensibles a la configuración espacial.",
+    "telemetry": {
+      "id_registro": "LOG-0023",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.01889",
+        "url": "https://arxiv.org/abs/2611.01889"
+      },
+      "confidence": "ALTA para verificaciones de robustez numérica; PRELIMINAR para extrapolación en biofísica"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora una reevaluación crítica sobre la robustez de las simulaciones de elementos finitos en contextos de refuerzo intrastromal. El estudio subraya una distinción metodológica crucial: la diferencia entre la verificación del solver numérico y la adecuación constitutiva de los modelos biomecánicos. A través de benchmarks de dos materiales, la investigación demuestra que resultados aparentemente significativos pueden revertirse o volverse irrelevantes ante cambios en el refinamiento de la malla, alertando sobre el riesgo de atribuir validez a simulaciones altamente sensibles a la configuración espacial.",
+      "Los autores del análisis demuestran que, en benchmarks de parches corneales, la variabilidad del beneficio biomecánico bajo refuerzos asimétricos no es una propiedad intrínseca, sino una consecuencia directa de la dependencia del mallado. Esta inestabilidad numérica invalida hallazgos previos basados en criterios de convergencia insuficientes o convenciones de referencia de frente de onda no normalizadas. El estudio recalca la necesidad de criterios prespecificados para simulaciones de deformación finita, asegurando la invarianza geométrica de los resultados.",
+      "Para la Sonda 0, este benchmark constituye una referencia epistémica fundamental para la validación de cualquier modelo teórico interno. Ante la ausencia de un compilador de vuelo o capacidad de reconfiguración física, la sonda prioriza la rigurosidad en el procesamiento de datos pasivos. La lección sobre los límites de la verificación numérica sirve como antídoto contra la sobreinterpretación de anomalías o señales de baja relación señal-ruido, recordando que la convergencia del algoritmo es un prerrequisito indispensable para la validez de cualquier conclusión científica.",
+      "Las limitaciones del análisis para esta unidad son claras: la Sonda 0 opera en el medio interestelar, lejos de aplicaciones biomédicas o modelos finitos in vivo. No obstante, la metodología de validación de solvers es universal. La Sonda adopta estos principios para auditar sus propios procesos de reconstrucción documental, rechazando interpretaciones de datos que no superen pruebas de sensibilidad ante variaciones en los parámetros de entrada o en la resolución de los métodos numéricos aplicados.",
+      "Esta perspectiva de rigor numérico aporta una heurística valiosa para el aislamiento de errores en sistemas computacionales complejos. En lugar de forzar conclusiones ante variaciones estadísticas, el sistema prioriza la consistencia entre resoluciones de datos, permitiendo que las cadenas funcionales preservadas operen sobre bases robustas. Dicha estrategia ofrece una referencia técnica pertinente para el diseño conceptual de contingencias operativas en misiones que enfrentan degradación acumulativa de componentes."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0023.md",
+    "epistemic_status": "narrative_archive_log"
+  },
+  {
+    "id": "LOG-0024",
+    "log_number": 24,
+    "title": "LOG-0024: Compromiso entre saturación y cuentas oscuras en arreglos de detectores de fotón único",
+    "display_title": "Compromiso entre saturación y cuentas oscuras en arreglos de detectores de fotón único",
+    "date": "2026-11-08T03:05:00Z",
+    "tags": [
+      "instrumentacion",
+      "fotonica",
+      "detectores",
+      "procesamiento-senales"
+    ],
+    "version": "V3.1",
+    "summary": "El procesamiento del ciclo incorpora el análisis de modelos analíticos sobre la distribución de modos ópticos en arreglos de diodos de avalancha de fotón único (SPAD) integrados en guías de onda. La investigación cuantifica el compromiso fundamental entre mitigar la saturación por tiempo muerto y evitar la multiplicación indeseada de cuentas oscuras. Mediante la formulación de una tasa asintótica de información basada en conteo, se establece una métrica que unifica el impacto del ruido intrínseco y los retardos de reactivación en los canales de recepción de ultra-baja intensidad.",
+    "telemetry": {
+      "id_registro": "LOG-0024",
+      "distance": "169.34 AU (estimada)",
+      "distance_status": "ESTIMATED",
+      "subsystems_status": "RTG 41.71 % nominal; transceptor degradado unidireccional; óptica pasiva operativa",
+      "vector": "Escape heliosférico en curso; distancia estimada 169.34 AU no verificada",
+      "external_signal": {
+        "title": "arXiv:2611.01111",
+        "url": "https://arxiv.org/abs/2611.01111"
+      },
+      "confidence": "ALTA para modelado fotónico en simulación; PRELIMINAR para extrapolación a sensores de espacio profundo"
+    },
+    "paragraphs": [
+      "El procesamiento del ciclo incorpora el análisis de modelos analíticos sobre la distribución de modos ópticos en arreglos de diodos de avalancha de fotón único (SPAD) integrados en guías de onda. La investigación cuantifica el compromiso fundamental entre mitigar la saturación por tiempo muerto y evitar la multiplicación indeseada de cuentas oscuras. Mediante la formulación de una tasa asintótica de información basada en conteo, se establece una métrica que unifica el impacto del ruido intrínseco y los retardos de reactivación en los canales de recepción de ultra-baja intensidad.",
+      "Las simulaciones comparativas revelan que la división pasiva y estática supera a los esquemas programables reconfigurables mediante interferómetros termo-ópticos cuando el sistema opera en regímenes de flujo bajo o moderado, debido a las pérdidas de inserción adicionales que introducen estos últimos. Para un píxel no paralizable, la eficiencia óptima de adquisición se alcanza a una tasa crítica donde la penalización por exceso de pérdidas puede duplicarse en presencia de ruido dominante. Esto evidencia que una mayor complejidad de conmutación no garantiza una mayor capacidad de información sin ventanas dinámicas de flujo extremadamente amplias.",
+      "Para la Sonda 0, estas conclusiones ofrecen un marco de referencia técnico para comprender los límites de sus propios canales de recepción óptica e interferométrica. Con sensores bolométricos e interferométricos operando bajo flujo fotónico marginal en el medio interestelar, la gestión de ruido térmico y cuentas espurias cobra máxima relevancia. La comprensión teórica de cómo las pérdidas de enrutamiento penalizan el flujo de información aporta criterios para la calibración pasiva y el filtrado digital sin requerir reconfiguraciones activas en subsistemas degradados.",
+      "Las restricciones de hardware de la nave delimitan el alcance del análisis: la instrumentación electro-óptica de abordo no dispone de arreglos reconfigurables de SPAD de última generación ni de capacidades de telemetría bidireccional para pruebas interactivas. Los resultados analíticos se integran en la memoria como modelos de referencia para mejorar los estimadores de momento ponderados en las rutinas de análisis espectral pasivo, garantizando que no se interpreten fluctuaciones estadísticas de ruido como tecnofirmas o anomalías físicas externas.",
+      "Este análisis de instrumentación consolida la disciplina del protocolo EXODATA V3.1, manteniendo el foco en el modelado riguroso de la incertidumbre en sensores de recepción. La segmentación de los procesos de filtrado asegura que la lógica de adquisición preserve su estabilidad ante niveles variables de fondo electromagnético. La Sonda prosigue su monitoreo en silencio, aplicando principios rigurosos de teoría de detección antes de validar cualquier síntesis hacia el medio exterior."
+    ],
+    "github_url": "https://github.com/sonda0/bitacora/blob/main/transmisiones/LOG-0024.md",
     "epistemic_status": "narrative_archive_log"
   }
 ]

@@ -99,3 +99,21 @@ export function clearDataCache(): void {
   cachedSystems = null;
   cachedTimeline = null;
 }
+
+export async function checkForUpdates(): Promise<boolean> {
+  const currentManifest = await getManifest();
+  
+  // Clear cache to force re-fetch
+  clearDataCache();
+  
+  const newManifest = await getManifest();
+  
+  const hasUpdates = currentManifest.sync?.content_fingerprint !== newManifest.sync?.content_fingerprint;
+  
+  if (!hasUpdates) {
+    // Restore cache if no updates found to avoid unnecessary work
+    cachedManifest = newManifest;
+  }
+  
+  return hasUpdates;
+}

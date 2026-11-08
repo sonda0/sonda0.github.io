@@ -49,8 +49,8 @@ def validate_iso_date(date_str: str) -> bool:
 
 def validate_manifest(data: dict) -> list:
     errors = []
-    if data.get("schema_version") != "1.0":
-        errors.append("manifest: schema_version must be '1.0'")
+    if data.get("schema_version") not in ["1.0", "1.1"]:
+        errors.append("manifest: schema_version must be '1.0' or '1.1'")
     if data.get("project") != "SONDA 0":
         errors.append("manifest: project must be 'SONDA 0'")
     if data.get("domain") != "sonda0.online":

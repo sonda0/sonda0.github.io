@@ -59,6 +59,17 @@ export interface ManifestData {
     youtube: string;
     reddit: string;
   };
+  sync?: {
+    version: string;
+    source_repository: string;
+    source_branch: string;
+    source_commit?: string | null;
+    content_fingerprint?: string | null;
+    last_successful_sync: string;
+    status: string;
+    transmissions_count: number;
+    anomalies_status: 'SYNCHRONIZED' | 'STALE' | string;
+  };
 }
 
 export interface TimelineEvent {

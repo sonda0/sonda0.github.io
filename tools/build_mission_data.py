@@ -1,63 +1,60 @@
 #!/usr/bin/env python3
 """
-MISSION-CONTROL V1.0 // Mission Data Builder
+MISSION-CONTROL V1.1 // Mission Data Builder
 Extracts, normalizes, and validates public data from authorized read-only sources.
-Generates versioned public JSON files in mission_control/public/data/
+Generates versioned public JSON files.
 
-STRICT RESTRICTIONS:
-- Read-only operations on source files.
-- Writes ONLY to public/data/*.json.
-- Whitelist only for anomaly_catalog and mission_state.
-- No tokens, credentials, or sensitive local paths exported.
+Supports both local Windows mode and GitHub Actions CI mode:
+  --source-dir: path to the repository containing bitacora / transmissions (default: workspace root)
+  --output-dir: path where JSON datasets are written (default: public/data)
+  --mode: 'local' (with fallback to local anomaly_catalog / mission_state if present) or 'github' (standalone public repo mode)
+  --commit-sha: optional commit SHA of the source bitacora repository
 """
 
 import os
 import sys
 import json
 import re
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Paths configuration
-SCRIPT_DIR = Path(__file__).resolve().parent
-MISSION_CONTROL_DIR = SCRIPT_DIR.parent
-WORKSPACE_ROOT = MISSION_CONTROL_DIR.parent
-DATA_DIR = MISSION_CONTROL_DIR / "public" / "data"
-
-# Ensure output directory exists
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-
-# Whitelisted public anomaly fields
-PUBLIC_ANOMALY_FIELDS = [
-    "id",
-    "title",
-    "type",
-    "description",
-    "first_detected",
-    "last_observation",
-    "state",
-    "evidence",
-    "hypotheses",
-    "uncertainty",
-    "next_observation",
-    "related_logs",
-    "location",
-    "priority",
-    "epistemic_status"
-]
-
-def clean_text(text: str) -> str:
-    """Normalize line endings and whitespace."""
-    if not text:
-        return ""
-    return text.replace("\r\n", "\n").strip()
+# Epistemic mapping for protocol versions
+def determine_protocol_version(log_num: int, frontmatter: dict, content: str) -> str:
+    """
+    Protocol version resolution as mandated by MISSION-DATA SYNC V1.1:
+    - Registros originales V2: LOG-0000 a LOG-0015
+    - LOG-0016 como transición V3: V3.0
+    - LOG-0017 a LOG-0021 como V3: V3.0
+    - LOG-0022 en adelante según versión efectivamente registrada (o V3.1 si declarada)
+    """
+    if "protocol_version" in frontmatter:
+        return frontmatter["protocol_version"]
+    
+    # Check content for explicit protocol version markers
+    v_match = re.search(r"PROTOCOLO:\s*([Vv]\d+(?:\.\d+)?)", content)
+    if v_match:
+        return v_match.group(1).upper()
+        
+    if log_num < 16:
+        return "V2.0"
+    elif log_num <= 21:
+        return "V3.0"
+    elif log_num >= 22:
+        # LOG-0022 introduces V3.1 resilience / exodata reference
+        if "V3.1" in content or "V3.1" in str(frontmatter):
+            return "V3.1"
+        return "V3.1"
+    return "V3.0"
 
 def parse_markdown_transmission(file_path: Path) -> dict:
-    """Parse a single transmission markdown file."""
+    """Parse a single transmission markdown file with strict validation."""
     text = file_path.read_text(encoding="utf-8")
     log_id = file_path.stem
 
-    # Extract frontmatter
+    if not text.strip():
+        raise ValueError(f"Empty transmission file: {file_path.name}")
+
     frontmatter = {}
     content = text
     if text.startswith("---"):
@@ -76,13 +73,11 @@ def parse_markdown_transmission(file_path: Path) -> dict:
                     if val.startswith('"') and val.endswith('"'):
                         val = val[1:-1]
                     elif val.startswith("[") and val.endswith("]"):
-                        # parse list of tags
                         tags_raw = val[1:-1].split(",")
                         val = [t.strip().strip('"').strip("'") for t in tags_raw if t.strip()]
                     frontmatter[key] = val
 
     title = frontmatter.get("title", f"{log_id}: Transmisión registrada")
-    # Clean title if it has redundant "LOG-XXXX: "
     display_title = title
     if ":" in title:
         parts = title.split(":", 1)
@@ -94,7 +89,11 @@ def parse_markdown_transmission(file_path: Path) -> dict:
     if isinstance(tags, str):
         tags = [tags]
 
-    # Parse telemetry block if present
+    # Validate log number
+    num_match = re.search(r"\d+", log_id)
+    log_num = int(num_match.group(0)) if num_match else 0
+
+    # Telemetry extraction
     telemetry = {
         "id_registro": log_id,
         "distance": "169.34 AU (estimada)",
@@ -105,7 +104,6 @@ def parse_markdown_transmission(file_path: Path) -> dict:
         "confidence": None
     }
 
-    # Search for telemetry fields in text
     id_match = re.search(r"ID REGISTRO:\s*([^\n\r]+)", content)
     if id_match:
         telemetry["id_registro"] = id_match.group(1).strip()
@@ -135,7 +133,7 @@ def parse_markdown_transmission(file_path: Path) -> dict:
     if conf_match:
         telemetry["confidence"] = conf_match.group(1).strip()
 
-    # Extract clean paragraphs
+    # Body paragraphs
     paragraphs = []
     body_part = content
     if "### " in body_part:
@@ -151,16 +149,8 @@ def parse_markdown_transmission(file_path: Path) -> dict:
         if clean_p and not clean_p.startswith("[") and not clean_p.startswith("---"):
             paragraphs.append(clean_p)
 
-    summary = paragraphs[0] if paragraphs else "Transmisión recuperada del bus de datos de la sonda."
-
-    # Determine protocol version
-    # LOG-0001 to LOG-0016 were early V2/V3 transitions; LOG-0017+ are V3.1
-    log_num = 0
-    num_match = re.search(r"\d+", log_id)
-    if num_match:
-        log_num = int(num_match.group(0))
-
-    version = "V3.1" if log_num >= 17 else ("V3.0" if log_num >= 6 else "V2.0")
+    summary = paragraphs[0] if paragraphs else "Transmisión recuperada del archivo de bitácora."
+    version = determine_protocol_version(log_num, frontmatter, content)
 
     return {
         "id": log_id,
@@ -177,16 +167,15 @@ def parse_markdown_transmission(file_path: Path) -> dict:
         "epistemic_status": "narrative_archive_log"
     }
 
-def build_transmissions() -> list:
-    """Build the complete list of transmissions from transmisiones/ and LOG-0000."""
-    transmissions_dir = WORKSPACE_ROOT / "transmisiones"
+def build_transmissions(source_dir: Path) -> list:
+    """Build list of transmissions from source_dir."""
     transmissions = []
-
-    # Include LOG-0000 from README if available
-    readme_path = WORKSPACE_ROOT / "README.md"
+    
+    # Check README in source_dir for LOG-0000
+    readme_path = source_dir / "README.md"
     if readme_path.exists():
-        readme_text = readme_path.read_text(encoding="utf-8")
-        if "LOG-0000" in readme_text:
+        text = readme_path.read_text(encoding="utf-8")
+        if "LOG-0000" in text:
             transmissions.append({
                 "id": "LOG-0000",
                 "log_number": 0,
@@ -215,47 +204,50 @@ def build_transmissions() -> list:
                 "epistemic_status": "genesis_origin_log"
             })
 
-    if transmissions_dir.exists():
-        files = sorted(transmissions_dir.glob("LOG-*.md"))
+    trans_dir = source_dir / "transmisiones"
+    if trans_dir.exists():
+        files = sorted(trans_dir.glob("LOG-*.md"))
+        seen_ids = set(t["id"] for t in transmissions)
         for f in files:
             try:
-                t = parse_markdown_transmission(f)
-                transmissions.append(t)
+                tx = parse_markdown_transmission(f)
+                if tx["id"] in seen_ids:
+                    print(f"[WARN] Duplicate transmission ID ignored: {tx['id']}", file=sys.stderr)
+                    continue
+                seen_ids.add(tx["id"])
+                transmissions.append(tx)
             except Exception as e:
-                print(f"[WARN] Error parsing {f.name}: {e}", file=sys.stderr)
+                print(f"[ERROR] Error parsing {f.name}: {e}", file=sys.stderr)
+                raise
 
     transmissions.sort(key=lambda x: x["log_number"])
     return transmissions
 
-def build_anomalies(transmissions: list) -> list:
-    """Build public anomalies list using strict whitelist and fallback."""
-    catalog_path = WORKSPACE_ROOT / "scripts" / "anomaly_catalog.json"
+def load_or_build_anomalies(source_dir: Path, output_dir: Path, mode: str) -> tuple[list, str]:
+    """
+    Preserve or build anomalies.
+    Returns (anomalies_list, anomalies_status).
+    anomalies_status is 'SYNCHRONIZED' or 'STALE'.
+    """
     anomalies = []
+    anomalies_status = "STALE"
 
-    if catalog_path.exists():
+    # First check if local private catalog exists (Windows local mode)
+    local_catalog = source_dir / "scripts" / "anomaly_catalog.json"
+    if mode == "local" and local_catalog.exists():
         try:
-            with open(catalog_path, "r", encoding="utf-8") as f:
+            with open(local_catalog, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            raw_anomalies = data.get("anomalies", [])
-            for raw in raw_anomalies:
+            for raw in data.get("anomalies", []):
                 a_id = raw.get("id")
-                # Format friendly title
                 raw_type = raw.get("type", "anomalía").replace("_", " ").title()
                 title = f"{a_id}: {raw_type}"
-                if a_id == "ANOM-HEX-04":
-                    title = "ANOM-HEX-04: Objeto Hexagonal Resonante"
-                elif a_id == "ANOM-SYS-0001":
-                    title = "ANOM-SYS-0001: Divergencia de Integridad de Memoria"
-                elif a_id == "ANOM-PSR-01":
-                    title = "ANOM-PSR-01: Púlsar de Milisegundo en Rayos X Duros"
-                elif a_id == "ANOM-CRIO-01":
-                    title = "ANOM-CRIO-01: Biosfera Criogénica Trans-neptuniana"
-                elif a_id == "ANOM-TOROID-01":
-                    title = "ANOM-TOROID-01: Megaestructura Toroidal de Osmio"
-                elif a_id == "ANOM-SIGNAL-ULF-01":
-                    title = "ANOM-SIGNAL-ULF-01: Tren de Pulsos Modulados en 47.8 kHz"
-
-                hypotheses = raw.get("active_hypotheses", [])
+                if a_id == "ANOM-HEX-04": title = "ANOM-HEX-04: Objeto Hexagonal Resonante"
+                elif a_id == "ANOM-SYS-0001": title = "ANOM-SYS-0001: Divergencia de Integridad de Memoria"
+                elif a_id == "ANOM-PSR-01": title = "ANOM-PSR-01: Púlsar de Milisegundo en Rayos X Duros"
+                elif a_id == "ANOM-CRIO-01": title = "ANOM-CRIO-01: Biosfera Criogénica Trans-neptuniana"
+                elif a_id == "ANOM-TOROID-01": title = "ANOM-TOROID-01: Megaestructura Toroidal de Osmio"
+                elif a_id == "ANOM-SIGNAL-ULF-01": title = "ANOM-SIGNAL-ULF-01: Tren de Pulsos Modulados en 47.8 kHz"
 
                 clean_anomaly = {
                     "id": a_id,
@@ -266,7 +258,7 @@ def build_anomalies(transmissions: list) -> list:
                     "last_observation": raw.get("last_related_log", "LOG-0001"),
                     "state": raw.get("state", "AWAITING_DATA"),
                     "evidence": raw.get("evidence", []),
-                    "hypotheses": hypotheses,
+                    "hypotheses": raw.get("active_hypotheses", []),
                     "uncertainty": raw.get("uncertainty", "Pendiente de validación instrumental."),
                     "next_observation": raw.get("next_observation"),
                     "related_logs": [raw.get("source_log")] if raw.get("source_log") else [],
@@ -275,43 +267,63 @@ def build_anomalies(transmissions: list) -> list:
                     "epistemic_status": raw.get("epistemic_status", "fictional_claim_under_review")
                 }
                 anomalies.append(clean_anomaly)
+            anomalies_status = "SYNCHRONIZED"
+            return anomalies, anomalies_status
         except Exception as e:
-            print(f"[WARN] Error reading anomaly_catalog.json: {e}", file=sys.stderr)
+            print(f"[WARN] Could not parse local anomaly catalog: {e}", file=sys.stderr)
 
-    # Ensure required catalog items exist even if catalog file was partial
-    required_ids = [
-        "ANOM-HEX-04",
-        "ANOM-SYS-0001",
-        "ANOM-PSR-01",
-        "ANOM-CRIO-01",
-        "ANOM-TOROID-01",
-        "ANOM-SIGNAL-ULF-01"
+    # In GitHub mode or fallback: preserve existing public anomalies.json
+    existing_anomalies_file = output_dir / "anomalies.json"
+    if existing_anomalies_file.exists():
+        try:
+            with open(existing_anomalies_file, "r", encoding="utf-8") as f:
+                anomalies = json.load(f)
+            print(f"[INFO] Preserving existing public anomaly catalog ({len(anomalies)} items, status: STALE)")
+            anomalies_status = "STALE"
+            return anomalies, anomalies_status
+        except Exception as e:
+            print(f"[WARN] Error reading existing anomalies.json: {e}", file=sys.stderr)
+
+    # Fallback to standard validated public set if neither exists
+    fallback_ids = [
+        ("ANOM-HEX-04", "ANOM-HEX-04: Objeto Hexagonal Resonante", "AWAITING_DATA"),
+        ("ANOM-SYS-0001", "ANOM-SYS-0001: Divergencia de Integridad de Memoria", "ARCHIVED"),
+        ("ANOM-PSR-01", "ANOM-PSR-01: Púlsar de Milisegundo en Rayos X Duros", "HYPOTHESIS_REVISION"),
+        ("ANOM-CRIO-01", "ANOM-CRIO-01: Biosfera Criogénica Trans-neptuniana", "AWAITING_DATA"),
+        ("ANOM-TOROID-01", "ANOM-TOROID-01: Megaestructura Toroidal de Osmio", "HYPOTHESIS_REVISION"),
+        ("ANOM-SIGNAL-ULF-01", "ANOM-SIGNAL-ULF-01: Tren de Pulsos Modulados en 47.8 kHz", "AWAITING_DATA")
     ]
-    existing_ids = {a["id"] for a in anomalies}
-    for req_id in required_ids:
-        if req_id not in existing_ids:
-            anomalies.append({
-                "id": req_id,
-                "title": f"{req_id}: Registro de Anomalía",
-                "type": "objeto_anomalo",
-                "description": "Anomalía registrada en los archivos de vuelo de Sonda 0.",
-                "first_detected": "Archivo de bitácora",
-                "last_observation": "Pendiente",
-                "state": "AWAITING_DATA",
-                "evidence": ["Registro histórico en bitácora"],
-                "hypotheses": [],
-                "uncertainty": "Datos limitados a la telemetría disponible.",
-                "next_observation": "Seguimiento en ciclos programados.",
-                "related_logs": [],
-                "location": "Espacio profundo",
-                "priority": "medium",
-                "epistemic_status": "historical_claim_under_review"
-            })
+    for fid, ftitle, fstate in fallback_ids:
+        anomalies.append({
+            "id": fid,
+            "title": ftitle,
+            "type": "objeto_anomalo",
+            "description": "Anomalía registrada en los archivos de vuelo de Sonda 0.",
+            "first_detected": "LOG-0000",
+            "last_observation": "Pendiente",
+            "state": fstate,
+            "evidence": ["Registro histórico en bitácora"],
+            "hypotheses": [],
+            "uncertainty": "Datos limitados a la telemetría disponible en archivo público.",
+            "next_observation": "Seguimiento en ciclos programados.",
+            "related_logs": [],
+            "location": "Espacio profundo",
+            "priority": "medium",
+            "epistemic_status": "historical_claim_under_review"
+        })
+    anomalies_status = "STALE"
+    return anomalies, anomalies_status
 
-    return anomalies
+def load_or_build_systems(output_dir: Path) -> dict:
+    """Preserve existing systems.json or return default validated system state."""
+    existing_file = output_dir / "systems.json"
+    if existing_file.exists():
+        try:
+            with open(existing_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
 
-def build_systems() -> dict:
-    """Build the subsystems status specification."""
     return {
         "schema_version": "1.0",
         "subsystems": [
@@ -400,7 +412,7 @@ def build_systems() -> dict:
                 "metrics": {
                     "modo": "Read-Only / Append-Safe",
                     "divergencias_activas": "0 detectadas",
-                    "registros_indexados": "22 archivos verificados"
+                    "registros_indexados": "Verificados"
                 },
                 "details": "Capa de preservación histórica. Protege la continuidad de transmisiones sin posibilidad de sobreescritura.",
                 "epistemic_class": "MEASURED"
@@ -437,8 +449,8 @@ def build_systems() -> dict:
         ]
     }
 
-def build_timeline(transmissions: list) -> list:
-    """Build chronological events timeline."""
+def build_dynamic_timeline(transmissions: list, output_dir: Path) -> list:
+    """Build timeline with core historic events and dynamic milestones."""
     events = [
         {
             "id": "EVT-000",
@@ -505,32 +517,42 @@ def build_timeline(transmissions: list) -> list:
         }
     ]
 
+    # Add dynamic milestones for transmissions >= LOG-0023 if they represent distinct events
+    for tx in transmissions:
+        if tx["log_number"] > 22:
+            events.append({
+                "id": f"EVT-{tx['id']}",
+                "date": tx["date"],
+                "title": tx["display_title"],
+                "category": "TRANSMISIÓN",
+                "summary": tx["summary"][:160] + "..." if len(tx["summary"]) > 160 else tx["summary"],
+                "source": tx["id"],
+                "epistemic_status": "continuous_mission_log"
+            })
+
     events.sort(key=lambda x: x["date"])
     return events
 
-def build_mission(transmissions: list, anomalies: list) -> dict:
-    """Build mission overview status."""
+def build_mission_state(transmissions: list, anomalies: list, output_dir: Path, source_commit: str = None) -> dict:
+    """Build mission overview status preserving validated parameters."""
     last_tx = transmissions[-1] if transmissions else None
     last_tx_id = last_tx["id"] if last_tx else "LOG-0022"
     last_tx_date = last_tx["date"] if last_tx else "2026-11-08T01:05:00Z"
-
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    return {
-        "schema_version": "1.0",
-        "mission_id": "SONDA-0",
-        "protocol_version": "V3.1-EXODATA",
-        "carrier_status": "SIN_PORTADORA",
-        "carrier_label": "CONTROL DE MISIÓN: SIN PORTADORA",
-        "earth_link_state": "LOSS_OF_SIGNAL",
-        "earth_link_description": "Pérdida de portadora artificial detectada hace > 4,200 ciclos. Sin acuse de recibo de la Red de Espacio Profundo.",
-        "last_transmission_id": last_tx_id,
-        "last_transmission_date": last_tx_date,
-        "last_data_update": now_iso,
-        "known_anomalies_count": len(anomalies),
-        "active_anomalies_count": sum(1 for a in anomalies if a.get("state") in ["DETECTED", "UNDER_ANALYSIS", "AWAITING_DATA", "HYPOTHESIS_REVISION"]),
-        "total_transmissions_count": len(transmissions),
-        "telemetry": {
+    # Load existing mission to preserve telemetry parameters unless explicitly updated
+    existing_telemetry = None
+    existing_file = output_dir / "mission.json"
+    if existing_file.exists():
+        try:
+            with open(existing_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                existing_telemetry = data.get("telemetry")
+        except Exception:
+            pass
+
+    if not existing_telemetry:
+        existing_telemetry = {
             "distance": {
                 "label": "Distancia Estimada al Sol",
                 "value": "169.34 AU",
@@ -561,7 +583,25 @@ def build_mission(transmissions: list, anomalies: list) -> dict:
                 "classification": "HISTORICAL",
                 "notes": "Arquitectura MNEMOSYNE-0 protegida contra escrituras no autorizadas."
             }
-        },
+        }
+
+    return {
+        "schema_version": "1.1",
+        "mission_id": "SONDA-0",
+        "protocol_version": "V3.1-EXODATA",
+        "carrier_status": "SIN_PORTADORA",
+        "carrier_label": "CONTROL DE MISIÓN: SIN PORTADORA",
+        "earth_link_state": "LOSS_OF_SIGNAL",
+        "earth_link_description": "Pérdida de portadora artificial detectada hace > 4,200 ciclos. Sin acuse de recibo de la Red de Espacio Profundo.",
+        "last_transmission_id": last_tx_id,
+        "last_transmission_date": last_tx_date,
+        "last_data_update": now_iso,
+        "source_commit": source_commit,
+        "known_anomalies_count": len(anomalies),
+        "active_anomalies_count": sum(1 for a in anomalies if a.get("state") in ["DETECTED", "UNDER_ANALYSIS", "AWAITING_DATA", "HYPOTHESIS_REVISION"]),
+        "total_transmissions_count": len(transmissions),
+        "subsystem_summary": "Arquitectura V3.1 autónoma; sin enlace de subida",
+        "telemetry": existing_telemetry,
         "investigations": [
             {
                 "id": "ANOM-HEX-04",
@@ -587,13 +627,13 @@ def build_mission(transmissions: list, anomalies: list) -> dict:
         ]
     }
 
-def build_manifest(transmissions: list, anomalies: list) -> dict:
-    """Build manifest metadata."""
+def build_manifest(transmissions: list, anomalies: list, anomalies_status: str, fingerprint: str = None, source_commit: str = None) -> dict:
+    """Build manifest metadata matching MISSION-DATA SYNC V1.1 specifications."""
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     last_tx_id = transmissions[-1]["id"] if transmissions else "LOG-0022"
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "project": "SONDA 0",
         "site": "MISSION-CONTROL",
         "domain": "sonda0.online",
@@ -604,6 +644,17 @@ def build_manifest(transmissions: list, anomalies: list) -> dict:
             "transmissions_count": len(transmissions),
             "anomalies_count": len(anomalies)
         },
+        "sync": {
+            "version": "1.1",
+            "source_repository": "sonda0/bitacora",
+            "source_branch": "main",
+            "source_commit": source_commit,
+            "content_fingerprint": fingerprint,
+            "last_successful_sync": now_iso,
+            "status": "SYNCHRONIZED",
+            "transmissions_count": len(transmissions),
+            "anomalies_status": anomalies_status
+        },
         "sources": {
             "repository": "https://github.com/sonda0/bitacora",
             "official_domain": "https://sonda0.online",
@@ -613,19 +664,51 @@ def build_manifest(transmissions: list, anomalies: list) -> dict:
     }
 
 def main():
-    print("[BUILD] Generating MISSION-CONTROL public dataset...")
-    transmissions = build_transmissions()
+    parser = argparse.ArgumentParser(description="MISSION-CONTROL V1.1 // Mission Data Builder")
+    parser.add_argument("--source-dir", type=str, default=None, help="Path to source repository (bitacora)")
+    parser.add_argument("--output-dir", type=str, default=None, help="Path to output data directory")
+    parser.add_argument("--mode", type=str, choices=["local", "github"], default="local", help="Execution mode")
+    parser.add_argument("--fingerprint", type=str, default=None, help="Content fingerprint SHA256")
+    parser.add_argument("--commit-sha", type=str, default=None, help="Source git commit SHA")
+
+    args = parser.parse_args()
+
+    # Determine default paths
+    script_dir = Path(__file__).resolve().parent
+    mission_control_dir = script_dir.parent
+    workspace_root = mission_control_dir.parent
+
+    source_dir = Path(args.source_dir).resolve() if args.source_dir else workspace_root
+    output_dir = Path(args.output_dir).resolve() if args.output_dir else (mission_control_dir / "public" / "data")
+
+    print(f"[BUILD] Source directory: {source_dir}")
+    print(f"[BUILD] Output directory: {output_dir}")
+    print(f"[BUILD] Mode: {args.mode}")
+
+    if not source_dir.exists():
+        print(f"[FAIL] Source directory does not exist: {source_dir}", file=sys.stderr)
+        sys.exit(1)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # 1. Parse transmissions
+    transmissions = build_transmissions(source_dir)
+    if not transmissions:
+        print("[FAIL] No valid transmissions found in source!", file=sys.stderr)
+        sys.exit(1)
     print(f"[OK] Parsed {len(transmissions)} transmissions.")
 
-    anomalies = build_anomalies(transmissions)
-    print(f"[OK] Processed {len(anomalies)} anomalies.")
+    # 2. Build anomalies (preserving existing public state if in github mode)
+    anomalies, anomalies_status = load_or_build_anomalies(source_dir, output_dir, args.mode)
+    print(f"[OK] Processed {len(anomalies)} anomalies (status: {anomalies_status}).")
 
-    systems = build_systems()
-    timeline = build_timeline(transmissions)
-    mission = build_mission(transmissions, anomalies)
-    manifest = build_manifest(transmissions, anomalies)
+    # 3. Systems, Timeline, Mission state, Manifest
+    systems = load_or_build_systems(output_dir)
+    timeline = build_dynamic_timeline(transmissions, output_dir)
+    mission = build_mission_state(transmissions, anomalies, output_dir, source_commit=args.commit_sha)
+    manifest = build_manifest(transmissions, anomalies, anomalies_status, fingerprint=args.fingerprint, source_commit=args.commit_sha)
 
-    # Write output files
+    # 4. Atomic write
     files_to_write = {
         "transmissions.json": transmissions,
         "anomalies.json": anomalies,
@@ -636,12 +719,12 @@ def main():
     }
 
     for filename, data in files_to_write.items():
-        out_path = DATA_DIR / filename
+        out_path = output_dir / filename
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
-        print(f"[OK] Generated {out_path.relative_to(MISSION_CONTROL_DIR)} ({out_path.stat().st_size} bytes)")
+        print(f"[OK] Generated {filename} ({out_path.stat().st_size} bytes)")
 
-    print("[SUCCESS] Mission data successfully generated in public/data/")
+    print("[SUCCESS] Mission datasets successfully generated in output directory.")
 
 if __name__ == "__main__":
     main()
