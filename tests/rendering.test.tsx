@@ -134,6 +134,46 @@ describe('UI Rendering & Component Tests', () => {
           })
         } as Response;
       }
+      if (url.endsWith('flight-telemetry.json')) {
+        return {
+          ok: true,
+          status: 200,
+          statusText: 'OK',
+          json: async () => ({
+            schema_version: '1.0',
+            generated_at: '2026-11-08T18:05:00Z',
+            parameters: [
+              {
+                id: 'nav.heliocentric_distance',
+                name: 'Distancia Heliocéntrica',
+                value: '169.34 AU',
+                unit: 'AU',
+                category: 'NAVEGACION',
+                epistemicState: 'ESTIMATED',
+                documentarySource: 'mission.json::telemetry.distance',
+                provenanceLog: 'LOG-0016, LOG-0000',
+                observationDate: '2026-11-08T18:05:00Z',
+                uncertainty: 'Modelo orbital congelado tras LOG-0016; sin solución DSN independiente.',
+                validityState: 'STALE',
+                historicalSeries: [
+                  { date: '2026-11-06T04:12:09Z', value: '164.82 AU', source: 'LOG-0000', epistemicState: 'HISTORICAL' },
+                  { date: '2026-11-07T18:00:00Z', value: '169.34 AU', source: 'LOG-0016', epistemicState: 'ESTIMATED' }
+                ]
+              }
+            ],
+            integrity: {
+              total_parameters: 1,
+              measured_narrative_count: 0,
+              estimated_count: 1,
+              historical_count: 0,
+              unknown_count: 0,
+              conflicting_count: 0,
+              stale_count: 1,
+              with_historical_series: 1
+            }
+          })
+        } as Response;
+      }
       if (url.endsWith('mission.json')) {
         return {
           ok: true,

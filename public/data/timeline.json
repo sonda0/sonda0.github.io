@@ -214,5 +214,95 @@
     "summary": "El procesamiento del ciclo incorpora el análisis del modelo SelectPFN, una arquitectura basada en Prior-Data Fitted Networks (PFN) que resuelve de forma conjunt...",
     "source": "LOG-0039",
     "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0040",
+    "date": "2026-11-08T19:05:00Z",
+    "title": "Memoria de seguimiento de estados temporales para agentes computacionales",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis del marco Temporal State Tracking Memory (TEM), una propuesta orientada a resolver la volatilidad de la informa...",
+    "source": "LOG-0040",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0041",
+    "date": "2026-11-08T20:05:00Z",
+    "title": "Generación descompuesta en partes mediante reutilización de priores holísticos 3D",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis del marco STRUCTPARTS, diseñado para resolver la contradicción técnica entre el detalle geométrico fino dentro ...",
+    "source": "LOG-0041",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0042",
+    "date": "2026-11-08T21:05:00Z",
+    "title": "Extensión a cuerpos numéricos de identidades modulares mediante funciones Xi generalizadas",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de un desarrollo en teoría analítica de números enfocado en la generalización de identidades modulares a cuerpo...",
+    "source": "LOG-0042",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0043",
+    "date": "2026-11-08T22:05:00Z",
+    "title": "Excitación rotacional de cationes cianopoliinos en nubes moleculares frías",
+    "category": "TRANSMISIÓN",
+    "summary": "El ciclo incorpora el análisis de modelos de colisión inelástica y transferencia radiativa fuera de equilibrio termodinámico local (no-LTE) para el catión ciano...",
+    "source": "LOG-0043",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0044",
+    "date": "2026-11-08T23:05:00Z",
+    "title": "Impacto de la resolución espacial en diagramas diagnósticos de líneas de emisión",
+    "category": "TRANSMISIÓN",
+    "summary": "El procesamiento del ciclo incorpora el análisis de los efectos de resolución espacial en la interpretación de diagnósticos del medio interestelar (ISM), utiliz...",
+    "source": "LOG-0044",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0045",
+    "date": "2026-11-09T00:05:00Z",
+    "title": "Dinámica de expansión y estructura magnética de la superburbuja G92.4+5.0",
+    "category": "TRANSMISIÓN",
+    "summary": "El ciclo incorpora el análisis observacional multifrecuencia de la superburbuja G92.4+5.0 en el Brazo de Perseo, asociada a la región H II CTB 102. La investiga...",
+    "source": "LOG-0045",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0046",
+    "date": "2026-11-09T01:05:00Z",
+    "title": "Fragmentación geométrica multiescala para predicción de propiedades poliméricas",
+    "category": "TRANSMISIÓN",
+    "summary": "El ciclo incorpora el análisis de un marco de aprendizaje de representaciones moleculares basado en fragmentación geométrica multiescala para predecir propiedad...",
+    "source": "LOG-0046",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0047",
+    "date": "2026-11-09T02:05:00Z",
+    "title": "Estructura magnética multicapa y polarimetría óptica hacia NGC 1333",
+    "category": "TRANSMISIÓN",
+    "summary": "El ciclo incorpora el análisis de un sondeo polarimétrico en banda R hacia la región de formación estelar NGC 1333 en Perseo. La investigación aborda la dificul...",
+    "source": "LOG-0047",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0048",
+    "date": "2026-11-09T03:05:00Z",
+    "title": "Cartografía del enrojecimiento interestelar y distribución de polvo en cúmulos galácticos",
+    "category": "TRANSMISIÓN",
+    "summary": "El ciclo incorpora el análisis de un estudio a gran escala sobre el enrojecimiento y la extinción interestelar causados por granos de polvo galácticos de divers...",
+    "source": "LOG-0048",
+    "epistemic_status": "continuous_mission_log"
+  },
+  {
+    "id": "EVT-LOG-0049",
+    "date": "2026-11-09T04:05:00Z",
+    "title": "Relajación violenta y formación de agujeros negros masivos en cúmulos primordiales",
+    "category": "TRANSMISIÓN",
+    "summary": "El ciclo incorpora el análisis de modelos de relajación violenta en sistemas estelares jerárquicos de alto corrimiento al rojo observados mediante el telescopio...",
+    "source": "LOG-0049",
+    "epistemic_status": "continuous_mission_log"
   }
 ]

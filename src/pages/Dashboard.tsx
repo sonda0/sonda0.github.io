@@ -3,6 +3,7 @@ import { MissionState, TimelineEvent } from '../types/mission';
 import { Transmission } from '../types/transmission';
 import { TelemetryCard } from '../components/TelemetryCard';
 import { TransmissionCard } from '../components/TransmissionCard';
+import { FlightTelemetryPanel } from '../components/FlightTelemetryPanel';
 import { getStateBadgeClass, getStateLabel } from '../components/AnomalyCard';
 import { formatDateTime } from '../services/transmissionParser';
 import {
@@ -148,12 +149,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* 2. Bloque de Telemetría Instrumental */}
+      {/* 2. Bloque de Telemetría Instrumental (Legado) */}
       <div className="col-12">
         <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div className="panel-title">
             <Radio size={15} />
-            <span>TELEMETRÍA INSTRUMENTAL DE LA SONDA</span>
+            <span>TELEMETRÍA INSTRUMENTAL DE LA SONDA (LEGADO)</span>
           </div>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
             CLASIFICACIÓN EPISTÉMICA RIGUROSA
@@ -182,6 +183,16 @@ export const Dashboard: React.FC<DashboardProps> = ({
             icon={<Database size={14} style={{ color: 'var(--cyan-instrument)' }} />}
           />
         </div>
+      </div>
+
+      {/* 2b. FLIGHT-TELEMETRY PANEL // Resumen de 6 Indicadores Clave */}
+      <div className="col-12">
+        <FlightTelemetryPanel
+          compact={true}
+          title="FLIGHT-TELEMETRY V1.0 // RESUMEN DE TELEMETRÍA DE VUELO"
+          onSelectLog={onSelectTransmission}
+          onSelectAnomaly={onSelectAnomaly}
+        />
       </div>
 
       {/* 3. Transmisión Reciente */}

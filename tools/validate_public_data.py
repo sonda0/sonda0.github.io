@@ -84,9 +84,13 @@ def validate_mission(data: dict) -> list:
             errors.append(f"mission: telemetry.{key}.value cannot be empty")
     return errors
 
-def validate_transmissions(data: list) -> list:
+def validate_transmissions(data: list, test_mode: bool = False) -> list:
     errors = []
-    if not isinstance(data, list) or len(data) < 20:
+    if not isinstance(data, list):
+        errors.append(f"transmissions: expected list, got {type(data)}")
+        return errors
+    
+    if not test_mode and len(data) < 20:
         errors.append(f"transmissions: expected list of >=20 items, got {len(data) if isinstance(data, list) else type(data)}")
         return errors
 
@@ -115,9 +119,9 @@ def validate_transmissions(data: list) -> list:
 
     return errors
 
-def validate_anomalies(data: list) -> list:
+def validate_anomalies(data: list, test_mode: bool = False) -> list:
     errors = []
-    if not isinstance(data, list) or len(data) < 6:
+    if not isinstance(data, list) or (not test_mode and len(data) < 6):
         errors.append(f"anomalies: expected list with >=6 items, got {len(data) if isinstance(data, list) else type(data)}")
         return errors
 
@@ -150,10 +154,10 @@ def validate_anomalies(data: list) -> list:
 
     return errors
 
-def validate_systems(data: dict) -> list:
+def validate_systems(data: dict, test_mode: bool = False) -> list:
     errors = []
     subsystems = data.get("subsystems")
-    if not isinstance(subsystems, list) or len(subsystems) < 5:
+    if not isinstance(subsystems, list) or (not test_mode and len(subsystems) < 5):
         errors.append("systems: 'subsystems' must be a list with at least 5 systems")
         return errors
 
@@ -170,9 +174,9 @@ def validate_systems(data: dict) -> list:
 
     return errors
 
-def validate_timeline(data: list) -> list:
+def validate_timeline(data: list, test_mode: bool = False) -> list:
     errors = []
-    if not isinstance(data, list) or len(data) < 3:
+    if not isinstance(data, list) or (not test_mode and len(data) < 3):
         errors.append("timeline: expected at least 3 events")
         return errors
 
@@ -188,13 +192,87 @@ def validate_timeline(data: list) -> list:
 
     return errors
 
+
+def validate_flight_telemetry(data: dict) -> list:
+    errors = []
+    if data.get("schema_version") != "1.0":
+        errors.append("flight-telemetry: schema_version must be '1.0'")
+    if not validate_iso_date(data.get("generated_at", "")):
+        errors.append("flight-telemetry: generated_at is not a valid ISO date")
+    
+    params = data.get("parameters", [])
+    if not isinstance(params, list) or len(params) < 10:
+        errors.append(f"flight-telemetry: expected list of >=10 parameters, got {len(params) if isinstance(params, list) else type(params)}")
+        return errors
+    
+    allowed_categories = {"NAVEGACION", "AMBIENTE", "ENERGIA", "COMUNICACIONES", "SISTEMAS"}
+    allowed_states = {"MEASURED_NARRATIVE", "ESTIMATED", "HISTORICAL", "UNKNOWN", "CONFLICTING", "STALE"}
+    allowed_validity = {"VALID", "STALE", "SUPERSEDED", "CONFLICTING"}
+    
+    seen_ids = set()
+    for idx, p in enumerate(params):
+        p_id = p.get("id")
+        if not p_id:
+            errors.append(f"flight-telemetry.parameters[{idx}]: missing id")
+            continue
+        if p_id in seen_ids:
+            errors.append(f"flight-telemetry: duplicate parameter id '{p_id}'")
+        seen_ids.add(p_id)
+        
+        if not p.get("name"):
+            errors.append(f"flight-telemetry[{p_id}]: missing name")
+        if p.get("category") not in allowed_categories:
+            errors.append(f"flight-telemetry[{p_id}]: invalid category '{p.get('category')}'")
+        if p.get("epistemicState") not in allowed_states:
+            errors.append(f"flight-telemetry[{p_id}]: invalid epistemicState '{p.get('epistemicState')}'")
+        if p.get("validityState") not in allowed_validity:
+            errors.append(f"flight-telemetry[{p_id}]: invalid validityState '{p.get('validityState')}'")
+        if not p.get("documentarySource"):
+            errors.append(f"flight-telemetry[{p_id}]: missing documentarySource")
+        if not p.get("provenanceLog"):
+            errors.append(f"flight-telemetry[{p_id}]: missing provenanceLog")
+        if not validate_iso_date(p.get("observationDate", "")):
+            errors.append(f"flight-telemetry[{p_id}]: invalid observationDate '{p.get('observationDate')}'")
+        if not p.get("uncertainty"):
+            errors.append(f"flight-telemetry[{p_id}]: missing uncertainty statement")
+        
+        # Historical series validation
+        hist = p.get("historicalSeries")
+        if hist is not None:
+            if not isinstance(hist, list):
+                errors.append(f"flight-telemetry[{p_id}]: historicalSeries must be a list if present")
+            else:
+                for h_idx, hp in enumerate(hist):
+                    if not validate_iso_date(hp.get("date", "")):
+                        errors.append(f"flight-telemetry[{p_id}].historicalSeries[{h_idx}]: invalid date")
+                    if not hp.get("source"):
+                        errors.append(f"flight-telemetry[{p_id}].historicalSeries[{h_idx}]: missing source")
+                    if hp.get("epistemicState") not in allowed_states:
+                        errors.append(f"flight-telemetry[{p_id}].historicalSeries[{h_idx}]: invalid epistemicState")
+    
+    # Integrity block validation
+    integrity = data.get("integrity", {})
+    if not isinstance(integrity, dict):
+        errors.append("flight-telemetry: integrity block missing or invalid")
+    else:
+        expected_keys = ["total_parameters", "measured_narrative_count", "estimated_count", 
+                        "historical_count", "unknown_count", "conflicting_count", "stale_count", "with_historical_series"]
+        for key in expected_keys:
+            if key not in integrity:
+                errors.append(f"flight-telemetry.integrity: missing key '{key}'")
+    
+    return errors
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Public Data Validator")
     parser.add_argument("--data-dir", type=str, default=str(DATA_DIR), help="Path to data directory")
+    parser.add_argument("--test-mode", action="store_true", help="Run in test mode with relaxed validation")
     args = parser.parse_args()
 
     target_dir = Path(args.data_dir).resolve()
+    test_mode = args.test_mode
+    
     print(f"[VALIDATE] Auditing public datasets in {target_dir}...")
     all_errors = []
 
@@ -204,7 +282,8 @@ def main():
         "transmissions.json",
         "anomalies.json",
         "systems.json",
-        "timeline.json"
+        "timeline.json",
+        "flight-telemetry.json"
     ]
 
     for fname in required_files:
@@ -228,13 +307,15 @@ def main():
         elif fname == "mission.json":
             all_errors.extend(validate_mission(parsed))
         elif fname == "transmissions.json":
-            all_errors.extend(validate_transmissions(parsed))
+            all_errors.extend(validate_transmissions(parsed, test_mode))
         elif fname == "anomalies.json":
-            all_errors.extend(validate_anomalies(parsed))
+            all_errors.extend(validate_anomalies(parsed, test_mode))
         elif fname == "systems.json":
-            all_errors.extend(validate_systems(parsed))
+            all_errors.extend(validate_systems(parsed, test_mode))
         elif fname == "timeline.json":
-            all_errors.extend(validate_timeline(parsed))
+            all_errors.extend(validate_timeline(parsed, test_mode))
+        elif fname == "flight-telemetry.json":
+            all_errors.extend(validate_flight_telemetry(parsed))
 
     if all_errors:
         print(f"[FAIL] Found {len(all_errors)} validation errors:", file=sys.stderr)

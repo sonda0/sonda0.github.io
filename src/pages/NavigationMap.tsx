@@ -8,6 +8,7 @@ import {
   extractNavigationTelemetry
 } from '../services/navigationData';
 import { StatusIndicator } from '../components/StatusIndicator';
+import { FlightTelemetryPanel } from '../components/FlightTelemetryPanel';
 import {
   Compass,
   AlertTriangle,
@@ -693,6 +694,16 @@ export const NavigationMap: React.FC<NavigationMapProps> = ({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* FLIGHT-TELEMETRY PANEL // Panel Extendido de Telemetría de Vuelo */}
+      <div className="panel-card panel-body">
+        <FlightTelemetryPanel
+          title="FLIGHT-TELEMETRY V1.0 // PANEL EXTENDIDO DE PARÁMETROS DE VUELO"
+          onSelectLog={onSelectTransmission}
+          onSelectAnomaly={onSelectAnomaly}
+          showCategoryFilters={true}
+        />
       </div>
 
       {/* 5. Historial de Navegación y Registros de Telemetría Comparables */}

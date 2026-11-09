@@ -1,5 +1,7 @@
 name: Mission Data Sync
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: '17,47 * * * *'
   workflow_dispatch:

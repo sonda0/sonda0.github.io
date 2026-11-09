@@ -17,8 +17,78 @@ import json
 import re
 import hashlib
 import argparse
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+
+
+def load_manifest(path: Path) -> dict:
+    """Load manifest.json from path, return empty dict if missing or invalid."""
+    if not path.exists():
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def validate_transmission_integrity(transmissions: list, source_count: int) -> tuple[bool, list[str]]:
+    """Validate transmission integrity. Returns (is_valid, list of errors)."""
+    errors = []
+    seen_ids = set()
+    missing_ids = []
+    
+    for t in transmissions:
+        tx_id = t.get("id")
+        if not tx_id:
+            errors.append("Transmission missing 'id' field")
+            continue
+        if tx_id in seen_ids:
+            errors.append(f"Duplicate transmission ID: {tx_id}")
+        seen_ids.add(tx_id)
+    
+    # Check for expected sequential LOG IDs (allow gaps but track them)
+    log_numbers = []
+    for tid in seen_ids:
+        if tid.startswith("LOG-"):
+            try:
+                num = int(tid.split("-")[1])
+                log_numbers.append(num)
+            except (IndexError, ValueError):
+                pass
+    
+    if log_numbers:
+        max_log = max(log_numbers)
+        expected = set(range(0, max_log + 1))
+        missing = expected - set(log_numbers)
+        if missing:
+            missing_str = ", ".join(f"LOG-{str(m).zfill(4)}" for m in sorted(missing))
+            errors.append(f"Missing transmission IDs: {missing_str}")
+    
+    # Check that we didn't lose transmissions compared to source
+    if len(transmissions) < source_count:
+        errors.append(f"REGRESSION: Only {len(transmissions)} transmissions processed vs {source_count} in source")
+    
+    return len(errors) == 0, errors
+
+
+def load_manifest(path: Path) -> dict:
+    """Load manifest.json from path, return empty dict if missing or invalid."""
+    if not path.exists():
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def run_cmd(cmd: list) -> tuple[int, str, str]:
+    """Runs a command and returns (exit_code, stdout, stderr)."""
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    out, err = p.communicate()
+    return p.returncode, out, err
 
 # Epistemic mapping for protocol versions
 def determine_protocol_version(log_num: int, frontmatter: dict, content: str) -> str:
@@ -71,7 +141,8 @@ def parse_markdown_transmission(file_path: Path) -> dict:
                     key, val = line.split(":", 1)
                     key = key.strip()
                     val = val.strip()
-                    if val.startswith('"') and val.endswith('"'):
+                    # Strip both single and double quotes
+                    if (val.startswith('"') and val.endswith('"')) or (val.startswith("'") and val.endswith("'")):
                         val = val[1:-1]
                     elif val.startswith("[") and val.endswith("]"):
                         tags_raw = val[1:-1].split(",")
@@ -797,7 +868,7 @@ def main():
     mission = build_mission_state(transmissions, anomalies, output_dir, source_commit=args.commit_sha)
     manifest = build_manifest(transmissions, anomalies, anomalies_status, fingerprint=args.fingerprint, source_commit=args.commit_sha, anomaly_export=anomaly_export)
 
-    # 4. Atomic write using temporary files and os.replace
+    # 5. Atomic write using temporary files and os.replace
     files_to_write = {
         "transmissions.json": transmissions,
         "anomalies.json": anomalies,
@@ -806,6 +877,30 @@ def main():
         "mission.json": mission,
         "manifest.json": manifest
     }
+
+    for filename, data in files_to_write.items():
+        out_path = output_dir / filename
+        tmp_path = output_dir / f".{filename}.tmp"
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, out_path)
+        print(f"[OK] Generated {filename} ({out_path.stat().st_size} bytes)")
+
+    # 5. Build flight-telemetry.json (deterministic, idempotent) - AFTER files are written
+    print("[BUILD] Generating flight-telemetry.json...")
+    import subprocess
+    build_flight_py = script_dir / "build_flight_telemetry.py"
+    ret, out, err = run_cmd([
+        sys.executable, str(build_flight_py),
+        "--output-dir", str(output_dir),
+        "--source-dir", str(source_dir)
+    ])
+    print(out)
+    if ret != 0:
+        print(f"[ERROR] build_flight_telemetry failed:\n{err}", file=sys.stderr)
+        sys.exit(1)
 
     for filename, data in files_to_write.items():
         out_path = output_dir / filename

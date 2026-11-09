@@ -253,5 +253,155 @@ class TestSyncMission(unittest.TestCase):
         self.assertIsNotNone(evt17)
         self.assertEqual(evt17["date"], "2026-11-08T01:15:00Z")
 
+    # --- REGRESSION PREVENTION TESTS (HOTFIX SYNC-INTEGRITY 002) ---
+
+    def test_preflight_source_count_check(self):
+        """Pre-flight check: must have at least one transmission in source."""
+        # Valid case: has LOG-0001 and LOG-0000 via README
+        txs = build_mission_data.build_transmissions(self.source_dir)
+        self.assertGreaterEqual(len(txs), 2)
+        
+        # Empty source should return empty list (not crash)
+        empty_source = Path(self.test_dir) / "empty_source"
+        empty_trans = empty_source / "transmisiones"
+        empty_trans.mkdir(parents=True, exist_ok=True)
+        (empty_source / "README.md").write_text("# Empty", encoding="utf-8")
+        
+        # Empty source should return empty list, not crash
+        txs = build_mission_data.build_transmissions(empty_source)
+        self.assertEqual(len(txs), 0)
+
+    def test_transmission_integrity_missing_ids(self):
+        """Detect missing sequential LOG IDs."""
+        # Create LOG-0001 and LOG-0003 (missing LOG-0002)
+        log1 = (self.trans_dir / "LOG-0001.md").read_text(encoding="utf-8")
+        log3 = (
+            "---\n"
+            "title: 'LOG-0003: Test'\n"
+            "date: '2026-11-07T05:00:00Z'\n"
+            "---\n### Test\n\nPárrafo.\n\n[FIN DE ARCHIVO]\n"
+        )
+        (self.trans_dir / "LOG-0003.md").write_text(log3, encoding="utf-8")
+        
+        # Test validation
+        from build_mission_data import validate_transmission_integrity
+        txs = build_mission_data.build_transmissions(self.source_dir)
+        valid, errors = build_mission_data.validate_transmission_integrity(txs, len(txs))
+        self.assertFalse(valid)
+        self.assertTrue(any("Missing transmission IDs" in e for e in errors))
+
+    def test_transmission_integrity_duplicate_ids(self):
+        """Duplicate LOG IDs must be detected."""
+        # Manually create a list with duplicate IDs to test validation directly
+        txs_with_duplicates = [
+            {"id": "LOG-0001", "title": "Test 1", "date": "2026-11-07T03:00:00Z", "tags": [], "version": "V2.0", "summary": "Test", "telemetry": {"id_registro": "LOG-0001", "distance": "165.14 AU", "distance_status": "HISTORICAL", "subsystems_status": "Nominal"}, "paragraphs": [], "github_url": "https://github.com", "epistemic_status": "archive"},
+            {"id": "LOG-0001", "title": "Test 1 Duplicate", "date": "2026-11-07T03:00:00Z", "tags": [], "version": "V2.0", "summary": "Test dup", "telemetry": {"id_registro": "LOG-0001", "distance": "165.14 AU", "distance_status": "HISTORICAL", "subsystems_status": "Nominal"}, "paragraphs": [], "github_url": "https://github.com", "epistemic_status": "archive"},
+        ]
+        
+        from build_mission_data import validate_transmission_integrity
+        valid, errors = build_mission_data.validate_transmission_integrity(txs_with_duplicates, len(txs_with_duplicates))
+        self.assertFalse(valid)
+        self.assertTrue(any("Duplicate transmission ID" in e for e in errors))
+
+    def test_transmission_count_regression(self):
+        """Fewer transmissions in output than source must fail."""
+        from build_mission_data import validate_transmission_integrity
+        txs = build_mission_data.build_transmissions(self.source_dir)
+        
+        # Simulate regression: output has fewer transmissions than source
+        valid, errors = build_mission_data.validate_transmission_integrity(
+            [txs[0]],  # Only 1 transmission
+            len(build_mission_data.build_transmissions(self.source_dir))  # Source has more
+        )
+        self.assertFalse(valid)
+        self.assertTrue(any("REGRESSION" in e for e in errors))
+
+    def test_no_changes_pre_deployment_artifact_check(self):
+        """Pre-deployment artifact integrity check must run on NO_CHANGES."""
+        from sync_mission import check_artifact_freshness, validate_transmission_integrity, load_manifest
+        
+        # Setup: valid artifact
+        txs = build_mission_data.build_transmissions(self.source_dir)
+        manifest = {"sync": {"content_fingerprint": "dummy_fp"}}
+        (self.output_dir / "manifest.json").write_text(json.dumps(manifest))
+        
+        # Write valid transmissions
+        (self.output_dir / "transmissions.json").write_text(
+            json.dumps(build_mission_data.build_transmissions(self.source_dir)), encoding="utf-8"
+        )
+        
+        # Now corrupt the transmissions file
+        (self.output_dir / "transmissions.json").write_text(json.dumps([{"id": "LOG-0001"}]), encoding="utf-8")
+        
+        # The sync should detect artifact regression and fail
+        sync_script = TOOLS_DIR / "sync_mission.py"
+        fp, _ = detect_changes.compute_source_fingerprint(self.source_dir)
+        manifest = {"sync": {"content_fingerprint": fp}}
+        (self.output_dir / "manifest.json").write_text(json.dumps(manifest))
+        
+        # This should fail because artifact regression detected
+        cmd = [
+            sys.executable, str(TOOLS_DIR / "sync_mission.py"),
+            "--source-dir", str(self.source_dir),
+            "--data-dir", str(self.output_dir),
+            "--mode", "github",
+            "--manifest-url", "http://127.0.0.1:9999/nonexistent.json"
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        # Should fail because artifact regression detected
+        self.assertNotEqual(res.returncode, 0)
+        self.assertIn("REGRESSION", res.stderr + res.stdout)
+
+    def test_post_build_regression_check(self):
+        """Post-build regression check must catch missing transmissions."""
+        # Add a new transmission
+        log2 = (
+            "---\n"
+            'title: "LOG-0002: New Record"\n'
+            'date: "2026-11-07T04:00:00Z"\n'
+            "---\n### Test\n\nPárrafo.\n\n[FIN DE ARCHIVO]\n"
+        )
+        (self.trans_dir / "LOG-0002.md").write_text(log2, encoding="utf-8")
+        
+        # Run sync - should detect new content and build
+        sync_script = TOOLS_DIR / "sync_mission.py"
+        cmd = [
+            sys.executable, str(TOOLS_DIR / "sync_mission.py"),
+            "--source-dir", str(self.source_dir),
+            "--data-dir", str(self.output_dir),
+            "--mode", "github",
+            "--force",
+            "--test-mode"
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0)
+        self.assertIn("SYNC_RESULT=SYNC_SUCCESS", res.stdout)
+        
+        # Verify all transmissions in output
+        txs = json.loads((self.output_dir / "transmissions.json").read_text())
+        ids = {t["id"] for t in txs}
+        self.assertIn("LOG-0000", ids)
+        self.assertIn("LOG-0001", ids)
+        self.assertIn("LOG-0002", ids)
+
+    def test_artifact_freshness_check(self):
+        """Artifact freshness warning for stale manifests."""
+        from sync_mission import check_artifact_freshness
+        from datetime import datetime, timezone, timedelta
+        
+        # Old manifest
+        old_date = (datetime.now(timezone.utc) - timedelta(hours=72)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        manifest_path = self.output_dir / "manifest.json"
+        manifest_path.write_text(json.dumps({
+            "sync": {
+                "last_successful_sync": old_date,
+                "content_fingerprint": "old_fp"
+            }
+        }))
+        
+        fresh, warnings = check_artifact_freshness(manifest_path, "test_commit")
+        self.assertTrue(fresh)  # Should still be fresh (just warning)
+        self.assertTrue(any("stale" in w.lower() for w in warnings))
+
 if __name__ == "__main__":
     unittest.main()

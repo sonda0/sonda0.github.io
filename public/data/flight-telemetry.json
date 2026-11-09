@@ -1,0 +1,514 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-09T04:21:02Z",
+  "source_commit": null,
+  "parameters": [
+    {
+      "id": "nav.heliocentric_distance",
+      "name": "Distancia Heliocéntrica",
+      "value": "169.34 AU",
+      "unit": "AU",
+      "category": "NAVEGACION",
+      "epistemicState": "ESTIMATED",
+      "documentarySource": "mission.json::telemetry.distance",
+      "provenanceLog": "LOG-0016, LOG-0000",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Modelo orbital congelado tras LOG-0016; sin solución DSN independiente. No se extrapola avance.",
+      "validityState": "STALE",
+      "historicalSeries": [
+        {
+          "date": "2026-11-06T04:12:09Z",
+          "value": "164.82 AU",
+          "source": "LOG-0000",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T03:00:00Z",
+          "value": "165.14 AU",
+          "source": "LOG-0001",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T04:00:44Z",
+          "value": "165.70 AU",
+          "source": "LOG-0002",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T05:00:47Z",
+          "value": "165.98 AU",
+          "source": "LOG-0003",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T06:00:50Z",
+          "value": "166.26 AU",
+          "source": "LOG-0004",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T07:00:54Z",
+          "value": "166.54 AU",
+          "source": "LOG-0005",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T08:00:57Z",
+          "value": "166.82 AU",
+          "source": "LOG-0006",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T09:01:00Z",
+          "value": "167.10 AU",
+          "source": "LOG-0007",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T10:01:06Z",
+          "value": "167.38 AU",
+          "source": "LOG-0008",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T11:01:09Z",
+          "value": "167.66 AU",
+          "source": "LOG-0009",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T12:01:13Z",
+          "value": "167.94 AU",
+          "source": "LOG-0010",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T13:01:16Z",
+          "value": "168.22 AU",
+          "source": "LOG-0011",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T14:01:19Z",
+          "value": "168.50 AU",
+          "source": "LOG-0012",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T15:01:22Z",
+          "value": "168.78 AU",
+          "source": "LOG-0013",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T17:17:59Z",
+          "value": "169.06 AU",
+          "source": "LOG-0014",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T17:18:06Z",
+          "value": "169.34 AU",
+          "source": "LOG-0015",
+          "epistemicState": "HISTORICAL"
+        }
+      ],
+      "notes": "Escape heliosférico en curso. Coordenadas no verificadas independientemente; modelo orbital congelado."
+    },
+    {
+      "id": "nav.inertial_velocity",
+      "name": "Velocidad Inercial",
+      "value": "NO DETERMINADO",
+      "unit": "km/s",
+      "category": "NAVEGACION",
+      "epistemicState": "UNKNOWN",
+      "documentarySource": "navigationData.ts::extractNavigationTelemetry, LOG-0000",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-06T04:12:09Z",
+      "uncertainty": "Sin solución DSN; vector inercial no reconstruible solo con posiciones antiguas y potencia declarada (LOG-0016).",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Vector cinemático de velocidad inercial: NO DETERMINADO (Sin solución DSN)"
+    },
+    {
+      "id": "nav.acceleration",
+      "name": "Aceleración",
+      "value": "NO DETERMINADO",
+      "unit": "m/s²",
+      "category": "NAVEGACION",
+      "epistemicState": "UNKNOWN",
+      "documentarySource": "Sin registro instrumental documentado",
+      "provenanceLog": "N/A",
+      "observationDate": "2026-11-09T04:21:02Z",
+      "uncertainty": "No hay datos de aceleración en bitácoras públicas. Propulsores iónicos desconectados (systems.json).",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Propulsores iónicos desconectados para salvaguarda de reserva (systems.json::SYS-RTG-01)"
+    },
+    {
+      "id": "nav.chassis_orientation",
+      "name": "Orientación del Chasis",
+      "value": "112° hacia plano galáctico exterior",
+      "unit": "grados",
+      "category": "NAVEGACION",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "LOG-0000, navigationData.ts::NAV-SONDA-0.physicalNotes",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-06T04:12:09Z",
+      "uncertainty": "Orientación instrumental declarada en LOG-0000; no hay telemetría de actitud actual independiente.",
+      "validityState": "STALE",
+      "historicalSeries": null,
+      "notes": "Giro de chasis declarado en LOG-0000; orientación fija desde pérdida de portadora"
+    },
+    {
+      "id": "nav.displacement_vector",
+      "name": "Vector de Desplazamiento",
+      "value": "Escape heliosférico; rumbo 112° (LOG-0000)",
+      "unit": "vector",
+      "category": "NAVEGACION",
+      "epistemicState": "ESTIMATED",
+      "documentarySource": "LOG-0000, navigationData.ts::NAV-SONDA-0.physicalNotes",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-06T04:12:09Z",
+      "uncertainty": "Vector cinemático completo NO DETERMINADO; solo rumbo instrumental conocido.",
+      "validityState": "STALE",
+      "historicalSeries": null,
+      "notes": "Rumbo de escape 112 grados hacia el plano galáctico exterior (LOG-0000)"
+    },
+    {
+      "id": "nav.trajectory_model_status",
+      "name": "Estado del Modelo de Trayectoria",
+      "value": "MODELO CONGELADO",
+      "unit": "estado",
+      "category": "NAVEGACION",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "LOG-0016, navigationData.ts::extractNavigationTelemetry",
+      "provenanceLog": "LOG-0016",
+      "observationDate": "2026-11-07T18:00:00Z",
+      "uncertainty": "Propagación orbital automática congelada por protocolo EXODATA V3.1 tras LOG-0016. Pendiente de validación física.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Congelada en 169.34 AU pendiente de validación física (navigationData.ts)"
+    },
+    {
+      "id": "env.external_temperature",
+      "name": "Temperatura Exterior",
+      "value": "3.1 K (fondo cósmico / basal)",
+      "unit": "K",
+      "category": "AMBIENTE",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "systems.json::SYS-INT-01.metrics.sensores_bolometricos, LOG-0001",
+      "provenanceLog": "LOG-0001",
+      "observationDate": "2026-11-07T03:00:00Z",
+      "uncertainty": "3.1 K basal corresponde a sensores bolométricos; temperatura de fondo cósmico de microondas ~2.7 K. No hay medición directa de temperatura ambiente de la sonda.",
+      "validityState": "STALE",
+      "historicalSeries": null,
+      "notes": "Sensores bolométricos en línea (3.1 K basal) - systems.json"
+    },
+    {
+      "id": "env.internal_temperature",
+      "name": "Temperatura Interna",
+      "value": "NO DETERMINADO",
+      "unit": "K",
+      "category": "AMBIENTE",
+      "epistemicState": "UNKNOWN",
+      "documentarySource": "Sin registro en bitácoras públicas",
+      "provenanceLog": "N/A",
+      "observationDate": "2026-11-09T04:21:02Z",
+      "uncertainty": "No hay telemetría de temperatura interna del bus en fuentes públicas.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "No documentado en transmisiones públicas ni mission.json"
+    },
+    {
+      "id": "env.instrument_temperature",
+      "name": "Temperatura de Instrumentos",
+      "value": "Ver parámetros específicos (RTG: 584 K)",
+      "unit": "K",
+      "category": "AMBIENTE",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "systems.json::SYS-RTG-01.metrics.temperatura_termopar",
+      "provenanceLog": "systems.json",
+      "observationDate": "2026-11-09T03:17:54Z",
+      "uncertainty": "Solo temperatura de termopar RTG documentada (584 K). Otros instrumentos sin telemetría térmica pública.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Temperatura termopar RTG: 584 K (systems.json). Óptica e interferométrico sin datos térmicos públicos."
+    },
+    {
+      "id": "env.radiation",
+      "name": "Radiación",
+      "value": "Magnetómetro: 0.01 nT resolución; Erosión iónica detectada",
+      "unit": "nT / eventos",
+      "category": "AMBIENTE",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "systems.json::SYS-INT-01.metrics.magnetometro_flujo, LOG-0001, LOG-0002",
+      "provenanceLog": "LOG-0001, LOG-0002",
+      "observationDate": "2026-11-07T03:00:00Z",
+      "uncertainty": "Magnetómetro operacional (0.01 nT res). Compresión magnética 1.8 G/73s en HEX-04 (LOG-0001). Erosión iónica en capa ablativa (LOG-0002). No hay dosimetría acumulada pública.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Magnetómetro de puerta de flujo en línea (0.01 nT resolución). Blindaje de radiación: activo (transmisiones)."
+    },
+    {
+      "id": "env.shielding_status",
+      "name": "Estado del Blindaje",
+      "value": "ACTIVO (capa ablativa con erosión iónica compensada)",
+      "unit": "estado",
+      "category": "AMBIENTE",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "transmissions.json (subsystems_status recurrente), systems.json::SYS-OPT-01",
+      "provenanceLog": "LOG-0001 a LOG-0015",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Blindaje de radiación reportado \"activo\" en transmisiones. Óptica: 1,420 micro-impactos compensados (86% integridad).",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Blindaje de radiación: activo (telemetría recurrente). Integridad óptica 86% con 1,420 micro-impactos compensados."
+    },
+    {
+      "id": "energy.rtg_power",
+      "name": "Potencia Residual RTG",
+      "value": "41.71%",
+      "unit": "%",
+      "category": "ENERGIA",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "mission.json::telemetry.rtg_power, systems.json::SYS-RTG-01",
+      "provenanceLog": "LOG-0000 a LOG-0015",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Potencia residual calculada a partir de curva de decaimiento del plutonio-238. Tasa de degradación estimada 0.8% por ciclo orbital (systems.json).",
+      "validityState": "STALE",
+      "historicalSeries": [
+        {
+          "date": "2026-11-07T03:00:00Z",
+          "value": "41.79%",
+          "source": "LOG-0001",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T04:00:44Z",
+          "value": "41.78%",
+          "source": "LOG-0002",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T05:00:47Z",
+          "value": "41.77%",
+          "source": "LOG-0003",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T08:00:57Z",
+          "value": "41.76%",
+          "source": "LOG-0006",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T10:01:06Z",
+          "value": "41.75%",
+          "source": "LOG-0008",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T11:01:09Z",
+          "value": "41.74%",
+          "source": "LOG-0009",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T13:01:16Z",
+          "value": "41.73%",
+          "source": "LOG-0011",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T17:17:59Z",
+          "value": "41.72%",
+          "source": "LOG-0014",
+          "epistemicState": "HISTORICAL"
+        },
+        {
+          "date": "2026-11-07T17:18:06Z",
+          "value": "41.71%",
+          "source": "LOG-0015",
+          "epistemicState": "HISTORICAL"
+        }
+      ],
+      "notes": "Potencia residual calculada a partir de curva de decaimiento del plutonio-238."
+    },
+    {
+      "id": "energy.electrical_consumption",
+      "name": "Consumo Eléctrico",
+      "value": "Parcial: Transceptor 18.5 W (emisión)",
+      "unit": "W",
+      "category": "ENERGIA",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "systems.json::SYS-COM-01.metrics.potencia_emision",
+      "provenanceLog": "systems.json",
+      "observationDate": "2026-11-09T03:17:54Z",
+      "uncertainty": "Solo potencia de emisión del transceptor documentada (18.5 W). Consumo total de instrumentos, cómputo y calefacción no público.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Potencia emisión transceptor banda X: 18.5 W. Propulsores iónicos desconectados."
+    },
+    {
+      "id": "energy.reserve",
+      "name": "Reserva Energética",
+      "value": "NO DETERMINADO",
+      "unit": "%",
+      "category": "ENERGIA",
+      "epistemicState": "UNKNOWN",
+      "documentarySource": "Sin registro en fuentes públicas",
+      "provenanceLog": "N/A",
+      "observationDate": "2026-11-09T04:21:02Z",
+      "uncertainty": "No hay telemetría de reserva de batería/condensadores en bitácoras públicas.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Arquitectura RTG sin baterías de reserva documentadas; alimentación directa."
+    },
+    {
+      "id": "energy.rtg_temperature",
+      "name": "Temperatura RTG",
+      "value": "584 K",
+      "unit": "K",
+      "category": "ENERGIA",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "systems.json::SYS-RTG-01.metrics.temperatura_termopar",
+      "provenanceLog": "systems.json",
+      "observationDate": "2026-11-09T03:17:54Z",
+      "uncertainty": "Temperatura de termopar reportada en systems.json. No hay serie temporal pública.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Temperatura termopar RTG (systems.json::SYS-RTG-01)"
+    },
+    {
+      "id": "comms.carrier_status",
+      "name": "Estado de Portadora",
+      "value": "CONTROL DE MISIÓN: SIN PORTADORA",
+      "unit": "estado",
+      "category": "COMUNICACIONES",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "mission.json::carrier_status, mission.json::carrier_label",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Pérdida de portadora artificial detectada hace > 4,200 ciclos. Estado confirmado por ausencia de acuse DSN.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "CONTROL DE MISIÓN: SIN PORTADORA"
+    },
+    {
+      "id": "comms.uplink_rate",
+      "name": "Velocidad del Enlace de Subida",
+      "value": "0 bps",
+      "unit": "bps",
+      "category": "COMUNICACIONES",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "mission.json::earth_link_description, systems.json::SYS-COM-01.metrics.canal_recepcion",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Canal de recepción inactivo por ausencia de portadora DSN. Cero paquetes de comando recibidos.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Uplink: 0 bps (sin portadora DSN). Antena HGA fija en recepción pasiva (LOG-0000)."
+    },
+    {
+      "id": "comms.downlink_rate",
+      "name": "Velocidad del Enlace de Bajada",
+      "value": "Intermitente (paquetes de bitácora horarios)",
+      "unit": "bps",
+      "category": "COMUNICACIONES",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "systems.json::SYS-COM-01.details, mission.json::subsystem_summary",
+      "provenanceLog": "LOG-0016+",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Emisión unidireccional de paquetes de bitácora hacia coordenadas solares. Tasa de baudios no especificada en fuentes públicas.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Emisión periódica de paquetes de bitácora hacia coordenadas solares de origen. Solo difusión."
+    },
+    {
+      "id": "comms.propagation_latency",
+      "name": "Latencia de Propagación Estimada",
+      "value": "84501 s (23.47 h)",
+      "unit": "s",
+      "category": "COMUNICACIONES",
+      "epistemicState": "ESTIMATED",
+      "documentarySource": "mission.json::telemetry.distance.value + modelo física (c = 299,792 km/s)",
+      "provenanceLog": "LOG-0016 (distancia congelada)",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Calculada a partir de distancia estimada 169.34 AU × 499 s/AU. Modelo: propagación electromagnética en vacío. Origen: Sonda. Destino: Tierra (DSN). Distancia no verificada independientemente.",
+      "validityState": "STALE",
+      "historicalSeries": null,
+      "notes": "Solo calculada cuando existe distancia válida, origen/destino definido y modelo explícito de propagación."
+    },
+    {
+      "id": "sys.memory_integrity",
+      "name": "Integridad de Memoria",
+      "value": "VERIFICADA / SIN CORRUPCIÓN",
+      "unit": "estado",
+      "category": "SISTEMAS",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "mission.json::telemetry.memory_integrity, systems.json::SYS-MNE-01",
+      "provenanceLog": "LOG-0016",
+      "observationDate": "2026-11-09T04:05:00Z",
+      "uncertainty": "Arquitectura MNEMOSYNE-0 protegida contra escrituras no autorizadas. Divergencia ANOM-SYS-0001 contenida (LOG-0016). 0 divergencias activas detectadas.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Arquitectura MNEMOSYNE-0 protegida contra escrituras no autorizadas."
+    },
+    {
+      "id": "sys.instrument_status",
+      "name": "Estado de Instrumentos",
+      "value": "Lente Multiespectral de Gran Apertura: OPERATIVO CON COMPENSACIÓN; Arreglo Interferométrico y Espectrometría: OPERATIVO NOMINAL",
+      "unit": "estado",
+      "category": "SISTEMAS",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "systems.json::SYS-OPT-01, SYS-INT-01",
+      "provenanceLog": "systems.json",
+      "observationDate": "2026-11-09T03:17:54Z",
+      "uncertainty": "Lente multiespectral: 86% integridad, 1,420 micro-impactos compensados. Arreglo interferométrico: sincronizado. Espectrómetro, magnetómetro, bolómetros en línea.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Óptica: OPERATIVO CON COMPENSACIÓN. Interferométrico: OPERATIVO NOMINAL."
+    },
+    {
+      "id": "sys.compute_availability",
+      "name": "Disponibilidad Computacional",
+      "value": "94% reasignado a interferometría (LOG-0000)",
+      "unit": "%",
+      "category": "SISTEMAS",
+      "epistemicState": "HISTORICAL",
+      "documentarySource": "LOG-0000, systems.json::SYS-CORE-01",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-06T04:12:09Z",
+      "uncertainty": "Valor de LOG-0000 (genesis). Arquitectura EXODATA V3.1 en control autónomo (3,600 s/ciclo). No hay telemetría actual de uso de CPU.",
+      "validityState": "STALE",
+      "historicalSeries": null,
+      "notes": "94% ciclos a interferometría tras pérdida de portadora (LOG-0000). Protocolo EXODATA V3.1 verificado (systems.json)."
+    },
+    {
+      "id": "sys.antenna_orientation",
+      "name": "Orientación de Antena",
+      "value": "45% ganancia nominal / fija",
+      "unit": "grados / estado",
+      "category": "SISTEMAS",
+      "epistemicState": "MEASURED_NARRATIVE",
+      "documentarySource": "systems.json::SYS-COM-01.metrics.antena_hga, LOG-0000",
+      "provenanceLog": "LOG-0000",
+      "observationDate": "2026-11-06T04:12:09Z",
+      "uncertainty": "Antena HGA fija (sin gimbal activo). Ganancia 45% nominal. Apuntada a coordenadas solares de origen.",
+      "validityState": "VALID",
+      "historicalSeries": null,
+      "notes": "Antena HGA fija en recepción pasiva / emisión hacia sector solar (LOG-0000)."
+    }
+  ],
+  "integrity": {
+    "total_parameters": 23,
+    "measured_narrative_count": 8,
+    "estimated_count": 3,
+    "historical_count": 8,
+    "unknown_count": 4,
+    "conflicting_count": 0,
+    "stale_count": 0,
+    "with_historical_series": 2
+  }
+}

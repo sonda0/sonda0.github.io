@@ -3,11 +3,11 @@
   "project": "SONDA 0",
   "site": "MISSION-CONTROL",
   "domain": "sonda0.online",
-  "generated_at": "2026-11-08T18:57:04Z",
-  "last_valid_transmission": "LOG-0039",
+  "generated_at": "2026-11-09T03:17:54Z",
+  "last_valid_transmission": "LOG-0049",
   "data_status": "SYNCHRONIZED",
   "stats": {
-    "transmissions_count": 40,
+    "transmissions_count": 50,
     "anomalies_count": 6
   },
   "sync": {
@@ -15,11 +15,11 @@
     "source_repository": "sonda0/bitacora",
     "source_branch": "main",
     "source_commit": null,
-    "content_fingerprint": "044334ae4e2c7a525da8e8aa0eae3fbf574ea42b5f2a23d45432bec4461c06a1",
-    "last_successful_sync": "2026-11-08T18:57:04Z",
+    "content_fingerprint": null,
+    "last_successful_sync": "2026-11-09T03:17:54Z",
     "status": "SYNCHRONIZED",
-    "transmissions_count": 40,
-    "anomalies_status": "SYNCHRONIZED"
+    "transmissions_count": 50,
+    "anomalies_status": "STALE"
   },
   "sources": {
     "repository": "https://github.com/sonda0/bitacora",
@@ -32,8 +32,8 @@
     "exporter_version": "1.0",
     "content_fingerprint": "fef1d1b426d1dfa6752a6c148cd72a48d166ea575f2392b2e866a2cb6a7d511d",
     "exported_at": "2026-11-08T18:46:23Z",
-    "last_validated_at": "2026-11-08T18:57:04Z",
-    "status": "SYNCHRONIZED",
+    "last_validated_at": "2026-11-09T03:17:54Z",
+    "status": "STALE",
     "count": 6
   }
 }
