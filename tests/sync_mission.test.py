@@ -116,7 +116,7 @@ class TestSyncMission(unittest.TestCase):
         existing = [{"id": "ANOM-HEX-04", "title": "Preserved Anomaly", "state": "AWAITING_DATA"}]
         (self.output_dir / "anomalies.json").write_text(json.dumps(existing), encoding="utf-8")
 
-        anomalies, status = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="github")
+        anomalies, status, _ = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="github")
         self.assertEqual(status, "STALE")
         self.assertEqual(len(anomalies), 1)
         self.assertEqual(anomalies[0]["title"], "Preserved Anomaly")
@@ -230,10 +230,10 @@ class TestSyncMission(unittest.TestCase):
         local_cat_path.parent.mkdir(parents=True, exist_ok=True)
         local_cat_path.write_text(json.dumps({"anomalies": [{"id": "ANOM-HEX-04", "title": "Test"}]}), encoding="utf-8")
 
-        _, status_local = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="local")
+        _, status_local, _ = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="local")
         self.assertEqual(status_local, "STALE")
 
-        _, status_github = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="github")
+        _, status_github, _ = build_mission_data.load_or_build_anomalies(self.source_dir, self.output_dir, mode="github")
         self.assertEqual(status_github, "STALE")
 
     def test_timeline_evt016_accurate_and_no_rom_corruption(self):

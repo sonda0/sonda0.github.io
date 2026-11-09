@@ -38,16 +38,14 @@ def main():
     data_dir = Path(args.data_dir).resolve()
     manifest_path = data_dir / "manifest.json"
 
-    # Default anomaly export path lookup
+    # Default anomaly export path lookup: only look relative to source_dir or data_dir, not globally
     anomaly_path = None
     if args.anomaly_file:
         anomaly_path = Path(args.anomaly_file).resolve()
     else:
-        # Check standard locations
         candidates = [
-            data_dir.parent / "data-source" / "anomalies-public.json",
-            data_dir.parent.parent / "data-source" / "anomalies-public.json",
-            script_dir.parent / "data-source" / "anomalies-public.json"
+            source_dir / "data-source" / "anomalies-public.json",
+            data_dir.parent / "data-source" / "anomalies-public.json"
         ]
         for c in candidates:
             if c.exists():
