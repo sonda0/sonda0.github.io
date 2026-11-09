@@ -236,7 +236,15 @@ export const App: React.FC = () => {
         );
 
       case '/navegacion':
-        return <NavigationMap />;
+        return (
+          <NavigationMap
+            mission={mission}
+            anomalies={anomalies}
+            transmissions={transmissions}
+            onSelectAnomaly={(id) => navigateTo(`/anomalias/${id}`)}
+            onSelectTransmission={(id) => navigateTo(`/transmisiones/${id}`)}
+          />
+        );
 
       case '/sistemas':
         return systems ? <Systems systemsData={systems} /> : null;
