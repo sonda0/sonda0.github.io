@@ -142,6 +142,12 @@ class TestSyncMission(unittest.TestCase):
         manifest = {"sync": {"content_fingerprint": fp}}
         (self.output_dir / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
 
+        # Write valid transmissions matching the expected count (LOG-0000 + LOG-0001)
+        txs = build_mission_data.build_transmissions(self.source_dir)
+        (self.output_dir / "transmissions.json").write_text(
+            json.dumps(txs), encoding="utf-8"
+        )
+
         # Run sync_mission.py with matching fingerprint and no --force
         cmd = [
             sys.executable, str(sync_script),
@@ -364,7 +370,7 @@ class TestSyncMission(unittest.TestCase):
         # Stale artifact -> should regenerate and succeed
         self.assertEqual(res.returncode, 0)
         self.assertIn("Artifact is stale", res.stdout)
-        self.assertIn("Proceeding to build due to stale artifact", res.stdout)
+        self.assertIn("Proceeding to build due to stale or missing artifact", res.stdout)
         self.assertIn("[POST-BUILD] Transmission integrity verified: 2 transmissions", res.stdout)
         self.assertIn("SYNC_RESULT=SYNC_SUCCESS", res.stdout)
 

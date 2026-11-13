@@ -33,7 +33,7 @@ def load_manifest(path: Path) -> dict:
         return {}
 
 
-def validate_transmission_integrity(transmissions: list, source_count: int) -> tuple[bool, list[str]]:
+def validate_transmission_integrity(transmissions: list, expected_count: int) -> tuple[bool, list[str]]:
     """Validate transmission integrity. Returns (is_valid, list of errors)."""
     errors = []
     seen_ids = set()
@@ -50,25 +50,32 @@ def validate_transmission_integrity(transmissions: list, source_count: int) -> t
     
     # Check for expected sequential LOG IDs (allow gaps but track them)
     log_numbers = []
+    has_log0000 = False
     for tid in seen_ids:
         if tid.startswith("LOG-"):
             try:
                 num = int(tid.split("-")[1])
                 log_numbers.append(num)
+                if num == 0:
+                    has_log0000 = True
             except (IndexError, ValueError):
                 pass
     
     if log_numbers:
+        min_log = min(log_numbers)
         max_log = max(log_numbers)
-        expected = set(range(0, max_log + 1))
+        # If LOG-0000 is not present, sequence starts from min_log (typically 1)
+        # If LOG-0000 is present, sequence should start from 0
+        expected_start = 0 if has_log0000 else min_log
+        expected = set(range(expected_start, max_log + 1))
         missing = expected - set(log_numbers)
         if missing:
             missing_str = ", ".join(f"LOG-{str(m).zfill(4)}" for m in sorted(missing))
             errors.append(f"Missing transmission IDs: {missing_str}")
     
-    # Check that we didn't lose transmissions compared to source
-    if len(transmissions) < source_count:
-        errors.append(f"REGRESSION: Only {len(transmissions)} transmissions processed vs {source_count} in source")
+    # Check that we didn't lose transmissions compared to expected
+    if len(transmissions) < expected_count:
+        errors.append(f"REGRESSION: Only {len(transmissions)} transmissions processed vs {expected_count} expected in source")
     
     return len(errors) == 0, errors
 
