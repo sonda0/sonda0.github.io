@@ -45,7 +45,7 @@ def compute_transmission_fingerprint(transmissions: list) -> str:
     ids = sorted(t.get("id", "") for t in transmissions if t.get("id"))
     return hashlib.sha256("|".join(ids).encode()).hexdigest()
 
-def validate_transmission_integrity(transmissions: list, source_count: int) -> tuple[bool, list[str]]:
+def validate_transmission_integrity(transmissions: list, expected_count: int) -> tuple[bool, list[str]]:
     """Validate transmission integrity. Returns (is_valid, list of errors)."""
     errors = []
     seen_ids = set()
@@ -78,9 +78,9 @@ def validate_transmission_integrity(transmissions: list, source_count: int) -> t
             missing_str = ", ".join(f"LOG-{str(m).zfill(4)}" for m in sorted(missing))
             errors.append(f"Missing transmission IDs: {missing_str}")
     
-    # Check that we didn't lose transmissions compared to source
-    if len(transmissions) < source_count:
-        errors.append(f"REGRESSION: Only {len(transmissions)} transmissions processed vs {source_count} in source")
+    # Check that we didn't lose transmissions compared to expected
+    if len(transmissions) < expected_count:
+        errors.append(f"REGRESSION: Only {len(transmissions)} transmissions processed vs {expected_count} expected in source")
     
     return len(errors) == 0, errors
 
@@ -93,62 +93,72 @@ def check_artifact_freshness(manifest_path: Path, source_commit: str = None) -> 
         return True, warnings  # Allow first run
     
     manifest = load_manifest(manifest_path)
+    
+    # Check if manifest has sync metadata
     sync_info = manifest.get("sync", {})
+    if not sync_info:
+        warnings.append("No sync metadata in manifest")
+        return True, warnings
     
-    # Check if manifest has a source_commit that matches our source
-    if source_commit and sync_info.get("source_commit"):
-        if sync_info["source_commit"] != source_commit:
-            # This is a warning, not a block - could be legitimate if we're syncing to a different commit
-            pass
+    # Check if source_commit matches (if provided)
+    if source_commit and sync_info.get("source_commit") != source_commit:
+        warnings.append(f"Manifest source commit ({sync_info.get('source_commit')}) differs from current source ({source_commit})")
     
-    # Check if last sync was too old (stale artifact)
-    last_sync = sync_info.get("last_successful_sync")
-    if last_sync:
+    # Check artifact age (warn if > 48 hours)
+    sync_time_str = sync_info.get("timestamp") or sync_info.get("last_successful_sync")
+    if sync_time_str:
         try:
-            last_sync_dt = datetime.fromisoformat(last_sync.replace("Z", "+00:00"))
-            age_hours = (datetime.now(timezone.utc) - last_sync_dt).total_seconds() / 3600
-            if age_hours > 48:
-                warnings.append(f"Manifest last synced {age_hours:.1f}h ago - potential stale artifact")
+            sync_time = datetime.fromisoformat(sync_time_str.replace('Z', '+00:00'))
+            age = datetime.now(timezone.utc) - sync_time
+            if age.total_seconds() > 48 * 3600:
+                warnings.append(f"Artifact age: {age.days}d {age.seconds//3600}h - may be stale")
         except Exception:
             pass
-    
-    # Check fingerprint consistency
-    content_fp = sync_info.get("content_fingerprint")
-    transmissions_count = sync_info.get("transmissions_count")
     
     return True, warnings
 
 
+def compute_expected_transmission_count(source_dir: Path) -> int:
+    """Compute expected transmission count including LOG-0000 from README if present."""
+    trans_dir = source_dir / "transmisiones"
+    source_transmissions = list(trans_dir.glob("LOG-*.md")) if trans_dir.exists() else []
+    count = len(source_transmissions)
+    
+    # Check if README contains LOG-0000 (which build_mission_data.py will add)
+    readme_path = source_dir / "README.md"
+    if readme_path.exists():
+        text = readme_path.read_text(encoding="utf-8")
+        if "LOG-0000" in text:
+            count += 1
+    return count
+
+
 def main():
-    parser = argparse.ArgumentParser(description="MISSION-DATA SYNC // Synchronizer")
-    parser.add_argument("--source-dir", type=str, required=True, help="Path to bitacora source repository")
-    parser.add_argument("--data-dir", type=str, required=True, help="Path to web public/data directory")
-    parser.add_argument("--mode", type=str, choices=["local", "github"], default="github", help="Execution mode")
-    parser.add_argument("--manifest-url", type=str, default="https://sonda0.github.io/data/manifest.json", help="URL to live published manifest.json")
-    parser.add_argument("--anomaly-file", type=str, default=None, help="Path to data-source/anomalies-public.json")
-    parser.add_argument("--commit-sha", type=str, default=None, help="Source git commit SHA")
-    parser.add_argument("--force", action="store_true", help="Force sync even if fingerprint matches")
-    parser.add_argument("--test-mode", action="store_true", help="Run in test mode with relaxed validation")
+    parser = argparse.ArgumentParser(description="MISSION-DATA SYNC V1.1")
+    parser.add_argument("--source-dir", required=True, help="Bitacora source directory")
+    parser.add_argument("--data-dir", required=True, help="Public data output directory")
+    parser.add_argument("--mode", choices=["local", "github"], default="local", help="Build mode")
+    parser.add_argument("--manifest-url", default=None, help="URL to live manifest.json")
+    parser.add_argument("--commit-sha", default=None, help="Git commit SHA of source")
+    parser.add_argument("--test-mode", action="store_true", help="Test mode (relaxed validation)")
+    parser.add_argument("--force", action="store_true", help="Force rebuild even if no changes")
     args = parser.parse_args()
 
-    script_dir = Path(__file__).resolve().parent
     source_dir = Path(args.source_dir).resolve()
     data_dir = Path(args.data_dir).resolve()
     manifest_path = data_dir / "manifest.json"
+    script_dir = Path(__file__).resolve().parent
 
-    # Default anomaly export path lookup: only look relative to source_dir or data_dir, not globally
+    # Find anomaly export
     anomaly_path = None
-    if args.anomaly_file:
-        anomaly_path = Path(args.anomaly_file).resolve()
-    else:
-        candidates = [
-            source_dir / "data-source" / "anomalies-public.json",
-            data_dir.parent / "data-source" / "anomalies-public.json"
-        ]
-        for c in candidates:
-            if c.exists():
-                anomaly_path = c
-                break
+    for c in [
+        source_dir / "data-source" / "anomalies-public.json",
+        source_dir.parent / "data-source" / "anomalies-public.json",
+        data_dir.parent / "data-source" / "anomalies-public.json",
+    ]:
+        if c.exists():
+            anomaly_path = c
+            break
 
     print("=" * 70)
     print("SONDA 0 // MISSION-DATA SYNC V1.1")
@@ -162,12 +172,10 @@ def main():
         print(f"[ERROR] Source directory does not exist: {source_dir}", file=sys.stderr)
         sys.exit(1)
 
-    # PRE-FLIGHT: Count source transmissions before processing
-    trans_dir = source_dir / "transmisiones"
-    source_transmissions = list(trans_dir.glob("LOG-*.md")) if trans_dir.exists() else []
-    source_count = len(source_transmissions)
-    print(f"[PRE-FLIGHT] Source transmissions found: {source_count}")
-    if source_count == 0:
+    # Compute expected transmission count (including LOG-0000 from README if present)
+    expected_transmission_count = compute_expected_transmission_count(source_dir)
+    print(f"[PRE-FLIGHT] Expected transmissions (including LOG-0000 from README): {expected_transmission_count}")
+    if expected_transmission_count == 0:
         print("[ERROR] No transmissions found in source - aborting to prevent data loss", file=sys.stderr)
         sys.exit(1)
 
@@ -203,31 +211,42 @@ def main():
         transmissions_path = data_dir / "transmissions.json"
         manifest = load_manifest(manifest_path)
         
+        should_regenerate = False
+        
         if transmissions_path.exists():
             with open(transmissions_path, "r", encoding="utf-8") as f:
                 current_transmissions = json.load(f)
             
-            # Verify current public data hasn't regressed
-            valid, errors = validate_transmission_integrity(json.load(open(data_dir / "transmissions.json", "r")), source_count)
-            if not valid:
-                print(f"[ERROR] ARTIFACT REGRESSION DETECTED in current public data:", file=sys.stderr)
-                for e in errors:
-                    print(f"  - {e}", file=sys.stderr)
-                print("[SYNC] Blocking deployment due to artifact regression!", file=sys.stderr)
-                sys.exit(1)
-            
-            # Check artifact freshness
-            fresh, warnings = check_artifact_freshness(manifest_path, args.commit_sha)
-            for w in warnings:
-                print(f"[WARN] {w}")
-            
-            print("[SYNC] Artifact integrity verified. Safe to skip deployment.")
+            # Check if artifact is stale (different count than expected)
+            if current_transmissions and len(current_transmissions) != expected_transmission_count:
+                print(f"[SYNC] Artifact is stale ({len(current_transmissions)} vs {expected_transmission_count} expected). Forcing regeneration.")
+                should_regenerate = True
+            else:
+                # Verify current public data hasn't regressed (only check for actual integrity issues)
+                valid, errors = validate_transmission_integrity(json.load(open(data_dir / "transmissions.json", "r")), expected_transmission_count)
+                if not valid:
+                    print(f"[ERROR] ARTIFACT REGRESSION DETECTED in current public data:", file=sys.stderr)
+                    for e in errors:
+                        print(f"  - {e}", file=sys.stderr)
+                    print("[SYNC] Blocking deployment due to artifact regression!", file=sys.stderr)
+                    sys.exit(1)
+                
+                # Check artifact freshness
+                fresh, warnings = check_artifact_freshness(manifest_path, args.commit_sha)
+                for w in warnings:
+                    print(f"[WARN] {w}")
+                
+                print("[SYNC] Artifact integrity verified. Safe to skip deployment.")
+                print("SYNC_RESULT=NO_CHANGES")
+                sys.exit(0)
+
+        if should_regenerate:
+            print("[SYNC] Proceeding to build due to stale artifact.")
+            # Don't exit - fall through to build phase
+        else:
+            print("[SYNC] Neither bitacora nor anomaly export has changed. Skipping build.")
             print("SYNC_RESULT=NO_CHANGES")
             sys.exit(0)
-
-        print("[SYNC] Neither bitacora nor anomaly export has changed. Skipping build.")
-        print("SYNC_RESULT=NO_CHANGES")
-        sys.exit(0)
 
     # 2. Build datasets
     build_py = script_dir / "build_mission_data.py"
@@ -256,7 +275,7 @@ def main():
         with open(transmissions_path, "r", encoding="utf-8") as f:
             new_transmissions = json.load(f)
         
-        valid, errors = validate_transmission_integrity(new_transmissions, source_count)
+        valid, errors = validate_transmission_integrity(new_transmissions, expected_transmission_count)
         if not valid:
             print(f"[ERROR] POST-BUILD REGRESSION DETECTED:", file=sys.stderr)
             for e in errors:
@@ -264,6 +283,24 @@ def main():
             sys.exit(1)
         
         print(f"[POST-BUILD] Transmission integrity verified: {len(new_transmissions)} transmissions")
+
+    # 3. Build flight-telemetry.json (deterministic, idempotent)
+    print("[SYNC] Generating flight-telemetry.json...")
+    build_flight_py = script_dir / "build_flight_telemetry.py"
+    cmd_flight = [
+        sys.executable, str(build_flight_py),
+        "--output-dir", str(data_dir),
+        "--source-dir", str(source_dir),
+    ]
+    if args.commit_sha:
+        cmd_flight.extend(["--commit-sha", args.commit_sha])
+    ret, out, err = run_cmd(cmd_flight)
+    print(out)
+    if ret != 0:
+        print(f"[ERROR] build_flight_telemetry failed:\n{err}", file=sys.stderr)
+        sys.exit(1)
+    
+    print("[SYNC] Flight telemetry generated successfully.")
 
     # 3. Validate public datasets
     validate_py = script_dir / "validate_public_data.py"
