@@ -87,6 +87,11 @@ jobs:
         working-directory: web
         run: npm test
 
+      - name: Run Python sync tests
+        if: steps.check.outputs.should_deploy == 'true'
+        working-directory: web
+        run: python tests/sync_mission.test.py
+
       - name: Build static web application
         if: steps.check.outputs.should_deploy == 'true'
         working-directory: web
