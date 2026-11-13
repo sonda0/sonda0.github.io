@@ -1,0 +1,65 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: web
+
+      - name: Checkout bitacora source
+        uses: actions/checkout@v4
+        with:
+          repository: sonda0/bitacora
+          path: bitacora
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Python dependencies
+        working-directory: web
+        run: pip install -r requirements.txt 2>/dev/null || true
+
+      - name: Install Node.js dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Run Python sync tests
+        working-directory: web
+        run: python tests/sync_mission.test.py -v
+
+      - name: Run 9 scenario integration tests
+        working-directory: web
+        run: python tests/test_9_scenarios.py -v
+
+      - name: Run TypeScript type check
+        working-directory: web
+        run: npx tsc --noEmit
+
+      - name: Run Vitest
+        working-directory: web
+        run: npm test
+
+      - name: Build static web application
+        working-directory: web
+        run: npm run build
+
+      - name: Validate public mission data
+        working-directory: web
+        run: python tools/validate_public_data.py
